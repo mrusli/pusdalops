@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+	
+		<!-- settings -->	
+		<mapping class="mil.pusdalops.domain.settings.Settings"/>
+	
+		<!-- authorization -->
+		<mapping class="mil.pusdalops.domain.authorization.User"/>
+		<mapping class="mil.pusdalops.domain.authorization.UserRole"/>
+
+		<!-- kejadian -->
+		<mapping class="mil.pusdalops.domain.kejadian.Kejadian"/>
+		<mapping class="mil.pusdalops.domain.kejadian.KejadianJenis"/>
+		<mapping class="mil.pusdalops.domain.kejadian.KejadianMotif"/>
+		<mapping class="mil.pusdalops.domain.kejadian.KejadianPelaku"/>
+
+		<!-- kerugian -->
+		<mapping class="mil.pusdalops.domain.kerugian.Kerugian"/>
+		<mapping class="mil.pusdalops.domain.kerugian.KerugianJenis"/>
+		<mapping class="mil.pusdalops.domain.kerugian.KerugianKondisi"/>
+		<mapping class="mil.pusdalops.domain.kerugian.KerugianSatuan"/>
+				
+		<!-- laporan lain -->		
+		<mapping class="mil.pusdalops.domain.laporanlain.LaporanLain"/>
+
+		<!-- pejabat -->
+		<mapping class="mil.pusdalops.domain.pejabat.Pejabat"></mapping>
+				
+		<!-- pejabat siaga -->		
+		<mapping class="mil.pusdalops.domain.siaga.PejabatSiaga"></mapping>
+				
+		<!-- gelar operasi -->		
+		<mapping class="mil.pusdalops.domain.gelarops.GelarOperasi"></mapping>
+		
+		<!-- kotamaops -->
+		<mapping class="mil.pusdalops.domain.kotamaops.Kotamaops"/>
+
+		<!-- personel -->
+		<mapping class="mil.pusdalops.domain.personel.Personel"/>
+		
+		<!-- serial -->
+		<mapping class="mil.pusdalops.domain.serial.DocumentSerialNumber"/>
+		
+		<!-- settings -->
+		<mapping class="mil.pusdalops.domain.settings.Settings"/>
+		
+		<!-- wilayah -->
+		<mapping class="mil.pusdalops.domain.wilayah.Kabupaten_Kotamadya"/>
+		<mapping class="mil.pusdalops.domain.wilayah.Kecamatan"/>
+		<mapping class="mil.pusdalops.domain.wilayah.Kelurahan"/>
+		<mapping class="mil.pusdalops.domain.wilayah.Propinsi"/>
+
+		<!-- pending -->
+		<mapping class="mil.pusdalops.domain.pending.PendingWilayah"></mapping>
+	</session-factory>
+</hibernate-configuration>

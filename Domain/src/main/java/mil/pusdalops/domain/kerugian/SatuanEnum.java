@@ -1,0 +1,6 @@
+package mil.pusdalops.domain.kerugian;
+
+public enum SatuanEnum {
+	UNIT, SET, ORANG, BATANG, BUAH, BUNDEL, BUTIR, DRUM, DUS, EKOR, HEKTAR, KM_PERSEGI, M_PERSEGI, 
+	KANTONG, KARDUS, KARUNG, KOTAK, LEMBAR, PAKET, PASANG, PUCUK, PETI, POHON;
+}
