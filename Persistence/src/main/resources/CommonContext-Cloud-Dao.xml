@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="CommonContext-Cloud-Config.xml"></import>
+
+	<bean id="dao" class="mil.pusdalops.persistence.common.dao.hibernate.DaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+ 	<bean id="userDao" class="mil.pusdalops.persistence.user.dao.hibernate.UserHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="kejadianDao" class="mil.pusdalops.persistence.kejadian.dao.hibernate.KejadianHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="propinsiDao" class="mil.pusdalops.persistence.propinsi.dao.hibernate.PropinsiHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>	
+	</bean>
+
+	<bean id="kabupaten_KotamadyaDao" class="mil.pusdalops.persistence.kabupaten_kotamadya.dao.hibernate.Kabupaten_KotamadyaHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>	
+	</bean>
+
+	<bean id="kecamatanDao" class="mil.pusdalops.persistence.kecamatan.dao.hibernate.KecamatanHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>	
+	</bean>
+	
+	<bean id="kelurahanDao" class="mil.pusdalops.persistence.kelurahan.dao.hibernate.KelurahanHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="kejadianJenisDao" class="mil.pusdalops.persistence.kejadian.jenis.dao.hibernate.KejadianJenisHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="kejadianMotifDao" class="mil.pusdalops.persistence.kejadian.motif.dao.hibernate.KejadianMotifHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+    
+	<bean id="kerugianJenisDao" class="mil.pusdalops.persistence.kerugian.jenis.dao.hibernate.KerugianJenisHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+    
+	<bean id="kerugianKondisiDao" class="mil.pusdalops.persistence.kerugian.kondisi.dao.hibernate.KerugianKondisiHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="kerugianSatuanDao" class="mil.pusdalops.persistence.kerugian.satuan.dao.hibernate.KerugianSatuanHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+<!--
+	
+	<bean id="userRoleDao" class="mil.pusdalops.persistence.userrole.dao.hibernate.UserRoleHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="settingsDao" class="mil.pusdalops.persistence.settings.dao.hibernate.SettingsHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="kotamaopsDao" class="mil.pusdalops.persistence.kotamaops.dao.hibernate.KotamaopsHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="personelDao" class="mil.pusdalops.persistence.personel.dao.hibernate.PersonelHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="kejadianPelakuDao" class="mil.pusdalops.persistence.kejadian.pelaku.dao.hibernate.KejadianPelakuHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="kerugianDao" class="mil.pusdalops.persistence.kerugian.dao.hibernate.KerugianHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		
+
+	<bean id="documentSerialNumberDao" class="mil.pusdalops.persistence.serial.dao.hibernate.DocumentSerialNumberHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="laporanLainDao" class="mil.pusdalops.persistence.laporanlain.dao.hibernate.LaporanLainHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="pejabatSiagaDao" class="mil.pusdalops.persistence.pejabatsiaga.dao.hibernate.PejabatSiagaHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="gelarOperasiDao" class="mil.pusdalops.persistence.gelaroperasi.dao.hibernate.GelarOperasiHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+ -->	
+</beans>
