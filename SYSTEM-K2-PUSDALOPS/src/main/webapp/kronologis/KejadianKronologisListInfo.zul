@@ -1,0 +1,44 @@
+<?page title="KejadianKronologisListInfo" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kejadianKronologisListInfoWin" apply="${kejadianKronologisListInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+				<label value=" - " sclass="headTitle"></label>
+				<textbox id="searchKronologisTextbox" width="400px" sclass="dlg01-textbox"></textbox>
+				<button id="searchKronologisButton" label="Penulusuran Kejadian" width="200px" sclass="mod01Button"></button>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<tabbox id="kejadianPeriodTabbox" sclass="mainTabbox" visible="false">
+				<tabs sclass="mainTabboxTabs">
+					<tab label="Semua" sclass="mainTab"/>
+					<tab label="Hari-ini" sclass="mainTab"/>
+					<tab label="7-Hari-Terakhir" sclass="mainTab"/>
+					<tab label="30-Hari-Terakhir" sclass="mainTab"/>
+				</tabs>
+			</tabbox>
+			<hlayout style="padding: 10px;" valign="middle" visible="false">				
+				<label value="TW Awal:" style="color:yellow;"></label> 
+				<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+				<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+				<textbox id="twAwalTimeZoneTextbox" width="52px" disabled="true" sclass="dlg01-textbox"></textbox>
+				<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>								
+				<label value="TW Akhir:" style="color:yellow;"></label>
+				<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+				<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+				<textbox id="twAkhirTimeZoneTextbox" width="52px" disabled="true" sclass="dlg01-textbox"></textbox>
+				<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>															
+			</hlayout>	
+			<listbox id="kejadianListbox" mold="paging" pageSize="7" height="740px">
+				<listhead>
+					<listheader width="850px"/>
+				</listhead>
+			</listbox>	
+		</div>
+	</center>
+</borderlayout>
+</zk>

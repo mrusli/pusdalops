@@ -1,0 +1,38 @@
+<?page title="KerugianJenisTextEntry" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" width="440px" height="220px"
+	id="kerugianJenisTextEntryDialogWin" apply="${kerugianJenisTextEntryDialogControl}">
+	<grid>
+		<rows>
+			<row>
+				<cell width="35%">
+					<label value="Jenis Kerugian:"></label>					
+				</cell>
+				<cell>
+					<textbox id="jenisKerugianTextbox" width="210px"></textbox>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<label value="Tipe Kerugian:"></label>
+				</cell>
+				<cell>
+					<combobox id="tipeKerugianCombobox" width="210px"></combobox>
+				</cell>
+			</row>
+			<row>
+				<cell align="right">
+					<checkbox id="noInfoCheckbox" checked="false"></checkbox>
+				</cell>
+				<cell>
+					<label value="Tidak ada Info"></label>
+				</cell>
+			</row>
+		</rows>
+	</grid>
+	<hlayout style="padding-top: 5px;">
+		<button id="changeButton" label="Tambah"></button>
+		<button id="cancelButton" label="Cancel"></button>	
+	</hlayout>
+</window>
+</zk>

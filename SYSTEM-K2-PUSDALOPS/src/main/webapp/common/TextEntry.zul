@@ -1,0 +1,22 @@
+<?page title="TextEntry" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" width="460px" height="130px"
+	id="textEntryDialogWin" apply="${textEntryDialogControl}">
+	<grid>
+		<rows>
+			<row>
+				<cell width="35%">
+					<label id="nameLabel" value="Text:"></label>					
+				</cell>
+				<cell>
+					<textbox id="entryTextbox" width="210px"></textbox>
+				</cell>
+			</row>
+		</rows>
+	</grid>
+	<hlayout style="padding-top: 5px;">
+		<button id="changeButton" label="Tambah"></button>
+		<button id="cancelButton" label="Cancel"></button>	
+	</hlayout>
+</window>
+</zk>

@@ -1,0 +1,86 @@
+<?page title="Pejabat Siaga" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="pejabatSiagaDialogWin" border="normal" 
+	width="520px" height="430px" apply="${pejabatSiagaDialogWinControl}">
+	<vbox>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Siaga ID:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="kejadianIdTextbox" width="240px" readonly="true" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="TW.Awal:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<hlayout valign="middle">
+							<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>					
+						</hlayout>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+						<label value="TW.Akhir:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<hlayout valign="middle">
+							<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>
+						</hlayout>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+						<label value="Nama:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="namaCombobox" width="240px" sclass="dlg-combobox" readonly="false"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Pangkat:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="pangkatTextbox" readonly="true" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+						<label value="Jabatan:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="jabatanTextbox" readonly="true" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+						<label value="NRP:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="nrpTextbox" readonly="true" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>					
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

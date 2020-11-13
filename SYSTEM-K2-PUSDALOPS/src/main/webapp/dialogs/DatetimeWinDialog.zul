@@ -1,0 +1,15 @@
+<?page title="Waktu" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window width="500px" height="180px" title="Rubah TW Kejadian"
+	id="datetimeDialogWin" apply="${datetimeDialogWinControl}">
+	<hlayout>
+		<datebox id="twDatebox" format="yyyy/MM/dd" width="180px"/>
+		<timebox id="twTimebox" format="HH:mm" width="140px"></timebox>
+		<combobox id="twZonaWaktuCombobox" width="120px"></combobox>	
+	</hlayout>
+	<hlayout style="padding-top: 5px;">
+		<button id="rubahButton" label="Rubah" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>	
+</window>
+</zk>

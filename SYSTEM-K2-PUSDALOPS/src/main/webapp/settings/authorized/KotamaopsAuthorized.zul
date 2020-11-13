@@ -1,0 +1,32 @@
+<?page title="Kotamaops" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kotamaopsAuthorizedWin" apply="${kotamaopsAuthorizedControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+				<label sclass="headTitle" value=" - Peruntukan : "></label>
+				<textbox id="kotamaopsPeruntukanTextbox" width="280px" readonly="true" sclass="dlg01-textbox"/>
+				<button id="selectKotamaopsButton" label="Pilih" sclass="mod01Button"></button>
+				<button id="saveSelectedKotamaopsButton" label="Simpan" visible="false" sclass="mod01Button"></button>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout style="padding: 10px;" valign="middle">
+				<label id="infoResultlabel" value="Total: 0 pengguna" sclass="infoResultLabel"></label>
+				<button id="newButton" label="Tambah" sclass="modButton"></button>
+			</hlayout>	
+			<listbox id="authUserListbox" mold="paging" pageSize="15" height="420px">
+				<listhead>
+					<listheader label="No." width="95px"/>
+					<listheader label="Nama Login" width="180px"/>
+					<listheader label="Aktif" width="95px"/>
+					<listheader/>
+				</listhead>
+			</listbox>			
+		</div>
+	</center>
+</borderlayout>
+</zk>

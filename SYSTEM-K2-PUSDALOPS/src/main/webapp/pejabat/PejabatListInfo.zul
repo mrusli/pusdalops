@@ -1,0 +1,30 @@
+<?page title="PejabatListInfo" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="pejabatListInfoWin" apply="${pejabatListInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout style="padding: 10px;" valign="middle">
+				<label id="infoResultlabel" value="Total: 0 pejabat" sclass="infoResultLabel"></label>
+				<button id="newButton" label="Tambah" sclass="modButton"></button>
+			</hlayout>	
+			<listbox id="pejabatListbox" mold="paging" pageSize="22" height="730px">
+				<listhead>
+					<listheader label="Kotamops" width="280px"/>
+					<listheader label="Nama" width="220px"/>
+					<listheader label="Pangkat" width="220px"/>
+					<listheader label="Jabatan" width="220px"/>
+					<listheader label="NRP" width="220px"/>
+					<listheader/>
+				</listhead>
+			</listbox>	
+		</div>
+	</center>
+</borderlayout>
+</zk>

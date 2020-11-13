@@ -1,0 +1,96 @@
+<?page title="Kejadian Settings" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" id="kejadianSettingsWin" apply="${kejadianSettingsControl}">
+<vlayout>			
+	<hlayout valign="middle" style="padding: 5px 0px">
+		<label id="formTitleLabel"></label>
+	</hlayout>
+</vlayout>
+<vbox>
+	<grid>
+		<rows>
+			<row>
+				<cell>
+					<vlayout>
+						Kejadian
+						<tabbox id="kejadianTabbox" sclass="mainTabbox">
+							<tabs sclass="mainTabboxTabs">
+								<tab label="Jenis-Kejadian" sclass="mainTab"/>
+								<tab label="Motif-Kejadian" sclass="mainTab"/>
+							</tabs>
+						</tabbox>
+						<vlayout id="jenisKejadianVlayout">
+							<listbox id="jenisKejadianListbox" mold="paging" pageSize="10" height="440px">
+								<listhead>
+									<listheader label="Jenis Kejadian" width="100%"></listheader>
+									<listheader/>
+								</listhead>						
+							</listbox>					
+							<hlayout>
+								<button id="jenisKejadianAddButton" label="Tambah" sclass="modButton"></button>
+							</hlayout>						
+						</vlayout>
+						<vlayout id="motifKejadianVlayout" visible="false">
+							<listbox id="motifKejadianListbox" mold="paging" pageSize="10" height="440px">
+								<listhead>
+									<listheader label="Motif Kejadian" width="100%"></listheader>
+									<listheader/>								
+								</listhead>
+							</listbox>										
+							<hlayout>
+								<button id="motifAddButton" label="Tambah" sclass="modButton"></button>
+							</hlayout>						
+						</vlayout>
+					</vlayout>
+				</cell>
+				<cell>
+					<vlayout>
+						Kerugian
+						<tabbox id="kerugianTabbox" sclass="mainTabbox">
+							<tabs sclass="mainTabboxTabs">
+								<tab label="Jenis-Kerugian" sclass="mainTab"/>
+								<tab label="Kondisi-Kerugian" sclass="mainTab"/>
+								<tab label="Satuan-Kerugian" sclass="mainTab"></tab>
+							</tabs>
+						</tabbox>
+						<vlayout id="jenisKerugianVlayout">
+							<listbox id="jenisKerugianListbox" mold="paging" pageSize="10" height="440px">
+								<listhead>
+									<listheader label="Jenis Kerugian" width="100%"></listheader>
+									<listheader/>							
+								</listhead>
+							</listbox>					
+							<hlayout>
+								<button id="jenisKerugianAddButton" label="Tambah" sclass="modButton"></button>				
+							</hlayout>						
+						</vlayout>
+						<vlayout id="kondisiKerugianVlayout" visible="false">
+							<listbox id="kondisiKerugianListbox" mold="paging" pageSize="10" height="440px">
+								<listhead>
+									<listheader label="Kondisi Kerugian" width="100%"></listheader>
+									<listheader/>							
+								</listhead>
+							</listbox>											
+							<hlayout>
+								<button id="kondisiKerugianAddButton" label="Tambah" sclass="modButton"></button>
+							</hlayout>
+						</vlayout>
+						<vlayout id="satuanKerugianVlayout" visible="false">
+							<listbox id="satuanKerugianListbox" mold="paging" pageSize="10" height="440px">
+								<listhead>
+									<listheader label="Satuan Kerugian" width="100%"></listheader>
+									<listheader/>							
+								</listhead>							
+							</listbox>
+							<hlayout>
+								<button id="satuanKerugianAddButton" label="Tambah" sclass="modButton"></button>
+							</hlayout>												
+						</vlayout>
+					</vlayout>
+				</cell>
+			</row>
+		</rows>
+	</grid>
+</vbox>
+</window>
+</zk>

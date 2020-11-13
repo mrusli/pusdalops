@@ -1,0 +1,132 @@
+<?page title="Rekap-Kerugian" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kerugianRekapInfoWin" apply="${kerugianRekapInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<west width="380px" border="normal" sclass="westArea">
+		<div>
+			<grid height="45px">
+				<rows>
+					<row>
+						<cell width="12%">
+
+						</cell>
+						<cell>
+
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<grid height="745px">
+				<rows>
+					<row>
+						<cell>
+							<vlayout>
+								Kotamaops:
+								<combobox id="kotamaopsCombobox" width="270px"></combobox>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Propinsi:							
+								<combobox id="propinsiCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Kabupaten-Kotamadya:							
+								<combobox id="kabupatenCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Kecamatan:							
+								<combobox id="kecamatanCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Kelurahan:							
+								<combobox id="kelurahanCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</div>
+	</west>	
+	<center border="normal" sclass="centerArea">
+		<div>
+			<grid height="45px">
+				<rows>
+					<row>
+						<cell>
+							<hlayout valign="middle">
+								Pihak:
+								<combobox id="pihakCombobox" width="120px" sclass="dlg01-combobox"></combobox>
+								TW Awal:
+								<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>								
+								TW Akhir:
+								<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>
+								<button id="executeButton" label="Tampilkan" sclass="mod01Button"></button>																
+							</hlayout>						
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<grid>
+				<rows>
+					<row>
+						<cell width="20%">
+							Jumlah Kerugian-Personil:
+						</cell>
+						<cell width="10%">
+							<textbox id="kerugianPersTextbox" width="80px" readonly="true" sclass="dlg-textbox"></textbox>
+						</cell>
+						<cell width="20%">
+							Jumlah Kerugian-Materil:
+						</cell>
+						<cell width="10%">
+							<textbox id="kerugianMatrTextbox" width="80px" readonly="true" sclass="dlg-textbox"></textbox>
+						</cell>
+						<cell width="15%">
+							Total Kerugian:
+						</cell>	
+						<cell>
+							<textbox id="kerugianTotalTextbox" width="80px" readonly="true" sclass="dlg-textbox"></textbox>
+						</cell>				
+					</row>
+				</rows>
+			</grid>
+			<listbox id="kerugianListbox" mold="paging" pageSize="22" height="710px">
+				<listhead>
+					<listheader label="Tipe" width="90px"/>
+					<listheader label="Nama Pers/Mat" width="285px"/>
+					<listheader label="ID" width="120px"/>
+					<listheader label="Jenis" width="180px"/>
+					<listheader label="Kondisi"/>
+				</listhead>
+			</listbox>
+		</div>
+	</center>
+</borderlayout>
+</zk>

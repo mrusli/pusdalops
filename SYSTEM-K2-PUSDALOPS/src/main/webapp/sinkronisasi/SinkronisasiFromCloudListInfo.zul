@@ -1,0 +1,31 @@
+<?page title="Sinkronisasi-From-Cloud" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="sinkronisasiFromCloudlListInfoWin" apply="${sinkronisasiFromCloudListInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout style="padding: 10px;" valign="middle">
+				<label id="infoResultlabel" value="Total: 0 kejadian" sclass="infoResultLabel"></label>
+			</hlayout>	
+			<listbox id="kejadianListbox" mold="paging" pageSize="12" height="510px">
+				<listhead>
+					<listheader label="ID" width="185px"/>
+					<listheader label="TW" width="205px"/>
+					<listheader label="Kotamops" width="220px"/>
+					<listheader label="Jenis" width="160px"/>
+					<listheader label="Motif" width="160px"/>
+					<listheader width="35px"/>
+					<listheader label="Kerugian" width="280px"/>
+					<listheader width="35px"/>
+				</listhead>
+			</listbox>	
+		</div>
+	</center>
+</borderlayout>
+</zk>

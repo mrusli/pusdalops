@@ -1,0 +1,56 @@
+<?page title="PejabatDialog" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="pejabatDialogWin" border="normal" 
+	width="450px" height="280px" apply="${pejabatDialogWinControl}">
+	<vbox>
+		<grid width="410px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Kotamaops:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<combobox id="kotamaopsCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Nama:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="namaTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Pangkat:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="pangkatTextbox" width="240px" sclass="dlg-textbox"></textbox>					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Jabatan:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="jabatanTextbox" width="240px" sclass="dlg-textbox"></textbox>					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="NRP:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="nrpTextbox" width="240px" sclass="dlg-textbox"></textbox>					
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

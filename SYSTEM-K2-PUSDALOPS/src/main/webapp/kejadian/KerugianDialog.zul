@@ -1,0 +1,89 @@
+<?page title="Kerugian" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="kerugianDialogWin" border="normal"
+	width="520px" height="420px" apply="${kerugianDialogControl}">
+	<vbox>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Kejadian ID:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="kejadianIdTextbox" width="240px" readonly="true" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Nama Pers/Mat:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="namaPersMatTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Tipe Kerugian:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<combobox id="tipeKerugianCombobox" width="240px" sclass="dlg-combobox"></combobox>					
+					</cell>				
+				</row>
+				<row>
+					<cell>
+						<label value="ID:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="lembagaCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Jenis:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="kerugianJenisCombobox" width="240px" sclass="dlg-combobox"></combobox>					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kondisi:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="kondisiCombobox" width="240px" sclass="dlg-combobox"></combobox>					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Jumlah:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<hlayout>
+							<intbox id="jumlahIntbox" width="70px"></intbox>
+							<label value="Satuan:" style="font-size:14px;"></label>
+							<combobox id="satuanCombobox" width="110px" sclass="dlg-combobox"></combobox>						
+						</hlayout>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Keterangan:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="keteranganTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				
+			</rows>
+		</grid>
+		<hlayout style="padding-top: 5px;">
+			<button id="saveButton" label="Simpan" sclass="comButton"></button>
+			<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+		</hlayout>	
+	</vbox>
+</window>
+</zk>

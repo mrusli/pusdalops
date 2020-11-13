@@ -1,0 +1,33 @@
+<?page title="Gelar Operasi" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="gelarOperasiListInfoWin" apply="${gelarOperasiListInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout style="padding: 10px;" valign="middle">
+				<label id="infoResultlabel" value="Total: 0 gelar operasi" sclass="infoResultLabel"></label>
+				<button id="newButton" label="Tambah" sclass="modButton"></button>
+			</hlayout>	
+			<listbox id="gelarOperasiLainListbox" mold="paging" pageSize="22" height="730px">
+				<listhead>
+					<listheader label="ID" width="185px"/>
+					<listheader label="TW Awal-Akhir" width="235px"/>
+					<listheader label="Kotamops" width="220px"/>
+					<listheader label="Disposisi" width="120px"/>					
+					<listheader label="Satuan" width="120px"/>					
+					<listheader label="Brigade" width="120px"/>					
+					<listheader label="Batalyon" width="120px"/>
+					<listheader label="Komandan" width="120px"/>
+					<listheader/>					
+				</listhead>
+			</listbox>	
+		</div>
+	</center>
+</borderlayout>
+</zk>

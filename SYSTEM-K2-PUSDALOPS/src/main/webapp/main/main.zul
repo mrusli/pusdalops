@@ -1,0 +1,70 @@
+<?page title="Utama" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="/css/bootstrap-spacelab.min.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?link rel="stylesheet" type="text/css" href="/main/main.css"?>
+<?link rel="stylesheet" type="text/css" href="/home/home.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/style_ListInfo.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/style_Dialog.css"?>
+<!-- javascript -->
+<?script type="text/javascript" src="/js/zk-custom.js"?>
+<?script type="text/javascript" src="/js/print.js"?>
+<zk>
+<window id="mainDiv" apply="${mainControl}" sclass="mainWindow">
+	<div xmlns:n="native">
+		<n:h3>PUSAT PENGENDALIAN OPERASI TNI</n:h3>
+	</div>
+	<div>
+		<menubar>
+			<menuitem id="homeMenuitem" label="Home"/>
+			<menu label="Data-Input">
+				<menupopup>
+					<menuitem id="inputKejadianMenonjolMenuitem" label="Kejadian Menonjol"/>
+					<menuitem id="inputLaporanLainMenuitem" label="Laporan Lain"/>
+					<menuitem id="inputPejabatSiagaMenuitem" label="Pejabat Siaga"/>
+					<menuitem id="inputGelarOperasiMenuitem" label="Gelar Operasi"/>
+					<menuitem id="kronologisKejadianMenuitem" label="Kronologis Kejadian"/>
+					<menuitem id="inputDataPejabatMenuitem" label="Data Pejabat"/>
+				</menupopup>
+			</menu>
+			<menu id="sinkronisasiMenu" label="Sinkronisasi">
+				<menupopup>
+					<!-- for kotamaops ONLY -->
+					<menuitem id="syncToCloudKejadianMenuItem" label="Kejadian Menonjol"></menuitem>
+										
+				</menupopup>
+			</menu>
+			<menu label="Rekapitulasi">
+				<menupopup>
+					<menuitem id="rekapitulasiKerugianMenuitem" label="Kerugian-Keuntungan"/>
+					<menuitem id="rekapitulasiKejadianMotifMenuitem" label="Kejadian dan Motif"/>
+					<menuitem id="rekapitulasiPelakuSasaranMenuitem" label="Pelaku dan Sasaran"/>
+					<menuitem id="intensitasKejadianMenuitem" label="Intensitas Kejadian"/>
+				</menupopup>
+			</menu>
+			<menu label="Laporan">
+				<menupopup>
+					<menuitem id="laporanCetakLaporanRutinMenuitem" label="Cetak Laporan Rutin"/>
+				</menupopup>			
+			</menu>
+			<menu label="Profil">
+				<menupopup>
+					<menuitem id="userNameMenuitem" label="..."/>
+					<menuitem id="dbconnectMenuitem" label="Koneksi Database"></menuitem>
+				</menupopup>
+			</menu>
+			<menu id="settingsMenu" label="Settings" visible="false">
+				<menupopup>
+					<menuitem id="kotamaopsMenuitem" label="Kotamaops" ></menuitem>
+					<menuitem id="kotamaopsSettingsMenuitem" label="Kotamaops-Peruntukan" ></menuitem>
+					<menuitem id="kotamaopsWilayahMenuitem" label="Kotamaops-Propinsi" ></menuitem>					
+					<menuitem id="wilayahMenuitem" label="Wilayah" ></menuitem>					
+					<menuitem id="kejadianMenuitem" label="Kejadian-Kerugian" ></menuitem>					
+				</menupopup>
+			</menu>
+			<menuitem id="logoutMenuitem" label="Logout" sclass="logoutMenuitem" href="/login/j_spring_security_logout"/>		
+		</menubar>
+	</div>
+	<include id="mainInclude" width="100%" height="820px"></include>
+</window>
+</zk>

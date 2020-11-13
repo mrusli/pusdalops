@@ -1,0 +1,78 @@
+@charset "ISO-8859-1";
+
+.z-grid {
+/* 	border: 0px; */
+}
+
+input[type="submit"] {
+	color: yellow;
+}
+
+.backgroundImg {
+	background : url("/system/img/login/login-background-01-01.jpg");
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size:100%;
+}
+
+.gridLogin {
+	background: #d9251c;
+}
+
+.z-comboitem-text {
+    line-height: 45px;
+    padding-left: 50px;
+    font-size: 2em;
+}
+
+/*
+.alignMiddleHbox > tbody > tr > td > table > tbody > tr > td {
+	
+}
+*/
+
+.example1 {
+ height: 50px;	
+ overflow: hidden;
+ position: relative;
+}
+
+.example1 h3 {
+ font-size: 3em;
+ color: yellow;
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ line-height: 50px;
+ text-align: center;
+ /* Starting position */
+ -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);	
+ transform:translateX(100%);
+ /* Apply animation to this element */	
+ -moz-animation: example1 5s linear infinite;
+ -webkit-animation: example1 5s linear infinite;
+ animation: example1 5s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes example1 {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes example1 {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes example1 {
+ 0%   { 
+ -moz-transform: translateX(100%); /* Firefox bug fix */
+ -webkit-transform: translateX(100%); /* Firefox bug fix */
+ transform: translateX(100%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(-100%); /* Firefox bug fix */
+ -webkit-transform: translateX(-100%); /* Firefox bug fix */
+ transform: translateX(-100%); 
+ }
+}

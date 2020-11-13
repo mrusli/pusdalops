@@ -1,0 +1,135 @@
+<?page title="Gelar-Operasi" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="gelarOperasiDialogWin" border="normal" 
+	width="520px" height="630px" apply="${gelarOperasiDialogWinControl}">
+	<vbox>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Operasi ID:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="kejadianIdTextbox" width="240px" readonly="true" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Periode Operasi:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<hlayout valign="middle">
+							<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>					
+						</hlayout>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+					
+					</cell>
+					<cell>
+						<hlayout valign="middle">
+							<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>
+						</hlayout>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+						<label value="Disposisi:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="disposisiCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kotamaops:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="kotamaopsCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Satuan:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="satuanTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Brigade:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="brigadeTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Batalyon:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="batalyonTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<groupbox width="450px" closable="false">
+			<caption label="DISPOSISI: Pasukan" style="color:red;"></caption>
+			<grid width="410px">
+				<rows>
+					<row>
+						<cell width="15%">
+							<label value="KV:" style="font-size:14px;"></label>										
+						</cell>
+						<cell  width="30%">
+							<textbox id="kvTextbox" width="240px" sclass="dlg-textbox"></textbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Komandan:" style="font-size:14px;"></label>										
+						</cell>
+						<cell>
+							<textbox id="komandanTextbox" width="240px" sclass="dlg-textbox"></textbox>
+						</cell>
+					</row>
+					<row>
+						<cell valign="top">
+							<label value="Misi:" style="font-size:14px;"></label>										
+						</cell>
+						<cell>
+							<textbox id="misiTextbox" rows="3" width="240px" sclass="dlg-textbox"></textbox>					
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Jumlah:" style="font-size:14px;"></label>																
+						</cell>
+						<cell>
+							<hlayout valign="middle">
+								<textbox id="jumlahTextbox" width="120px"></textbox>Orang							
+							</hlayout>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

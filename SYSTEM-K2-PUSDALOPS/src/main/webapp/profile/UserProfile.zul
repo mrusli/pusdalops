@@ -1,0 +1,36 @@
+<?page title="User Profile" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" id="userProfileWin" apply="${userProfileControl}">
+	<vlayout>			
+		<hlayout valign="middle" style="padding: 5px 0px">
+			<label id="formTitleLabel"></label>
+		</hlayout>
+	</vlayout>
+	<vbox height="480px">
+		<grid>
+			<rows>
+				<row>
+					<cell width="15%">
+						Peruntukan Kotamaops:	
+					</cell>
+					<cell>
+						<textbox id="kotamaopsTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid>
+			<rows>
+				<row height="160px">
+					<cell width="50%">
+						<image id="kotamaopsLogoImage" style=""></image>					
+					</cell>
+					<cell>
+					
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

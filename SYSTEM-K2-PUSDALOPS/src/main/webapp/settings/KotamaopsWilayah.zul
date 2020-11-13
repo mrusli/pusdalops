@@ -1,0 +1,38 @@
+<?page title="Wilayah Kotamaops" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kotamaopsWilayahWin" apply="${kotamaopsWilayahControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+				<textbox id="kotamaopsTerpilihTextbox" width="280px" readonly="true"/>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout id="propHLayout" style="padding: 10px;" valign="middle">
+				<label id="infoResultProplabel" value="Total: 0 propinsi" sclass="infoResultLabel"></label>
+				<button id="newPropinsiButton" label="Tambah" sclass="modButton"></button>
+			</hlayout>		
+			<listbox id="kotamaopsPropinsiListbox" mold="paging" pageSize="5" height="440px" visible="true">
+				<listhead>
+					<listheader label="" width="165px"/>
+					<listheader label="Propinsi"/>
+				</listhead>
+			</listbox>
+			<hlayout id="kotamaHLayout" style="padding: 10px;" valign="middle">
+				<label id="infoResultKotamalabel" value="Total: 0 kotamaops" sclass="infoResultLabel"></label>
+				<button id="newKotamaopsButton" label="Tambah" sclass="modButton"></button>
+			</hlayout>		
+			<listbox id="kotamaopsListbox" mold="paging" pageSize="5" height="440px" visible="false">
+				<listhead>
+					<listheader label="" width="165px"/>
+					<listheader label="Kotamaops"/>
+				</listhead>
+			</listbox>
+									
+		</div>
+	</center>
+</borderlayout>
+</zk>

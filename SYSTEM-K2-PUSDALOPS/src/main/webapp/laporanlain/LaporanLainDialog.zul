@@ -1,0 +1,48 @@
+<?page title="Laporan Lain Dialog" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="laporanLainDialogWin" border="normal" 
+	width="450px" height="530px" apply="${laporanLainDialogWinControl}">
+	<vbox>
+		<grid width="410px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Laporan ID:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="kejadianIdTextbox" width="240px" readonly="true" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid width="410px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Judul/Topik:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="judulTopikTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="TW Pembuatan:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="twBuatTahunTextbox" width="60px" disabled="true" sclass="dlg-textbox"></textbox>
+						<textbox id="twBuatTanggalJamTextbox" width="100px" disabled="true" sclass="dlg-textbox"></textbox>
+						<textbox id="twBuatTimeZoneTextbox" width="42px" disabled="true" sclass="dlg-textbox"></textbox>
+						<button id="twBuatRubahButton" label="..." sclass="modButton"></button>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<textbox id="laporanTextbox" rows="20" width="410px"></textbox>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

@@ -1,0 +1,78 @@
+<?page title="IntensitasKejadianInfo" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kejadianIntensitasInfoWin" apply="${kejadianIntensitasInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<west width="400px" border="normal" sclass="westArea">
+		<div>
+			<grid height="45px">
+				<rows>
+					<row>
+						<cell width="25%">
+							Kotamaops:
+						</cell>
+						<cell>
+							<combobox id="kotamaopsCombobox" width="270px"></combobox>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<grid id="kejadianPropinsiGrid" height="735px">
+				<columns>
+					<column width="305px"/>
+					<column/>
+				</columns>
+			</grid>
+		</div>
+	</west>	
+	<center border="normal" sclass="centerArea">
+		<div>
+			<grid height="45px">
+				<rows>
+					<row>
+						<cell>
+							<hlayout valign="middle">
+								TW Awal:
+								<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>								
+								TW Akhir:
+								<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>
+								<button id="executeButton" label="Tampilkan" sclass="mod01Button"></button>																
+							</hlayout>						
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<grid>
+				<rows>
+					<row>
+						<cell>
+							<charts id="jenisKejadianChart" height="235px" width="920" type="column" title="Jenis Kejadian"/>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<charts id="motifKejadianChart" height="235px" width="920" type="column" title="Motif Kejadian"/>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<charts id="pelakuKejadianChart" height="240px" width="920" type="column" title="Pelaku Kejadian"/>
+						</cell>
+					</row>					
+				</rows>
+			</grid>
+		</div>
+	</center>
+</borderlayout>
+</zk>

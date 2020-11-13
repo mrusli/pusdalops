@@ -1,0 +1,65 @@
+<?page title="Wilayah" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" id="wilayahSettingsWin" apply="${wilayahSettingsControl}">
+<vlayout>			
+	<hlayout valign="middle" style="padding: 5px 0px">
+		<label id="formTitleLabel"></label>
+	</hlayout>
+</vlayout>
+<vbox>
+	<grid>
+		<rows>
+			<row>
+				<cell>
+					<listbox id="propinsiListbox" mold="paging" pageSize="10" height="440px">
+						<listhead>
+							<listheader label="Propinsi" width="85%"></listheader>
+							<listheader/>
+						</listhead>
+					</listbox>					
+				</cell>
+				<cell>
+					<listbox id="kabupatenListbox" mold="paging" pageSize="10" height="440px">
+						<listhead>
+							<listheader label="Kabupaten" width="85%"></listheader>
+							<listheader/>
+						</listhead>
+					</listbox>					
+				</cell>
+				<cell>
+					<listbox id="kecamatanListbox" mold="paging" pageSize="10" height="440px">
+						<listhead>
+							<listheader label="Kecamatan" width="85%"></listheader>
+							<listheader/>
+						</listhead>					
+					</listbox>					
+				</cell>
+				<cell>
+					<listbox id="kelurahanListbox" mold="paging" pageSize="10" height="440px">
+						<listhead>
+							<listheader label="Kelurahan" width="85%"></listheader>
+							<listheader/>
+						</listhead>					
+					</listbox>					
+				</cell>					
+			</row>
+			<row>
+				<cell>
+					<button id="propinsiAddButton" label="Tambah" sclass="modButton" disabled="true"></button>
+				</cell>
+				<cell>
+					<button id="kabupatenAddButton" label="Tambah" sclass="modButton"></button>
+				</cell>
+				<cell>
+					<button id="kecamatanAddButton" label="Tambah" sclass="modButton"></button>
+				</cell>
+				<cell>
+					<button id="kelurahanAddButton" label="Tambah" sclass="modButton"></button>
+				</cell>			
+			</row>
+		</rows>
+	</grid>
+</vbox>
+
+</window>
+</zk>

@@ -1,0 +1,9 @@
+<?page title="Error" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Error" border="normal" id="errorWin" mode="modal" width="400px" apply="${errorWinControl}">
+	<label id="errorMessageLabel"></label>
+	<hlayout style="padding-top: 5px;">
+		<button id="closeButton" label="Tutup" sclass="comButton"></button>
+	</hlayout>
+</window>
+</zk>

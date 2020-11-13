@@ -1,0 +1,101 @@
+<?page title="KotamaopsDialog" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="kotamaopsDialogWin" border="normal" 
+	width="520px" height="460px" apply="${kotamaopsDialogWinControl}">
+	<vbox>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Nama Kotamaops:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="namaKotamaopsTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Alamat:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="alamat01Textbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						
+					</cell>
+					<cell>
+						<textbox id="alamat02Textbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kota:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="kotaTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kode Pos:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="postalCodeTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Telepon:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="phoneTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Email:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="emailTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Fax:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="faxTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Zona Waktu:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="zonaWaktuCombobox" width="80px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kode Dokumen:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="kodeTextbox" width="80px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				
+			</rows>
+		</grid>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

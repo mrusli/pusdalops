@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="CommonContext-Dao.xml"/>
+
+	<bean id="basisController" class="mil.pusdalops.webui.common.GFCBaseController" abstract="true" scope="prototype">
+	
+	</bean>	
+
+	<bean id="textEntryDialogControl" class="mil.pusdalops.webui.common.dialogs.TextEntryDialogControl" scope="prototype" parent="basisController">
+	
+	</bean>
+ 
+ 	<bean id="mainLoginController" class="mil.pusdalops.webui.login.LoginController" scope="prototype" parent="basisController">
+ 	
+ 	</bean>
+
+	<bean id="mainLoginDialogControl" class="mil.pusdalops.webui.login.LoginDialogController" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<bean id="homeInfoControl" class="mil.pusdalops.webui.home.HomeInfoControler" scope="prototype" parent="basisController">
+	
+	</bean>
+	 
+	<!-- Security -->
+	
+	<bean id="userDetailsControl" class="mil.pusdalops.webui.security.UserSecurityControl" scope="prototype" parent="basisController">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+
+	<!-- Error -->
+
+	<bean id="errorWinControl" class="mil.pusdalops.webui.error.ErrorControl" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<!-- Main -->
+
+	<bean id="mainControl" class="mil.pusdalops.webui.main.Main" scope="prototype" parent="basisController">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+
+	<!-- Dialogs -->
+
+	<bean id="kotamaopsListDialogControl" class="mil.pusdalops.webui.dialogs.KotamaopsListDialogControl" scope="prototype" parent="basisController">
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+	</bean>
+
+	<bean id="propinsiListDialogControl" class="mil.pusdalops.webui.dialogs.PropinsiListDialogControl" scope="prototype" parent="basisController">
+		<property name="propinsiDao" ref="propinsiDao"></property>
+	</bean>
+
+	<bean id="propinsiImgDisplayDialogControl" class="mil.pusdalops.webui.dialogs.PropinsiImgDisplayDialogControl" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<bean id="datetimeDialogWinControl" class="mil.pusdalops.webui.dialogs.DatetimeDialogControl" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<!-- TW Conversion -->
+
+	<bean id="twConversion" class="mil.pusdalops.webui.common.TwConversion" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<!-- Serial Number -->
+
+	<bean id="serialNumberGenerator" class="mil.pusdalops.webui.common.SerialNumberGenerator" scope="prototype" parent="basisController">
+		<property name="documentSerialNumberDao" ref="documentSerialNumberDao"></property>
+	</bean>
+
+	<!-- User Profile -->
+
+	<bean id="userProfileControl" class="mil.pusdalops.webui.profile.UserProfileControl" scope="prototype" parent="basisController">
+		<property name="userDao" ref="userDao"></property>
+		<property name="settingsDao" ref="settingsDao"></property>	
+	</bean>
+
+	<bean id="dbConnectWinControl" class="mil.pusdalops.webui.profile.DBConnectControl" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<!-- Settings.Kotamatops -->
+	
+	<bean id="kotamaopsListInfoControl" class="mil.pusdalops.webui.settings.kotamaops.KotamaopsListInfoControl" scope="prototype" parent="basisController">
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+	</bean>
+
+	<bean id="kotamaopsDialogWinControl" class="mil.pusdalops.webui.settings.kotamaops.KotamaopsDialogControl" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<!-- Settings.Authorized -->
+
+	<bean id="kotamaopsAuthorizedControl" class="mil.pusdalops.webui.settings.authorized.KotamaopsAuthorizedControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="userRoleDao" ref="userRoleDao"></property>	
+	</bean>
+
+	<bean id="kotamaopsAuthorizedUserDialogControl" class="mil.pusdalops.webui.settings.authorized.KotamaopsAuthorizedUserDialogControl" scope="prototype" parent="basisController">
+		<property name="userDao" ref="userDao"></property>
+	
+	</bean>
+
+	<bean id="kotamaopsWilayahControl" class="mil.pusdalops.webui.settings.KotamaopsWilayahControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>	
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+	</bean>
+
+	<bean id="wilayahSettingsControl" class="mil.pusdalops.webui.settings.WilayahSettingsControl" scope="prototype" parent="basisController">
+		<property name="userDao" ref="userDao"></property>	
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kabupaten_KotamadyaDao" ref="kabupaten_KotamadyaDao"></property>
+		<property name="kecamatanDao" ref="kecamatanDao"></property>
+		<property name="kelurahanDao" ref="kelurahanDao"></property>
+	</bean>
+
+	<!-- Settings.Kejadian -->
+
+	<bean id="kejadianSettingsControl" class="mil.pusdalops.webui.settings.KejadianSettingsControl" scope="prototype" parent="basisController">
+		<property name="kejadianJenisDao" ref="kejadianJenisDao"></property>
+		<property name="kejadianMotifDao" ref="kejadianMotifDao"></property>
+		<property name="kerugianJenisDao" ref="kerugianJenisDao"></property>
+		<property name="kerugianKondisiDao" ref="kerugianKondisiDao"></property>
+		<property name="kerugianSatuanDao" ref="kerugianSatuanDao"></property>
+		<property name="settingsDao" ref="settingsDao"></property>
+	</bean>
+
+	<!-- Kejadian -->
+
+	<bean id="kejadianMenonjolListInfoControl" class="mil.pusdalops.webui.kejadian.KejadianMenonjolListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>		
+	</bean>
+	
+	<bean id="kejadianMenonjolDialogControl" class="mil.pusdalops.webui.kejadian.KejadianMenonjolDialogControl" scope="prototype" parent="basisController">
+		<property name="twConversion" ref="twConversion"></property>
+		<property name="serialNumberGenerator" ref="serialNumberGenerator"></property>		
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kabupaten_KotamadyaDao" ref="kabupaten_KotamadyaDao"></property>
+		<property name="kecamatanDao" ref="kecamatanDao"></property>
+		<property name="kelurahanDao" ref="kelurahanDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>		
+		<property name="kejadianJenisDao" ref="kejadianJenisDao"></property>
+		<property name="kejadianMotifDao" ref="kejadianMotifDao"></property>	
+		<property name="kejadianPelakuDao" ref="kejadianPelakuDao"></property>
+	</bean>
+
+	<bean id="wilayahTextEntryDialogControl" class="mil.pusdalops.webui.kejadian.WilayahTextEntryDialogControl" scope="prototype" parent="basisController">
+	
+	</bean>
+	
+	<bean id="kerugianListInfoControl" class="mil.pusdalops.webui.kejadian.KerugianListInfoControl" scope="prototype" parent="basisController">
+		<property name="kejadianDao" ref="kejadianDao"></property>	
+	</bean>
+	
+	<bean id="kerugianDialogControl" class="mil.pusdalops.webui.kejadian.KerugianDialogControl" scope="prototype" parent="basisController">
+		<property name="kerugianJenisDao" ref="kerugianJenisDao"></property>
+		<property name="kerugianKondisiDao" ref="kerugianKondisiDao"></property>
+		<property name="kerugianSatuanDao" ref="kerugianSatuanDao"></property>	
+	</bean>
+
+	<bean id="kerugianJenisTextEntryDialogControl" class="mil.pusdalops.webui.kejadian.KerugianJenisTextEntryDialogControl" scope="prototype" parent="basisController">
+	
+	</bean>
+
+	<!-- Laporan Lain -->
+	
+	<bean id="laporanLainListInfoControl" class="mil.pusdalops.webui.laporanlain.LaporanLainListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="laporanLainDao" ref="laporanLainDao"></property>	
+	</bean>
+	
+	<bean id="laporanLainDialogWinControl" class="mil.pusdalops.webui.laporanlain.LaporanLainDialogControl" scope="prototype" parent="basisController">
+		<property name="serialNumberGenerator" ref="serialNumberGenerator"></property>		
+		<property name="twConversion" ref="twConversion"></property>
+	
+	</bean>
+
+	<!-- Pejabat -->
+	
+	<bean id="pejabatListInfoControl" class="mil.pusdalops.webui.pejabat.PejabatListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="pejabatDao" ref="pejabatDao"></property>	
+
+	</bean>
+	
+	<bean id="pejabatDialogWinControl" class="mil.pusdalops.webui.pejabat.PejabatDialogWinControl" scope="prototype" parent="basisController">
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>			
+		<property name="pejabatDao" ref="pejabatDao"></property>	
+	
+	</bean>
+	
+	<!-- Pejabat Siaga -->
+	
+	<bean id="pejabatSiagaListInfoControl" class="mil.pusdalops.webui.siaga.PejabatSiagaListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="pejabatSiagaDao" ref="pejabatSiagaDao"></property>	
+	</bean>
+	
+	<bean id="pejabatSiagaDialogWinControl" class="mil.pusdalops.webui.siaga.PejabatSiagaDialogControl" scope="prototype" parent="basisController">
+		<property name="pejabatDao" ref="pejabatDao"></property>	
+		<property name="serialNumberGenerator" ref="serialNumberGenerator"></property>
+		<property name="pejabatSiagaDao" ref="pejabatSiagaDao"></property>	
+		
+	</bean>
+	
+	<!-- Gelar Operasi -->
+	
+	<bean id="gelarOperasiListInfoControl" class="mil.pusdalops.webui.gelar.GelarOperasiListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="gelarOperasiDao" ref="gelarOperasiDao"></property>
+	</bean>
+	
+	<bean id="gelarOperasiDialogWinControl" class="mil.pusdalops.webui.gelar.GelarOperasiDialogControl" scope="prototype" parent="basisController">
+		<property name="serialNumberGenerator" ref="serialNumberGenerator"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>		
+		<property name="gelarOperasiDao" ref="gelarOperasiDao"></property>
+	</bean>
+
+	<!-- Kejadian Kronologis -->
+	
+	<bean id="kejadianKronologisListInfoControl" class="mil.pusdalops.webui.kronologis.KejadianKronologisListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>
+	</bean>
+	
+	<!-- Sinkronisasi - for Katamaops -->
+	
+	<bean id="sinkronisasiToCloudListInfoControl" class="mil.pusdalops.webui.sinkronisasi.SinkronisasiToCloudListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>			
+	</bean>
+	
+	<bean id="sinkronisasiToCloudDialogControl" class="mil.pusdalops.webui.sinkronisasi.SinkronisasiToCloudDialogControl" scope="prototype" parent="basisController">
+		<property name="kejadianDao" ref="kejadianDao"></property>			
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kabupaten_KotamadyaDao" ref="kabupaten_KotamadyaDao"></property>
+		<property name="kecamatanDao" ref="kecamatanDao"></property>
+		<property name="kelurahanDao" ref="kelurahanDao"></property>	
+	</bean>
+	
+	<!-- Sinkronisasi - for Pusdalops -->
+	
+	<bean id="sinkronisasiFromCloudListInfoControl" class="mil.pusdalops.webui.sinkronisasi.SinkronisasiFromCloudListInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>			
+	</bean>
+	
+	<!-- Kerugian Rekapitulasi -->
+	
+	<bean id="kerugianRekapInfoControl" class="mil.pusdalops.webui.rekap.KerugianRekapInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kabupaten_KotamadyaDao" ref="kabupaten_KotamadyaDao"></property>
+		<property name="kecamatanDao" ref="kecamatanDao"></property>
+		<property name="kelurahanDao" ref="kelurahanDao"></property>
+		<property name="kejadianRekapDao" ref="kejadianRekapDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>			
+	</bean>
+
+	<!-- Kejadian Motif Rekapitulasi -->
+	
+	<bean id="kejadianMotifRekapInfoControl" class="mil.pusdalops.webui.rekap.KejadianMotifRekapInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kabupaten_KotamadyaDao" ref="kabupaten_KotamadyaDao"></property>
+		<property name="kecamatanDao" ref="kecamatanDao"></property>
+		<property name="kelurahanDao" ref="kelurahanDao"></property>
+		<property name="kejadianRekapMotifDao" ref="kejadianRekapMotifDao"></property>
+		<property name="kejadianMotifDao" ref="kejadianMotifDao"></property>	
+
+	</bean>
+	
+	<!-- Kejadian Pelaku Rekapitulasi -->
+	
+	<bean id="kejadianPelakuRekapInfoControl" class="mil.pusdalops.webui.rekap.KejadianPelakuRekapInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kabupaten_KotamadyaDao" ref="kabupaten_KotamadyaDao"></property>
+		<property name="kecamatanDao" ref="kecamatanDao"></property>
+		<property name="kelurahanDao" ref="kelurahanDao"></property>
+		<property name="kejadianRekapPelakuMotifDao" ref="kejadianRekapPelakuMotifDao"></property>	
+		<property name="kejadianPelakuDao" ref="kejadianPelakuDao"></property>
+		<property name="kejadianMotifDao" ref="kejadianMotifDao"></property>
+		
+	</bean>
+
+	<!-- Kejadian Intensitas Rekapitulasi -->
+
+	<bean id="kejadianIntensitasInfoControl" class="mil.pusdalops.webui.rekap.KejadianIntensitasInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="propinsiDao" ref="propinsiDao"></property>
+		<property name="kejadianRekapIntensitasDao" ref="kejadianRekapIntensitasDao"></property>
+		<property name="kejadianMotifDao" ref="kejadianMotifDao"></property>
+		<property name="kejadianPelakuDao" ref="kejadianPelakuDao"></property>
+	</bean>
+
+	<!-- Laporan Rutin -->
+	
+	<bean id="laporanRutinInfoControl" class="mil.pusdalops.webui.laporanrutin.LaporanRutinInfoControl" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="kejadianJenisDao" ref="kejadianJenisDao"></property>
+		<property name="laporanRutinDao" ref="laporanRutinDao"></property>
+	</bean>
+	
+</beans>

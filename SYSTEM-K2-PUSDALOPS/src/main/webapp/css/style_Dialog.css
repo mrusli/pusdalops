@@ -1,0 +1,195 @@
+@CHARSET "ISO-8859-1";
+
+.z-window-content {
+	padding: 0px;
+}
+
+.z-grid-body .z-cell {
+	padding: 4px 8px 4px 8px;
+}
+
+.smallText {
+	font-size: 1em;
+}
+
+/* 
+.z-textbox {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+ */
+.dlg-textbox {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+
+.dlg01-textbox {
+	padding: 2px;
+	height: 28px;
+	font-size: 16px;
+}
+
+.modButton {
+	font-size: 14px;
+	padding: 0px 10px 0px 10px;
+	background-color: #f98a00;	
+}
+
+.mod01Button {
+	font-size: 14px;
+	padding: 4px 10px 4px 10px;
+	background-color: #f98a00;
+}
+
+.comButton {
+	background-color: #f98a00;
+}
+.z-button {
+/* 	font-size: 14px;
+	line-height: 5.5px; --> conflict with .listinfoEditButton 	
+ 	background-color: #f98a00;
+*/
+}
+
+.z-button:hover {
+	background-color: #f98a00;	
+}
+
+.z-intbox {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+
+.z-decimalbox {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+
+/* 
+.z-combobox-input {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+
+.z-combobox-button {
+	padding-top: 2px;
+	height: 24px;
+} 
+*/
+/*
+* DO NOT change the zk styling directly, instead use
+* sClass property, and define a new style for the component
+*/
+.dlg-combobox {
+	height: 24px;
+}
+
+.dlg-combobox > .z-combobox-input {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+
+.dlg-combobox > .z-combobox-button {
+	padding-top: 2px;
+	height: 24px;
+}
+
+.dlg01-combobox {
+	height: 28px;
+}
+
+.dlg01-combobox > .z-combobox-input {
+	padding: 2px;
+	height: 28px;
+	font-size: 14px;
+}
+
+.dlg01-combobox > .z-combobox-button {
+	padding-top: 2px;
+	height: 28px;
+}
+
+.z-datebox {
+	height: 24px;	
+}
+
+/* 
+.z-datebox > .z-datebox-input {
+	padding: 2px;
+	height: 24px;
+	font-size: 14px;
+}
+
+.z-datebox > .z-datebox-button {
+	padding: 4px 0px 0px 0px;
+	height: 24px;
+} 
+*/
+
+.selectButton {
+	padding: 3px 2px 3px 2px;
+}
+
+.z-textbox-in-listbox {
+	padding: 0px;
+	height: 24px;
+	font-size: 1em;
+	border-radius: 0px;
+}
+
+.selectButton-in-listbox {
+	padding: 0px 2px 0px 2px;
+	border-radius: 0px;
+	height: 24px;
+}
+
+.z-combobox-input-in-listbox {
+	height: 24px;
+}
+
+.z-combobox-input-in-listbox > .z-combobox-input {
+	padding: 0px;
+	height: 24px;
+	font-size: 1em;
+	border-radius: 0px;
+}
+
+.z-combobox-input-in-listbox > .z-combobox-button{
+	height: 24px;
+	border-radius: 0px;
+}
+
+.textboxInList {
+	padding: 2px;
+	height: 24px;
+	font-size: 1em;
+	text-align: right;
+}
+
+textarea {
+	resize: none;
+}
+
+.sinkronisasiLabel {
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 16px;
+}
+
+.kerugianListbox {
+    font-size: 12px;
+    border: 1px solid #D9D9D9;
+}
+
+.refLabel {
+	font-size: 12px;
+}
+
+.referensiCheckbox > input[type="checkbox"] {
+	margin: 0 0 0;
+}

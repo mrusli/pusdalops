@@ -1,0 +1,53 @@
+<?page title="User" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="kotamaopsAuthorizedUserDialogWin" border="normal" 
+	width="520px" height="460px" apply="${kotamaopsAuthorizedUserDialogControl}">
+	<vbox>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Nama Kotamaops:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="namaKotamaopsTextbox" width="240px" disabled="true" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<grid width="450px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="Aktif:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<checkbox id="activeCheckbox"></checkbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="User Kotamaops:" style="font-size:14px;"></label>						
+					</cell>
+					<cell>
+						<textbox id="usernameTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Password:" style="font-size:14px;"></label>	
+					</cell>
+					<cell>
+						<textbox id="passwordTextbox" width="205px" sclass="dlg-textbox"></textbox>
+						<button id="ecryptPasswordButton" label="..." sclass="modButton"></button>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

@@ -1,0 +1,38 @@
+<?page title="Kerugian" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="kerugianListInfoWin" border="normal" style="background-color: #d9251c;"
+	width="1250px" height="430px" apply="${kerugianListInfoControl}">
+	<borderlayout>
+		<north border="none" sclass="northArea">
+			<vlayout>			
+				<hlayout valign="middle" style="padding: 5px 0px">
+					<label id="formTitleLabel" sclass="headTitle"></label>
+				</hlayout>
+			</vlayout>
+		</north>
+		<center border="none" sclass="centerArea">
+			<div>
+				<hlayout style="padding: 10px;" valign="middle">
+					<label id="infoResultlabel" value="Total: 0 kerugian" sclass="infoResultLabel"></label>
+					<button id="newButton" label="Tambah" sclass="modButton"></button>
+				</hlayout>	
+				<listbox id="kerugianListbox" mold="paging" pageSize="6" height="260px">
+					<listhead>
+						<listheader label="Nama Pers/Mat" width="185px"/>
+						<listheader label="Tipe Kerugian" width="100px"/>
+						<listheader label="ID" width="120px"/>
+						<listheader label="Jenis" width="160px"/>
+						<listheader label="Kondisi" width="160px"/>
+						<listheader label="Jumlah" width="80px"/>
+						<listheader label="Keterangan" width="280px"/>
+						<listheader/>
+					</listhead>
+				</listbox>	
+				<hlayout style="padding-top: 5px;">
+					<button id="cancelButton" label="Tutup" sclass="comButton"></button>	
+				</hlayout>
+			</div>
+		</center>
+	</borderlayout>
+</window>
+</zk>

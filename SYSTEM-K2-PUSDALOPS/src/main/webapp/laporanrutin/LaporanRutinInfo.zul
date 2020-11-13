@@ -1,0 +1,79 @@
+<?page title="LaporanRutin" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="laporanRutinInfoWin" apply="${laporanRutinInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout valign="middle">
+			<grid width="1020px" style="background-color:#d9251c; border-color: #d9251c;">
+				<rows>
+					<row>
+						<cell width="10%">
+							<label value="TW Awal:" style="color:yellow;"></label>			
+						</cell>
+						<cell width="30%">
+							<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>								
+						</cell>
+						<cell width="15%">
+							<label value="TW Akhir:" style="color:yellow;"></label>			
+						</cell>
+						<cell>
+							<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+							<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>						
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Kotamaops:" style="color:yellow;"></label>			
+						</cell>
+						<cell>
+							<combobox id="kotamaopsCombobox" width="270px" sclass="dlg01-combobox"></combobox>						
+						</cell>
+						<cell>
+							<label value="Jenis Kejadian:" style="color:yellow;"></label>			
+						</cell>
+						<cell>
+							<combobox id="jenisKejadianCombobox" width="270px" sclass="dlg01-combobox"></combobox>						
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			</hlayout>
+			<hlayout style="padding:10px;">
+				<button id="executeButton" label="Tampilkan" sclass="mod01Button" visible="true"></button>
+				<button id="printButton" label="Cetak" sclass="mod01Button" visible="false"></button>
+				<button id="resetButton" label="Reset" sclass="mod01Button"></button>			
+			</hlayout>
+			<vbox id="printVbox" width="1020px" style="padding-left:5px; padding-top:5px">	
+				<grid>
+					<rows>
+						<row align="center">
+							<label id="title01" style="font-weight:bold;"></label>
+						</row>
+						<row align="center">
+							<label id="title02" style="font-weight:bold;"></label>						
+						</row>
+						<row align="center">
+							<label id="title03" style="font-weight:bold;"></label>
+						</row>						
+					</rows>
+				</grid>
+				<grid id="kejadianGrid">
+
+				</grid>
+			</vbox>
+		</div>
+	</center>
+</borderlayout>
+</zk>

@@ -1,0 +1,16 @@
+<?page title="Daftar Kotamaops" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window width="500px" height="480px" title="Pilih Kotamaops" border="normal"
+	id="kotamaopsListDialogWin" apply="${kotamaopsListDialogControl}">
+	<listbox id="kotamaopsListbox" height="340px">
+		<listhead>
+			<listheader label="" width="165px"></listheader>
+			<listheader label="Nama Kotamaops" width="285px"></listheader>
+		</listhead>
+	</listbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="selectButton" label="Pilih" sclass="comButton"></button>
+		<button id="cancelButton" label="Cancel" sclass="comButton"></button>	
+	</hlayout>
+</window>
+</zk>

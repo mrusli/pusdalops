@@ -1,0 +1,32 @@
+<?page title="LoginWinDialog" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="none" width="680px" height="275px" position="center" closable="true" id="loginDialogWin" apply="${mainLoginDialogControl}">
+	<html:form id="f" name="f" action="j_spring_security_check" method="POST" xmlns:html="native">
+		<grid>
+			<rows>
+				<row>
+					<cell width="45%" align="right">
+						<label value="KOTAMAOPS:" style="font-size: 1.75em; font-weight: bold; color: #d9251c;"></label>							
+					</cell>
+					<cell>
+						<textbox id="username" name="username" style="font-size: 1.5em;"/>
+					</cell>
+				</row>
+				<row>
+					<cell align="right">
+						<label value="PASSWORD:" style="font-size: 1.75em; font-weight: bold; color: #d9251c;"></label>							
+					</cell>
+					<cell>
+						<textbox id="password" name="password" type="password" style="font-size: 1.5em;"/>							
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<separator height="20px"/>
+		<div align="center">
+			<html:input type="submit" value="Login" sclass="btn btn-primary"/>
+			<html:input type="reset" value="Reset" sclass="btn btn-primary" />			
+		</div>		
+	</html:form>
+</window>
+</zk>

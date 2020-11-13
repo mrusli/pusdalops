@@ -1,0 +1,157 @@
+<?page title="KejadianPelakuRekapInfo" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kejadianPelakuRekapInfoWin" apply="${kejadianPelakuRekapInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<west width="400px" border="normal" sclass="westArea">
+		<div>
+			<grid height="45px">
+				<rows>
+					<row>
+						<cell width="12%">
+
+						</cell>
+						<cell>
+
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<grid height="735px">
+				<rows>
+					<row>
+						<cell width="75%">
+							<vlayout>
+								Kotamaops:
+								<combobox id="kotamaopsCombobox" width="270px"></combobox>							
+							</vlayout>
+						</cell>
+						<cell>
+							<vlayout>
+								Jumlah:
+								<label id="jumlahKejKotamaops" value="0" sclass="h1"></label>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Propinsi:							
+								<combobox id="propinsiCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+						<cell>
+							<vlayout>
+								Jumlah:
+								<label id = "jumlahKejPropinsi" value="0" sclass="h1"></label>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Kabupaten-Kotamadya:							
+								<combobox id="kabupatenCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+						<cell>
+							<vlayout>
+								Jumlah:
+								<label id="jumlahKejKabupatenKot" value="0" sclass="h1"></label>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Kecamatan:							
+								<combobox id="kecamatanCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+						<cell>
+							<vlayout>
+								Jumlah:
+								<label id= "jumlahKejKecamatan" value="0" sclass="h1"></label>							
+							</vlayout>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vlayout>
+								Kelurahan:							
+								<combobox id="kelurahanCombobox" width="270px" disabled="true"></combobox>							
+							</vlayout>
+						</cell>
+						<cell>
+							<vlayout>
+								Jumlah:
+								<label id="jumlahKejKelurahan" value="0" sclass="h1"></label>							
+							</vlayout>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</div>
+	</west>	
+	<center border="normal" sclass="centerArea">
+		<div>
+			<grid height="45px">
+				<rows>
+					<row>
+						<cell>
+							<hlayout valign="middle">
+								TW Awal:
+								<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>								
+								TW Akhir:
+								<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>
+								<button id="executeButton" label="Tampilkan" sclass="mod01Button"></button>																
+							</hlayout>						
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<grid>
+				<rows>
+					<row>
+						<cell width="40%">
+							<listbox id="pelakuKejadianListbox" mold="paging" pageSize="8" height="345px" width="400px">
+								<listhead>
+									<listheader label="Pelaku" width="290px"/>
+									<listheader label="Jumlah"/>
+								</listhead>
+							</listbox>						
+						</cell>
+						<cell>
+							 <charts id="pelakuKejadianChart" height="356px" width="580" type="column" title="Pelaku Kejadian"/>						
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<listbox id="motifKejadianListbox" mold="paging" pageSize="8" height="345px" width="400px">
+								<listhead>
+									<listheader label="Motif Kejadian" width="290px"/>
+									<listheader label="Jumlah"/>
+								</listhead>
+							</listbox>						
+						</cell>
+						<cell>
+							 <charts id="motifKejadianChart" height="360px" width="580" type="column" title="Motif Kejadian"/>												
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</div>
+	</center>
+</borderlayout>
+</zk>

@@ -1,0 +1,32 @@
+<?page title="Kejadian Menonjol" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="kejadianMenonjolListInfoWin" apply="${kejadianMenonjolListInfoControl}">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div>
+			<hlayout style="padding: 10px;" valign="middle">
+				<label id="infoResultlabel" value="Total: 0 kejadian" sclass="infoResultLabel"></label>
+				<button id="newButton" label="Tambah" sclass="modButton"></button>
+			</hlayout>	
+			<listbox id="kejadianListbox" mold="paging" pageSize="22" height="740px">
+				<listhead>
+					<listheader label="ID" width="185px"/>
+					<listheader label="TW" width="205px"/>
+					<listheader label="Kotamops" width="220px"/>
+					<listheader label="Jenis" width="200px"/>
+					<listheader label="Motif" width="120px"/>
+					<listheader width="35px"/>
+					<listheader label="Kerugian" width="280px"/>
+					<listheader label="Sinkronisasi"></listheader>
+				</listhead>
+			</listbox>	
+		</div>
+	</center>
+</borderlayout>
+</zk>

@@ -1,0 +1,222 @@
+@CHARSET "ISO-8859-1";
+
+/*
+	border layout
+*/
+.z-borderlayout {
+	background: none;	
+}
+
+.northArea {
+	background-color: #d9251c;
+}
+
+.westArea {
+	background-color: #d9251c;
+}
+
+.centerArea {
+	background-color: #d9251c;
+}
+
+/*
+	tabs
+*/
+.mainTabbox {
+	border: 0px;
+}
+
+.mainTabboxTabs > .z-tabs-content > .z-tab-selected {
+	background: #f98a00;
+	color: #d9251c;
+	border-bottom: 2px solid white;
+}
+
+.mainTabboxTabs > .z-tabs-content > .z-tab-selected > .z-tab-content > .z-tab-text {
+	background: #f98a00;
+	color: white;	
+}
+
+.mainTab, .z-tabs, .z-tab, .z-tab-text {
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.1;	
+	font-size: 14px;
+	background: #d9251c;
+	color: yellow;
+	display: revert;
+}
+
+.mainTab, .z-tab:hover {
+	background: #d9251c;
+}
+
+.mainTab, a:hover {
+	text-decoration: none;
+}
+
+/* 
+
+.z-tab-text {
+	color: yellow;
+}
+
+.z-tab-selected:hover {
+	background: #cd0200;
+}
+ */
+
+
+/*
+.mainTabbox > .z-tab-selected {
+    border-bottom-color: #b5ce07;
+}
+.z-tab-selected .z-tab-text:hover {
+	color: #b5ce07;
+}
+
+a:hover, a:focus {
+	color: #b5ce07;
+	text-decoration: none;
+}
+*/
+
+
+.infoResultLabel {
+	color: #b5ce07;
+}
+
+.hLayoutMiddleAlign {
+	padding: 10px;
+}
+
+.hLayoutMiddleAlign > .z-hlayout-inner {
+	vertical-align: unset;	
+}
+
+/*  
+	remove the listbox borders
+*/
+
+.z-listbox {
+	border: 0px;
+}
+
+.z-listbox-header-border {
+	border: 0px;
+}
+
+.z-listbox-header {
+	background: #f98a00;
+}
+
+.z-listheader {
+	border: 0px;
+	background: #f98a00;
+}
+
+.z-listhead-bar {
+	background: #f98a00;
+	border-left: none;
+	border-bottom: none;
+}
+
+/*
+	set the header content - padding -> padding affects the row height  
+*/
+
+.z-listheader-content {
+	padding: 5px;
+	font-size: 1em;
+}
+
+/*  
+	set the listcell content - font-size & padding -> font-size & padding affects the row height
+*/
+
+.z-listcell-content {
+	font-size: 1em;
+	padding: 5px;
+}
+
+.z-listfooter-content {
+	color: #000000;
+	font-size: 14px;
+}
+
+.listinfoEditButton {
+	min-height: 12px;
+	font-size: 12px;
+	padding: 0px 6px 0px 6px;
+	background-color: #d9251c;
+}
+
+.phkKitaEditButton {
+	min-height: 12px;
+	font-size: 12px;
+	padding: 0px 6px 0px 6px;
+	background-color: #045b03ad;
+}
+
+.phkMusuhEditButton {
+	min-height: 12px;
+	font-size: 12px;
+	padding: 0px 6px 0px 6px;
+	background-color: #0910efe6;
+}
+
+.phkLainEditButton {
+	min-height: 12px;
+	font-size: 12px;
+	padding: 0px 6px 0px 6px;
+	background-color: #f98a00;
+}
+
+.expandedRow {
+	height: 120px;
+    vertical-align: top;
+}
+
+.expandedRowProp {
+	height: 170px;
+    vertical-align: top;
+}
+
+.summaryGrid {
+	border: 0px;
+}
+
+.hlayout-box {
+	padding: 5px;
+}
+
+/*
+
+*/
+.z-combobox-listinfo {
+	padding: 0px;
+	height: 22px;
+	font-size: 1em;
+	border-radius: 0px;
+	display: inline;
+}
+
+.z-combobox-listinfo > .z-combobox-input {
+	width: 80px;
+}
+
+.red-background.z-listitem .z-listcell {
+	background: red;
+}
+
+.h4 {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #2d2d2d;
+    font-size: 18px;
+}
+
+.badge {
+	background-color: #d9251c;
+}

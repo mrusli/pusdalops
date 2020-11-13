@@ -1,0 +1,24 @@
+<?page title="DBConnect" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window border="normal" id="dbConnectWin" apply="${dbConnectWinControl}">
+	<vlayout>			
+		<hlayout valign="middle" style="padding: 5px 0px">
+			<label id="formTitleLabel"></label>
+		</hlayout>
+	</vlayout>
+	<vbox height="480px">
+		<grid>
+			<rows>
+				<row>
+					<cell width="15%">
+						Driver:	
+					</cell>
+					<cell>
+						<textbox id="driverTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

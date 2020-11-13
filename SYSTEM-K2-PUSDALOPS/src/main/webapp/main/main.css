@@ -1,0 +1,78 @@
+@CHARSET "ISO-8859-1";
+
+.mainWindow {
+	background: #d9251c;
+	padding: 0px;
+}
+
+.mainWindow > .z-window-content {
+	background: #d9251c;
+}
+
+h3 {
+	color: yellow;
+	background-color: #d9251c;
+}
+
+.z-menubar {
+	border: 0px;
+	background: #d9251c;
+}
+
+.z-menu, .z-menuitem {
+	border-radius: 0px;
+}
+
+.z-menupopup {
+	border: 0px;
+	padding: 0px;
+	background: none;
+}
+
+.z-menupopup .z-menu-content, .z-menupopup .z-menuitem-content {
+	background: #cd0200;
+}
+
+.z-menuitem-content {
+	background: #d9251c;
+}
+
+.z-menu-content {
+	background: #d9251c;
+}
+
+.z-menu-content, .z-menuitem-content {
+	border: 0px;
+	-webkit-border-radius: 0px; 
+    border-radius: 0px;
+}
+
+.z-menu-content:hover {
+	background: #cd0200;
+}
+
+.z-menu-selected>.z-menu-content {
+	background-color: #d9251c; 
+}
+
+.z-menuitem-content:hover {
+	background: #cd0200;
+}
+
+.z-menu-text, .z-menuitem-text {
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+	font-size: 12px;
+	color: yellow;
+}
+
+.z-menupopup .z-menuitem-content:hover {
+	background-color: #d2690e;
+}
+
+.logoutMenuitem.z-menuitem {
+	border: 1px;
+	border-style: solid;
+	border-color: yellow;
+}

@@ -1,0 +1,191 @@
+<?page title="Kejadian Menonjol" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="kejadianMenonjolDialogWin" border="normal" 
+	width="920px" height="630px" apply="${kejadianMenonjolDialogControl}">
+	<vbox>
+		<grid width="860px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="ID:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="kejadianIdTextbox" width="240px" readonly="true" sclass="dlg-textbox"></textbox>
+					</cell>
+					<cell width="15%">
+					
+					</cell>
+					<cell align="right">
+						<label id="idLabel" style="font-size:9px"></label>
+					</cell>	
+				</row>
+			</rows>
+		</grid>
+		<grid width="860px">
+			<rows>
+				<row>
+					<cell width="15%">
+						<label value="TW.Pembuatan:" style="font-size:14px;"></label>
+					</cell>
+					<cell width="30%">
+						<textbox id="twBuatTahunTextbox" width="60px" sclass="dlg-textbox"></textbox>
+						<textbox id="twBuatTanggalJamTextbox" width="100px" sclass="dlg-textbox"></textbox>
+						<combobox id="twBuatTimeZoneCombobox" width="80px" sclass="dlg-combobox"></combobox>						
+					</cell>
+					<cell width="17%">
+						<label value="TW.Kejadian:" style="font-size:14px;"></label>	
+					</cell>
+					<cell>
+						<textbox id="twJadiTahunTextbox" width="60px" disabled="true" sclass="dlg-textbox"></textbox>
+						<textbox id="twJadiTanggalJamTextbox" width="100px" disabled="true" sclass="dlg-textbox"></textbox>
+						<textbox id="twJadiTimeZoneTextbox" width="42px" disabled="true" sclass="dlg-textbox"></textbox>
+						<button id="twJadiRubahButton" label="..." sclass="modButton"></button>
+					</cell>
+				</row>
+				<row>
+					<cell >
+						<label value="Kotamaops:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="kotamaopsCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+					<cell>
+						<label value="Propinsi:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="propCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Koord GPS:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="koordGpsTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+					<cell>
+						<label value="Koord Peta:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="koordPetaTextbox" width="240px" sclass="dlg-textbox"></textbox>					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Bujur / Lintang:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="bujurLintangTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+					<cell>
+
+					</cell>
+					<cell>
+
+					</cell>
+				</row>
+				
+				<row>
+					<cell>
+						<label value="Kab / Kotamadya:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<combobox id="kabupatenCombobox" width ="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+					<cell>
+						<label value="Kecamatan:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="kecamatanCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kelurahan:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<combobox id="kelurahanCombobox" width="240px" sclass="dlg-combobox"></combobox>
+					</cell>
+					<cell>
+					
+					</cell>
+					<cell>
+					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Kampung:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="kampungTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+					<cell>
+						<label value="Jalan:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="jalanTextbox" width="240px" sclass="dlg-textbox"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<groupbox width="860px" closable="false">
+			<caption label="Kejadian"></caption>
+			<grid>
+				<rows>
+					<row>
+						<cell width="15%">
+							<label value="Jenis Kejadian:" style="font-size:14px;"></label>
+						</cell>
+						<cell width="30%">
+							<combobox id="jenisKejadianCombobox" width="240px" sclass="dlg-combobox"></combobox>						
+						</cell>
+						<cell width="17%">
+							<label value="Motif:" style="font-size:14px;"></label>	
+						</cell>
+						<cell width="30%">
+							<combobox id="motifKejadianCombobox" width="240px" sclass="dlg-combobox"></combobox>	
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Pelaku Kejadian:" style="font-size:14px;"></label>						
+						</cell>
+						<cell>
+							<combobox id="pelakuKejadianCombobox" width="240px" sclass="dlg-combobox"></combobox>
+						</cell>
+						<cell>
+							<label value="Keterangan Pelaku:" style="font-size:14px;"></label>						
+						</cell>
+						<cell>
+							<textbox id="keteranganPelakuTextbox" width="240px" sclass="dlg-textbox"></textbox>						
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Sasaran:" style="font-size:14px;"></label>
+						</cell>
+						<cell>
+							<textbox id="sasaranTextbox" width="240px" sclass="dlg-textbox"></textbox>
+						</cell>
+						<cell>
+						
+						</cell>
+						<cell>
+						
+						</cell>
+					</row>
+				</rows>		
+			</grid>
+		</groupbox>
+		<groupbox width="860px" closable="false">
+			<caption label="Kronologis"></caption>
+			<textbox id="kronologisTextbox" rows="3" width="825px"></textbox>
+		</groupbox>
+	</vbox>
+	<hlayout style="padding-top: 5px;">
+		<button id="saveButton" label="Simpan" sclass="comButton"></button>
+		<button id="cancelButton" label="Batal" sclass="comButton"></button>	
+	</hlayout>	
+</window>
+</zk>

@@ -1,0 +1,165 @@
+<?page title="SinkronisasiToCloudDialog" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="sinkronisasiToCloudDialogWin" border="normal" 
+	width="1120px" height="690px" apply="${sinkronisasiToCloudDialogControl}">
+	<label id="sinkronisasiDialogLabel" value="Sinkronisasi Data Kejadian ke Pusdalops" sclass="sinkronisasiLabel"></label>
+	<grid>
+		<rows>
+			<row>
+				<cell width="10%">
+					<label value="Kejadian ID:" style="font-size:14px;"></label>
+				</cell>
+				<cell width="20%">
+					<textbox id="kejadianIdTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>
+				</cell>
+				<cell width="10%">
+					<label value="Kotamaops:" style="font-size:14px;"></label>
+				</cell>
+				<cell width="20%">
+					<textbox id="kotamaopsTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>
+				</cell>
+				<cell width="10%">
+					<label value="Propinsi:" style="font-size:14px;"></label>
+				</cell>
+				<cell>
+					<textbox id="propinsiTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>
+				</cell>
+			</row>
+		</rows>
+	</grid>
+	<hlayout spacing="15px">		
+		<groupbox closable="false">
+			<caption label="Referensi Wilayah">
+				<checkbox id="referensiWilayahCheckbox" checked="false" sclass="referensiCheckbox"></checkbox>
+			</caption>
+			<grid width="500px">
+				<rows>
+					<row>
+						<cell width="25%">
+							<label value="Kabupaten/Kot:" style="font-size:14px;"></label>
+						</cell>
+						<cell width="45%">
+							<textbox id="kabupatenKotTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>
+						</cell>
+						<cell>
+							<label id="kabupatenKotRef" value="[TIDAK Ditemukan]" sclass="refLabel"></label>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Kecamatan:" style="font-size:14px;"></label>
+						</cell>
+						<cell>
+							<textbox id="kecamatanTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>					
+						</cell>
+						<cell>
+							<label id="kecamatanRef" sclass="refLabel">></label>						
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Kelurahan:" style="font-size:14px;"></label>
+						</cell>
+						<cell>
+							<textbox id="kelurahanTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>					
+						</cell>
+						<cell>
+							<label id="kelurahanRef" sclass="refLabel">></label>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox closable="false">
+			<caption label="Referensi Kejadian">
+				<checkbox id="referensiKejadianCheckbox" checked="false" sclass="referensiCheckbox"></checkbox>
+			</caption>
+			<grid width="500px">
+				<rows>
+					<row>
+						<cell width="25%">
+							<label value="Jenis Kejadian:" style="font-size:14px;"></label>
+						</cell>
+						<cell width="45%">
+							<textbox id="jenisKejadianTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>
+						</cell>
+						<cell>
+							<label id="jenisKejadianRef" sclass="refLabel">></label>
+						</cell>						
+					</row>
+					<row>
+						<cell>
+							<label value="Motif Kejadian:" style="font-size:14px;"></label>
+						</cell>
+						<cell>
+							<textbox id="motifKejadianTextbox" width="200px" readonly="true" sclass="dlg-textbox"></textbox>
+						</cell>
+						<cell>
+							<label id="motifKejadianRef" sclass="refLabel">></label>
+						</cell>						
+					</row>
+					<row>
+						<cell>
+							<label value="_blank_" style="font-size:14px; color: white;"></label>
+						</cell>
+						<cell>
+						
+						</cell>
+						<cell>
+						
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</hlayout>
+	<groupbox>
+		<caption label="Referensi Kerugian">
+			<checkbox id="referensiKerugianCheckbox" checked="false" sclass="referensiCheckbox"></checkbox>
+		</caption>		
+		<listbox id="kerugianListbox" mold="paging" pageSize="4" height="160px" sclass="kerugianListbox">
+			<listhead>
+				<!-- pihak -->
+				<listheader width="125px"/>
+				<listheader label="Jenis" width="160px"/>
+				<listheader width="120px"/>
+				<listheader label="Kondisi" width="160px"/>
+				<listheader width="120px"/>
+				<listheader label="Satuan" width="160px"/>
+				<listheader width="203px"/>
+			</listhead>		
+		</listbox>		
+	</groupbox>
+	<grid>
+		<rows>
+			<row>
+				<cell width="10%">					
+					<button id="synchronizeToCloudButton" label="Sinkronisasi" sclass="mod01Button"></button>
+				</cell>
+				<cell>
+					<label id="actionSuccessLabel" style="font-size:12px;"></label>
+				</cell>
+				<cell>
+					
+				</cell>
+			</row>
+		</rows>
+	</grid>
+	<grid>
+		<rows>
+			<row>
+				<cell>
+					<vlayout>
+						<label id="refFoundLabel" value="[OK] - data di lokal database anda ditemukan dan sesuai dengan data di Pusdalops." style="font-size:12px;"/>
+						<label id="refNotFoundLabel" value="[TIDAK Ditemukan] - data di lokal database anda TIDAK ditemukan di data Pusdalops." style="font-size:12px"></label>
+						<label id="synchronNoteLabel" value="Klik tombol 'Sinkronisasi' untuk melakukan pemindahan data ke Pusdalops." style="font-size:12px;"></label>
+					</vlayout>
+				</cell>
+			</row>
+		</rows>
+	</grid>
+	<hlayout style="padding-top: 5px;">
+		<button id="closeButton" label="Tutup" sclass="comButton"></button>	
+	</hlayout>	
+</window>
+</zk>
