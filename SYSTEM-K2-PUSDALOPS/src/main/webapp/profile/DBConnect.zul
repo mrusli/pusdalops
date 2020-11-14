@@ -17,6 +17,30 @@
 						<textbox id="driverTextbox" width="380px" disabled="true"></textbox>
 					</cell>
 				</row>
+				<row>
+					<cell>
+						URL:	
+					</cell>
+					<cell>
+						<textbox id="urlTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						MySQL Dialect:	
+					</cell>
+					<cell>
+						<textbox id="mysqlDialectTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						IndexBase:
+					</cell>
+					<cell>
+						<textbox id="indexBaseTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
 			</rows>
 		</grid>
 	</vbox>
