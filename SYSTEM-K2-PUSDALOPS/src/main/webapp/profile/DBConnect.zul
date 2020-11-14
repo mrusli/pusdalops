@@ -41,14 +41,6 @@
 						<textbox id="indexBaseTextbox" width="380px" disabled="true"></textbox>
 					</cell>
 				</row>
-				<row>
-					<cell>
-					
-					</cell>
-					<cell>
-					
-					</cell>
-				</row>
 			</rows>
 		</grid>
 	</vbox>
