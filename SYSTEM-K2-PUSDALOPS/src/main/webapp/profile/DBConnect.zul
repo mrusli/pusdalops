@@ -17,8 +17,69 @@
 						<textbox id="driverTextbox" width="380px" disabled="true"></textbox>
 					</cell>
 				</row>
+				<row>
+					<cell>
+						URL:	
+					</cell>
+					<cell>
+						<textbox id="urlTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						MySQL Dialect:	
+					</cell>
+					<cell>
+						<textbox id="mysqlDialectTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						IndexBase:
+					</cell>
+					<cell>
+						<textbox id="indexBaseTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
 			</rows>
 		</grid>
+		Profil | Database Cloud
+		<grid>
+			<rows>
+				<row>
+					<cell width="15%">
+						Driver:	
+					</cell>
+					<cell>
+						<textbox id="cloudDriverTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						URL:	
+					</cell>
+					<cell>
+						<textbox id="cloudUrlTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						MySQL Dialect:	
+					</cell>
+					<cell>
+						<textbox id="cloudMysqlDialectTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						IndexBase:
+					</cell>
+					<cell>
+						<textbox id="cloudIndexBaseTextbox" width="380px" disabled="true"></textbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>		
 	</vbox>
 </window>
 </zk>
