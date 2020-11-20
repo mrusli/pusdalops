@@ -17,7 +17,7 @@ public class DBConnectControl extends GFCBaseController {
 	private Textbox driverTextbox, urlTextbox, mysqlDialectTextbox, 
 		indexBaseTextbox, cloudDriverTextbox, cloudUrlTextbox, cloudMysqlDialectTextbox, 
 		cloudIndexBaseTextbox;
-	private Properties mainProperties;
+	private Properties mainProperties, cloudProperties;
 	
 	public void onCreate$dbConnectWin(Event event) throws Exception {
 		formTitleLabel.setValue("Profil | Database Lokal");
@@ -28,6 +28,9 @@ public class DBConnectControl extends GFCBaseController {
 		
 		// local db
 		displayLocalDBConnectionData();
+
+		cloudProperties = new Properties();
+		cloudProperties.load(new FileInputStream("/pusdalops/hibernate-cloud.properties"));
 		
 		// cloud db
 		displayCloudDBConnectionData();
@@ -42,10 +45,10 @@ public class DBConnectControl extends GFCBaseController {
 	}
 	
 	private void displayCloudDBConnectionData() {
-		cloudDriverTextbox.setValue(mainProperties.get("hibernate.connection.driver_class").toString()); 
-		cloudUrlTextbox.setValue(mainProperties.get("hibernate.connection.url").toString());
-		cloudMysqlDialectTextbox.setValue(mainProperties.get("hibernate.dialect").toString());
-		cloudIndexBaseTextbox.setValue(mainProperties.get("hibernate.search.default.indexBase").toString());
+		cloudDriverTextbox.setValue(cloudProperties.get("hibernate.connection.driver_class").toString()); 
+		cloudUrlTextbox.setValue(cloudProperties.get("hibernate.connection.url").toString());
+		cloudMysqlDialectTextbox.setValue(cloudProperties.get("hibernate.dialect").toString());
+		cloudIndexBaseTextbox.setValue(cloudProperties.get("hibernate.search.default.indexBase").toString());
 	}
 	
 }

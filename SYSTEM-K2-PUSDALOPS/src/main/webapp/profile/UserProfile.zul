@@ -1,12 +1,12 @@
 <?page title="User Profile" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window border="normal" id="userProfileWin" apply="${userProfileControl}">
+<window border="normal" id="userProfileWin" apply="${userProfileControl}" vflex="1" hflex="1">
 	<vlayout>			
 		<hlayout valign="middle" style="padding: 5px 0px">
 			<label id="formTitleLabel"></label>
 		</hlayout>
 	</vlayout>
-	<vbox height="480px">
+	<vbox>
 		<grid>
 			<rows>
 				<row>

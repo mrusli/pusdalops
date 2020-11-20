@@ -1,6 +1,6 @@
 <?page title="Laporan Lain" contentType="text/html;charset=UTF-8"?>
 <zk>
-<borderlayout id="laporanLainListInfoWin" apply="${laporanLainListInfoControl}">
+<borderlayout id="laporanLainListInfoWin" apply="${laporanLainListInfoControl}" height="100%" width="100%">
 	<north border="none" sclass="northArea">
 		<vlayout>			
 			<hlayout valign="middle" style="padding: 5px 0px">
@@ -9,12 +9,12 @@
 		</vlayout>
 	</north>
 	<center border="none" sclass="centerArea">
-		<div>
-			<hlayout style="padding: 10px;" valign="middle">
+		<div vflex="1">
+			<hlayout style="padding: 10px;" valign="middle" height="50px">
 				<label id="infoResultlabel" value="Total: 0 kejadian" sclass="infoResultLabel"></label>
 				<button id="newButton" label="Tambah" sclass="modButton"></button>
 			</hlayout>	
-			<listbox id="laporanLainListbox" mold="paging" pageSize="22" height="730px">
+			<listbox id="laporanLainListbox" mold="paging" height="100%">
 				<listhead>
 					<listheader label="ID" width="185px"/>
 					<listheader label="TW" width="205px"/>

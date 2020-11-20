@@ -1,6 +1,6 @@
 <?page title="KejadianPelakuRekapInfo" contentType="text/html;charset=UTF-8"?>
 <zk>
-<borderlayout id="kejadianPelakuRekapInfoWin" apply="${kejadianPelakuRekapInfoControl}">
+<borderlayout id="kejadianPelakuRekapInfoWin" apply="${kejadianPelakuRekapInfoControl}" height="100%" width="100%">
 	<north border="none" sclass="northArea">
 		<vlayout>			
 			<hlayout valign="middle" style="padding: 5px 0px">
@@ -9,7 +9,7 @@
 		</vlayout>
 	</north>
 	<west width="400px" border="normal" sclass="westArea">
-		<div>
+		<div vflex="1">
 			<grid height="45px">
 				<rows>
 					<row>
@@ -22,7 +22,7 @@
 					</row>
 				</rows>
 			</grid>
-			<grid height="735px">
+			<grid height="100%">
 				<rows>
 					<row>
 						<cell width="75%">
@@ -99,7 +99,7 @@
 		</div>
 	</west>	
 	<center border="normal" sclass="centerArea">
-		<div>
+		<div vflex="1">
 			<grid height="45px">
 				<rows>
 					<row>
@@ -121,11 +121,11 @@
 					</row>
 				</rows>
 			</grid>
-			<grid>
+			<grid height="100%">
 				<rows>
 					<row>
-						<cell width="40%">
-							<listbox id="pelakuKejadianListbox" mold="paging" pageSize="8" height="345px" width="400px">
+						<cell width="30%" valign="top">
+							<listbox id="pelakuKejadianListbox" mold="paging" pageSize="8" height="100%" width="380px">
 								<listhead>
 									<listheader label="Pelaku" width="290px"/>
 									<listheader label="Jumlah"/>
@@ -133,12 +133,12 @@
 							</listbox>						
 						</cell>
 						<cell>
-							 <charts id="pelakuKejadianChart" height="356px" width="580" type="column" title="Pelaku Kejadian"/>						
+							 <charts id="pelakuKejadianChart" height="360px" width="580" type="column" title="Pelaku Kejadian"/>						
 						</cell>
 					</row>
 					<row>
-						<cell>
-							<listbox id="motifKejadianListbox" mold="paging" pageSize="8" height="345px" width="400px">
+						<cell width="30%" valign="top">
+							<listbox id="motifKejadianListbox" mold="paging" pageSize="8" height="100%" width="380px">
 								<listhead>
 									<listheader label="Motif Kejadian" width="290px"/>
 									<listheader label="Jumlah"/>

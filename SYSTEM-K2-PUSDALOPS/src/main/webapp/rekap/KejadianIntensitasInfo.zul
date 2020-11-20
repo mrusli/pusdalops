@@ -1,6 +1,6 @@
 <?page title="IntensitasKejadianInfo" contentType="text/html;charset=UTF-8"?>
 <zk>
-<borderlayout id="kejadianIntensitasInfoWin" apply="${kejadianIntensitasInfoControl}">
+<borderlayout id="kejadianIntensitasInfoWin" apply="${kejadianIntensitasInfoControl}" width="100%" height="100%">
 	<north border="none" sclass="northArea">
 		<vlayout>			
 			<hlayout valign="middle" style="padding: 5px 0px">
@@ -9,7 +9,7 @@
 		</vlayout>
 	</north>
 	<west width="400px" border="normal" sclass="westArea">
-		<div>
+		<div vflex="1">
 			<grid height="45px">
 				<rows>
 					<row>
@@ -22,7 +22,7 @@
 					</row>
 				</rows>
 			</grid>
-			<grid id="kejadianPropinsiGrid" height="735px">
+			<grid id="kejadianPropinsiGrid" mold="paging" pageSize="16" height="100%">
 				<columns>
 					<column width="305px"/>
 					<column/>
@@ -31,7 +31,7 @@
 		</div>
 	</west>	
 	<center border="normal" sclass="centerArea">
-		<div>
+		<div vflex="1">
 			<grid height="45px">
 				<rows>
 					<row>
@@ -53,21 +53,21 @@
 					</row>
 				</rows>
 			</grid>
-			<grid>
+			<grid height="100%">
 				<rows>
 					<row>
 						<cell>
-							<charts id="jenisKejadianChart" height="235px" width="920" type="column" title="Jenis Kejadian"/>
+							<charts id="jenisKejadianChart" height="245px" width="920" type="column" title="Jenis Kejadian"/>
 						</cell>
 					</row>
 					<row>
 						<cell>
-							<charts id="motifKejadianChart" height="235px" width="920" type="column" title="Motif Kejadian"/>
+							<charts id="motifKejadianChart" height="245px" width="920" type="column" title="Motif Kejadian"/>
 						</cell>
 					</row>
 					<row>
 						<cell>
-							<charts id="pelakuKejadianChart" height="240px" width="920" type="column" title="Pelaku Kejadian"/>
+							<charts id="pelakuKejadianChart" height="245px" width="920" type="column" title="Pelaku Kejadian"/>
 						</cell>
 					</row>					
 				</rows>

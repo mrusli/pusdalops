@@ -12,7 +12,7 @@
 
 	<groupId>mil.pusdalops.k2.webui</groupId>
 	<artifactId>SYSTEM-K2-PUSDALOPS</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>war</packaging>
 
 	<name>SYSTEM-K2-PUSDALOPS Maven Webapp</name>

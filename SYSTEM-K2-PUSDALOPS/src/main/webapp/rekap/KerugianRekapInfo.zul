@@ -1,6 +1,6 @@
 <?page title="Rekap-Kerugian" contentType="text/html;charset=UTF-8"?>
 <zk>
-<borderlayout id="kerugianRekapInfoWin" apply="${kerugianRekapInfoControl}">
+<borderlayout id="kerugianRekapInfoWin" apply="${kerugianRekapInfoControl}" width="100%" height="100%">
 	<north border="none" sclass="northArea">
 		<vlayout>			
 			<hlayout valign="middle" style="padding: 5px 0px">
@@ -9,7 +9,7 @@
 		</vlayout>
 	</north>
 	<west width="380px" border="normal" sclass="westArea">
-		<div>
+		<div vflex="1">
 			<grid height="45px">
 				<rows>
 					<row>
@@ -22,7 +22,7 @@
 					</row>
 				</rows>
 			</grid>
-			<grid height="745px">
+			<grid height="100%">
 				<rows>
 					<row>
 						<cell>
@@ -69,7 +69,7 @@
 		</div>
 	</west>	
 	<center border="normal" sclass="centerArea">
-		<div>
+		<div vflex="1">
 			<grid height="45px">
 				<rows>
 					<row>
@@ -93,7 +93,7 @@
 					</row>
 				</rows>
 			</grid>
-			<grid>
+			<grid height="45px">
 				<rows>
 					<row>
 						<cell width="20%">
@@ -117,7 +117,7 @@
 					</row>
 				</rows>
 			</grid>
-			<listbox id="kerugianListbox" mold="paging" pageSize="22" height="710px">
+			<listbox id="kerugianListbox" mold="paging" height="100%">
 				<listhead>
 					<listheader label="Tipe" width="90px"/>
 					<listheader label="Nama Pers/Mat" width="285px"/>
