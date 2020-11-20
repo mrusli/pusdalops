@@ -14,7 +14,7 @@
 				<label id="infoResultlabel" value="Total: 0 Kotamaops" sclass="infoResultLabel"></label>
 				<button id="newButton" label="Tambah" sclass="modButton"></button>
 			</hlayout>	
-			<listbox id="kotamaopsListbox" mold="paging" pageSize="3" height="470px">
+			<listbox id="kotamaopsListbox" mold="paging" pageSize="5" height="470px">
 				<listhead>
 					<listheader label="" width="165px"/>
 					<listheader label="Kotamaops" width="240px"/>
