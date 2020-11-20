@@ -22,6 +22,7 @@ public class App_Query {
 		
 		BigInteger count = kejadianRekapDao.countKerugianByTipe(TipeKerugian.Material, Pihak.KITA, LocalDateTime.now(), LocalDateTime.now());
 		System.out.println(count);
+		System.out.println("hello!!!");
 		
 		// List<Kejadian> kejadianList = kejadianRekapDao.findAllKejadian(null, null);
 		
