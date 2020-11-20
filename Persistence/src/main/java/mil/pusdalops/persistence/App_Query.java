@@ -1,8 +1,13 @@
 package mil.pusdalops.persistence;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import mil.pusdalops.domain.kerugian.Pihak;
+import mil.pusdalops.domain.kerugian.TipeKerugian;
 import mil.pusdalops.persistence.kejadian.rekap.dao.KejadianRekapDao;
 
 public class App_Query {
@@ -12,11 +17,11 @@ public class App_Query {
 	public static void main(String[] args) throws Exception {
 		ctx = new ClassPathXmlApplicationContext("CommonContext-Dao.xml");
 
-		@SuppressWarnings("unused")
 		KejadianRekapDao kejadianRekapDao = (KejadianRekapDao) ctx.getBean("kejadianRekapDao");
 
-		// BigInteger count = kejadianRekapDao.countTipeKerugianPersonil(null, null, null);
-		// System.out.println(count);
+		
+		BigInteger count = kejadianRekapDao.countKerugianByTipe(TipeKerugian.Material, Pihak.KITA, LocalDateTime.now(), LocalDateTime.now());
+		System.out.println(count);
 		
 		// List<Kejadian> kejadianList = kejadianRekapDao.findAllKejadianKerugian(null, null);
 		
