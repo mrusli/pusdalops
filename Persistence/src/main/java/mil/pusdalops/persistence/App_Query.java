@@ -2,12 +2,10 @@ package mil.pusdalops.persistence;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import mil.pusdalops.domain.kejadian.Kejadian;
 import mil.pusdalops.domain.kerugian.Pihak;
 import mil.pusdalops.domain.kerugian.TipeKerugian;
 import mil.pusdalops.persistence.kejadian.rekap.dao.KejadianRekapDao;
@@ -25,8 +23,7 @@ public class App_Query {
 		BigInteger count = kejadianRekapDao.countKerugianByTipe(TipeKerugian.Material, Pihak.KITA, LocalDateTime.now(), LocalDateTime.now());
 		System.out.println(count);
 		
-		@SuppressWarnings("unused")
-		List<Kejadian> kejadianList = kejadianRekapDao.findAllKejadian(null, null);
+		// List<Kejadian> kejadianList = kejadianRekapDao.findAllKejadian(null, null);
 		
 		// KejadianDao kejadianDao = (KejadianDao) ctx.getBean("kejadianDao");
 		// List<Kejadian> kejadianList = kejadianDao.findAllKejadian(true);
