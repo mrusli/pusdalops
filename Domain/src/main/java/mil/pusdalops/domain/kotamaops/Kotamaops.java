@@ -106,6 +106,15 @@ public class Kotamaops extends IdBasedObject {
 			inverseJoinColumns = @JoinColumn(name = "id_kotamaops_d"))
 	private List<Kotamaops> kotamaops;
 	
+	@Override
+	public String toString() {
+		return "Kotamaops [kotamaopsType=" + kotamaopsType + ", kotamaopsName=" + kotamaopsName
+				+ ", kotamaopsDisplayName=" + kotamaopsDisplayName + ", imagedId=" + imagedId + ", imageId01="
+				+ imageId01 + ", address01=" + address01 + ", address02=" + address02 + ", city=" + city
+				+ ", postalCode=" + postalCode + ", phone=" + phone + ", email=" + email + ", fax=" + fax
+				+ ", timeZone=" + timeZone + ", documentCode=" + documentCode + "]";
+	}
+
 	/**
 	 * @return the kotamaopsType
 	 */

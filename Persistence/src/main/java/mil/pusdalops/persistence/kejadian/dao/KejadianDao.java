@@ -1,9 +1,12 @@
 package mil.pusdalops.persistence.kejadian.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import mil.pusdalops.domain.kejadian.Kejadian;
+import mil.pusdalops.domain.kejadian.KejadianJenis;
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.wilayah.Propinsi;
 
 public interface KejadianDao {
 
@@ -109,12 +112,49 @@ public interface KejadianDao {
 	 */
 	public List<Kejadian> findKotamaopsNonSynchronizedKejadian(Kotamaops kotamaops) throws Exception;
 	
-	
-	
+	/**
+	 * Index / Re-Index kronologis
+	 * 
+	 * @throws Exception
+	 */
 	public void createIndexer() throws Exception;
 	
 	
 	
-	public List<Kejadian> searchKronologis(String searchString) throws Exception;
+	/**
+	 * search a text string in Kronologis
+	 * 
+	 * @param searchString
+	 * @param kotamaops 
+	 * @param kotamaops 
+	 * @return List<Kejadian>
+	 * @throws Exception
+	 */
+	public List<Kejadian> searchKronologis(String searchString, List<Kotamaops> kotamaops) throws Exception;
+
+	public List<Kejadian> findAllKejadianInKotamaops(boolean desc, List<Kotamaops> kotamaops) throws Exception;
+
+	public List<Kejadian> findAllKejadianInPropinsisByKotamaops(boolean desc, Kotamaops kotamaops, List<Propinsi> propinsis) throws Exception;
+
+	public List<Kejadian> searchKronologis(String searchString, Kotamaops selKotamaops) throws Exception;
+
+	public List<Kejadian> searchKronologis(String searchString, List<Kotamaops> kotamaops, Date twAwal,
+			Date twAkhir) throws Exception;
+
+	public List<Kejadian> searchKronologis(String searchString, Kotamaops selKotamaops, Date twAwal, Date twAkhir) throws Exception;
+
+	public List<Kejadian> searchKronologisByKejadianList(String searchString, List<KejadianJenis> kejadianJenisList, Date twAwal,
+			Date twAkhir) throws Exception;
+
+	public List<Kejadian> searchKronologisByKejadian(String searchString, KejadianJenis kejadianJenis, Date twAwal,
+			Date twAkhir) throws Exception;
+
+	public List<Kejadian> searchKronologisByPropinsiList(String searchString, List<Propinsi> propinsiList);
+
+	public List<Kejadian> searchKronologisByPropinsiList(String searchString, List<Propinsi> propinsiList, Date twAwal,
+			Date twAkhir) throws Exception;
+
+	public List<Kejadian> searchKronologisByPropinsi(String searchString, Propinsi selPropinsi, Date twAwal,
+			Date twAkhir) throws Exception;
 	
 }

@@ -124,26 +124,16 @@
 			<grid height="100%">
 				<rows>
 					<row>
-						<cell width="30%" valign="top">
-							<listbox id="pelakuKejadianListbox" mold="paging" pageSize="8" height="100%" width="380px">
-								<listhead>
-									<listheader label="Pelaku" width="290px"/>
-									<listheader label="Jumlah"/>
-								</listhead>
-							</listbox>						
+						<cell width="35%" valign="top">
+							<charts id="pelakuKejadianPieChart" type="pie" width="480" height="360" title=""></charts>
 						</cell>
 						<cell>
 							 <charts id="pelakuKejadianChart" height="360px" width="580" type="column" title="Pelaku Kejadian"/>						
 						</cell>
 					</row>
 					<row>
-						<cell width="30%" valign="top">
-							<listbox id="motifKejadianListbox" mold="paging" pageSize="8" height="100%" width="380px">
-								<listhead>
-									<listheader label="Motif Kejadian" width="290px"/>
-									<listheader label="Jumlah"/>
-								</listhead>
-							</listbox>						
+						<cell valign="top">
+							<charts id="motifKejadianPieChart" type="pie" width="480" height="360" title=""></charts>
 						</cell>
 						<cell>
 							 <charts id="motifKejadianChart" height="360px" width="580" type="column" title="Motif Kejadian"/>												

@@ -25,7 +25,7 @@ public class KotamaopsDialogControl extends GFCBaseController {
 	private Combobox zonaWaktuCombobox;
 	private Textbox namaKotamaopsTextbox, alamat01Textbox, alamat02Textbox,
 		kotaTextbox, postalCodeTextbox, phoneTextbox, emailTextbox, faxTextbox,
-		kodeTextbox;
+		kodeTextbox, image100Textbox, image200Textbox;
 	
 	private Kotamaops kotamaops;
 	
@@ -71,6 +71,8 @@ public class KotamaopsDialogControl extends GFCBaseController {
 	private void displayKotamaopsInfo() {
 		if (getKotamaops().getId().compareTo(Long.MIN_VALUE)==0) {
 			// new - do nothing
+			image100Textbox.setValue("blank_01_100.jpg");
+			image200Textbox.setValue("blank_01_200.jpg");
 		} else {
 			// existing - display data
 			namaKotamaopsTextbox.setValue(getKotamaops().getKotamaopsName()); 
@@ -87,6 +89,8 @@ public class KotamaopsDialogControl extends GFCBaseController {
 					zonaWaktuCombobox.setSelectedItem(comboitem);
 				}
 			}			
+			image100Textbox.setValue(getKotamaops().getImagedId());
+			image200Textbox.setValue(getKotamaops().getImageId01());
 		}
 	}
 
@@ -108,6 +112,9 @@ public class KotamaopsDialogControl extends GFCBaseController {
 		modKotamaops.setEditedAt(asDate(getLocalDateTime()));
 		// PUSAT creates OTHERS kotamaops
 		modKotamaops.setKotamaopsType(KotamaopsType.OTHERS);
+		// set a blank image -- user must define a new image later on
+		modKotamaops.setImagedId(image100Textbox.getValue());
+		modKotamaops.setImageId01(image200Textbox.getValue());
 		
 		// send event with changes in the object
 		Events.sendEvent(Events.ON_OK, kotamaopsDialogWin, modKotamaops);

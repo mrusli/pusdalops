@@ -1,4 +1,4 @@
-<?page title="Utama" contentType="text/html;charset=UTF-8"?>
+<?page title="K2-Pusdalops" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="/css/bootstrap-spacelab.min.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/style.css"?>
@@ -65,6 +65,6 @@
 			<menuitem id="logoutMenuitem" label="Logout" sclass="logoutMenuitem" href="/login/j_spring_security_logout"/>		
 		</menubar>
 	</div>
-	<include id="mainInclude"  hflex="1" vflex="1"></include>
+	<include id="mainInclude" hflex="1" vflex="1"></include>
 </window>
 </zk>

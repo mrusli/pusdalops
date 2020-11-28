@@ -2,6 +2,7 @@ package mil.pusdalops.persistence.kejadian.rekap.dao.hibernate;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -49,6 +50,28 @@ public class KejadianRekapPelakuMotifHibernate implements KejadianRekapPelakuMot
 		}
 	}
 
+	public BigInteger countKejadianInKotamaopsList(List<Kotamaops> kotamaopsList,LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception {
+		Session session = getSessionFactory().openSession();
+		
+		try {			
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT count(kejadian.id) FROM e010_k2_pusdalops.kejadian kejadian"
+					+ " where "
+					+ " kejadian.kotamaops_id_fk in (:kotamaops) and "
+					+ " kejadian.tw_kejadian_datetime<:twAkhirKejadian and "
+					+ " kejadian.tw_kejadian_datetime>:twAwalKejadian");
+			sqlQuery.setParameterList("kotamaops", kotamaopsList);
+			sqlQuery.setParameter("twAkhirKejadian", twAkhir.toString());
+			sqlQuery.setParameter("twAwalKejadian", twAwal.toString());
+			
+			return sqlQuery.list().isEmpty() ? BigInteger.ZERO : (BigInteger) sqlQuery.list().get(0);
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}		
+	}
+	
 	@Override
 	public BigInteger countKejadian(Kotamaops kotamaops, LocalDateTime twAwal, LocalDateTime twAkhir) {
 		Session session = getSessionFactory().openSession();

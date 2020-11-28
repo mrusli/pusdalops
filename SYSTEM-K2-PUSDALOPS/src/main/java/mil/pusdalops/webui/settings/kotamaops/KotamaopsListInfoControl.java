@@ -3,12 +3,14 @@ package mil.pusdalops.webui.settings.kotamaops;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -44,6 +46,7 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 	private List<Kotamaops> kotamaopsList;
 	
 	private final int KOTAMAOPS_PUST_IDX = 0;
+	private static final Logger log = Logger.getLogger(KotamaopsListInfoControl.class);
 	
 	public void onCreate$kotamaopsListInfoWin(Event event) throws Exception {
 		formTitleLabel.setValue("Settings | Kotamaops");
@@ -81,15 +84,18 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 				
 				item.setClass("expandedRow");
 
+			
 				try {
-				    buffImg = ImageIO.read(new File("/pusdalops/img/logo/"+kotamaops.getImagedId()));
+					buffImg = ImageIO.read(new File("/pusdalops/img/logo/"+kotamaops.getImagedId()));
+				} catch (MalformedURLException e) {
+					log.error("Malformed Image URL");
 				} catch (IOException e) {
-					throw e;
-				}				
-				
+					log.error("IO Image Error");
+				}
+								
 				// logo image
 				lc = new Listcell();
-				lc.setImageContent(buffImg);
+				lc.setImageContent(buffImg);					
 				// lc.setImage("/img/logo/"+kotamaops.getImagedId());
 				lc.setStyle("text-align: center;");
 				lc.setParent(item);

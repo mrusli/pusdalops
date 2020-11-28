@@ -2,6 +2,7 @@ package mil.pusdalops.persistence.kejadian.rekap.dao;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import mil.pusdalops.domain.kejadian.KejadianMotif;
 import mil.pusdalops.domain.kejadian.KejadianPelaku;
@@ -15,6 +16,8 @@ public interface KejadianRekapPelakuMotifDao {
 
 	public BigInteger countKejadian(LocalDateTime twAwal, LocalDateTime twAkhir);
 
+	public BigInteger countKejadianInKotamaopsList(List<Kotamaops> kotamaopsList,LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception;
+	
 	public BigInteger countKejadian(Kotamaops kotamaops, LocalDateTime twAwal, LocalDateTime twAkhir);
 
 	public BigInteger countKejadian(Kotamaops value, Propinsi propinsi, LocalDateTime twAwal,

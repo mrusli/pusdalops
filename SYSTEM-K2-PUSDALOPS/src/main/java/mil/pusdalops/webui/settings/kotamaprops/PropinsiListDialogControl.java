@@ -1,8 +1,11 @@
-package mil.pusdalops.webui.dialogs;
+package mil.pusdalops.webui.settings.kotamaprops;
 
+import java.util.Comparator;
 import java.util.List;
 
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -26,10 +29,21 @@ public class PropinsiListDialogControl extends GFCBaseController {
 	private Window propinsiListDialogWin;
 	private Listbox propinsiListbox;
 	
-	private List<Propinsi> propinsiList;
+	private List<Propinsi> propinsiList, propinsiToExclude;
+	private PropinsiListDialogData propinsiListDialogData;
 	
-	public void onCreate$propinsiListDialogWin(Event event) throws Exception {
+	@Override
+	public void doAfterCompose(Component comp) throws Exception {
+		super.doAfterCompose(comp);
+		
+		setPropinsiListDialogData(
+				(PropinsiListDialogData) arg.get("dialogData"));
+	}
 
+	public void onCreate$propinsiListDialogWin(Event event) throws Exception {
+		setPropinsiToExclude(
+				getPropinsiListDialogData().getPropinsisToExclude());
+		
 		// load propinsi list
 		loadPropinsiList();
 		
@@ -37,10 +51,12 @@ public class PropinsiListDialogControl extends GFCBaseController {
 		displayPropinsiList();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadPropinsiList() throws Exception {
-		setPropinsiList(
-				getPropinsiDao().findAllPropinsi());
-		
+		// load propinsi to add (not listed)
+		setPropinsiList((List<Propinsi>) getItemsNotInTheList(getPropinsiToExclude(), getPropinsiDao().findAllPropinsi()));
+		// sort
+		getPropinsiList().sort(Comparator.comparing(Propinsi::getNamaPropinsi));
 	}
 
 	private void displayPropinsiList() {
@@ -58,10 +74,6 @@ public class PropinsiListDialogControl extends GFCBaseController {
 			public void render(Listitem item, Propinsi propinsi, int index) throws Exception {
 				Listcell lc;
 				
-				// image
-				lc = new Listcell();
-				lc.setParent(item);
-				
 				// Nama Propinsi
 				lc = new Listcell(propinsi.getNamaPropinsi());
 				lc.setParent(item);
@@ -72,6 +84,13 @@ public class PropinsiListDialogControl extends GFCBaseController {
 	}
 	
 	public void onClick$selectButton(Event event) throws Exception {
+		if (propinsiListbox.getSelectedItem()==null) {
+			throw new Exception("Propinsi belum terpilih");
+		}
+		// get selected propinsi
+		Propinsi selProp = propinsiListbox.getSelectedItem().getValue();
+		// send event
+		Events.sendEvent(Events.ON_CHANGE, propinsiListDialogWin, selProp);
 		
 		propinsiListDialogWin.detach();
 	}
@@ -107,5 +126,21 @@ public class PropinsiListDialogControl extends GFCBaseController {
 	 */
 	public void setPropinsiList(List<Propinsi> propinsiList) {
 		this.propinsiList = propinsiList;
+	}
+
+	public List<Propinsi> getPropinsiToExclude() {
+		return propinsiToExclude;
+	}
+
+	public void setPropinsiToExclude(List<Propinsi> propinsiToExclude) {
+		this.propinsiToExclude = propinsiToExclude;
+	}
+
+	public PropinsiListDialogData getPropinsiListDialogData() {
+		return propinsiListDialogData;
+	}
+
+	public void setPropinsiListDialogData(PropinsiListDialogData propinsiListDialogData) {
+		this.propinsiListDialogData = propinsiListDialogData;
 	}
 }

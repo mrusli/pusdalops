@@ -50,14 +50,6 @@
 		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
 	</bean>
 
-	<bean id="propinsiListDialogControl" class="mil.pusdalops.webui.dialogs.PropinsiListDialogControl" scope="prototype" parent="basisController">
-		<property name="propinsiDao" ref="propinsiDao"></property>
-	</bean>
-
-	<bean id="propinsiImgDisplayDialogControl" class="mil.pusdalops.webui.dialogs.PropinsiImgDisplayDialogControl" scope="prototype" parent="basisController">
-	
-	</bean>
-
 	<bean id="datetimeDialogWinControl" class="mil.pusdalops.webui.dialogs.DatetimeDialogControl" scope="prototype" parent="basisController">
 	
 	</bean>
@@ -108,9 +100,17 @@
 	
 	</bean>
 
-	<bean id="kotamaopsWilayahControl" class="mil.pusdalops.webui.settings.KotamaopsWilayahControl" scope="prototype" parent="basisController">
+	<bean id="kotamaopsWilayahControl" class="mil.pusdalops.webui.settings.kotamaprops.KotamaopsWilayahControl" scope="prototype" parent="basisController">
 		<property name="settingsDao" ref="settingsDao"></property>	
 		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+	</bean>
+
+	<bean id="propinsiListDialogControl" class="mil.pusdalops.webui.settings.kotamaprops.PropinsiListDialogControl" scope="prototype" parent="basisController">
+		<property name="propinsiDao" ref="propinsiDao"></property>
+	</bean>
+
+	<bean id="propinsiImgDisplayDialogControl" class="mil.pusdalops.webui.settings.kotamaprops.PropinsiImgDisplayDialogControl" scope="prototype" parent="basisController">
+	
 	</bean>
 
 	<bean id="wilayahSettingsControl" class="mil.pusdalops.webui.settings.WilayahSettingsControl" scope="prototype" parent="basisController">
@@ -136,7 +136,8 @@
 
 	<bean id="kejadianMenonjolListInfoControl" class="mil.pusdalops.webui.kejadian.KejadianMenonjolListInfoControl" scope="prototype" parent="basisController">
 		<property name="settingsDao" ref="settingsDao"></property>
-		<property name="kejadianDao" ref="kejadianDao"></property>		
+		<property name="kejadianDao" ref="kejadianDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>		
 	</bean>
 	
 	<bean id="kejadianMenonjolDialogControl" class="mil.pusdalops.webui.kejadian.KejadianMenonjolDialogControl" scope="prototype" parent="basisController">
@@ -229,6 +230,11 @@
 	
 	<bean id="kejadianKronologisListInfoControl" class="mil.pusdalops.webui.kronologis.KejadianKronologisListInfoControl" scope="prototype" parent="basisController">
 		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+	</bean>
+	
+	<bean id="kejadianKronologisViewDialogControl" class="mil.pusdalops.webui.kronologis.KejadianKronologisViewDialogControl" scope="prototype" parent="basisController">
 		<property name="kejadianDao" ref="kejadianDao"></property>
 	</bean>
 	

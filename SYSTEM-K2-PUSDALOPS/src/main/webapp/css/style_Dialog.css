@@ -46,13 +46,13 @@
 .comButton {
 	background-color: #f98a00;
 }
-.z-button {
-/* 	font-size: 14px;
+/* .z-button {
+	font-size: 14px;
 	line-height: 5.5px; --> conflict with .listinfoEditButton 	
  	background-color: #f98a00;
-*/
-}
 
+}
+*/
 .z-button:hover {
 	background-color: #f98a00;	
 }

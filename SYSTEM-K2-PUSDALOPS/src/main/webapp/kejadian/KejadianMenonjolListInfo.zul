@@ -19,6 +19,7 @@
 					<listheader label="ID" width="185px"/>
 					<listheader label="TW" width="205px"/>
 					<listheader label="Kotamops" width="220px"/>
+					<listheader label="Propinsi" width="220px"/>
 					<listheader label="Jenis" width="200px"/>
 					<listheader label="Motif" width="120px"/>
 					<listheader width="35px"/>

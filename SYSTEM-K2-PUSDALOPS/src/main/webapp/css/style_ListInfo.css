@@ -195,7 +195,7 @@ a:hover, a:focus {
 */
 .z-combobox-listinfo {
 	padding: 0px;
-	height: 22px;
+	/*height: 22px;*/
 	font-size: 1em;
 	border-radius: 0px;
 	display: inline;
@@ -219,4 +219,12 @@ a:hover, a:focus {
 
 .badge {
 	background-color: #d9251c;
+}
+
+/*
+
+*/
+
+.autopaging-content-kronologis .z-listcell-content {
+	height: 110px;
 }

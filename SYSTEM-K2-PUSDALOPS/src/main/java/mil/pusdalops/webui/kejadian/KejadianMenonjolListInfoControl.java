@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -23,7 +24,9 @@ import mil.pusdalops.domain.kerugian.Pihak;
 import mil.pusdalops.domain.kotamaops.Kotamaops;
 import mil.pusdalops.domain.kotamaops.KotamaopsType;
 import mil.pusdalops.domain.settings.Settings;
+import mil.pusdalops.domain.wilayah.Propinsi;
 import mil.pusdalops.persistence.kejadian.dao.KejadianDao;
+import mil.pusdalops.persistence.kotamaops.dao.KotamaopsDao;
 import mil.pusdalops.persistence.settings.dao.SettingsDao;
 import mil.pusdalops.webui.common.GFCBaseController;
 
@@ -36,6 +39,7 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 
 	private SettingsDao settingsDao;
 	private KejadianDao kejadianDao;
+	private KotamaopsDao kotamaopsDao;
 	
 	private Window kejadianMenonjolListInfoWin;
 	private Label formTitleLabel, infoResultlabel;
@@ -46,6 +50,7 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 	private List<Kejadian> kejadianList;
 	
 	private final long SETTINGS_DEFAULT_ID = 1L;
+	private static final Logger log = Logger.getLogger(KejadianMenonjolListInfoControl.class);
 	
 	public void onCreate$kejadianMenonjolListInfoWin(Event event) throws Exception {
 		setSettings(
@@ -65,14 +70,24 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 	
 	private void loadKejadianList() throws Exception {
 		if (getKotamaops().getKotamaopsType().compareTo(KotamaopsType.PUSDALOPS)==0) {
-			// ascending order, newest kejadian first in the list
+			// kejadian in which kotamaops? -- depending on the kotamaops listed in Kotamaops-Propinsi menu
+			Kotamaops kotamaopsKotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+			
+			kotamaopsList.forEach(kotamaops->log.info(kotamaops.toString()));
+			
 			setKejadianList(
-					getKejadianDao().findAllKejadian(true));
+					getKejadianDao().findAllKejadianInKotamaops(true, kotamaopsList));
 		} else {
 			// display kejadian for this kotamaops only
 			// by ascending order, newest kejadian first in the list
+			Kotamaops kotamaopsPropinsiByProxy =
+					getKotamaopsDao().findKotamaopsPropinsiByProxy(getKotamaops().getId());
+			List<Propinsi> propinsiList = kotamaopsPropinsiByProxy.getPropinsis();
+			
 			setKejadianList(
-					getKejadianDao().findAllKejadianByKotamaops(getKotamaops(), true));
+					getKejadianDao().findAllKejadianInPropinsisByKotamaops(true, getKotamaops(), propinsiList));
 		}
 	}
 
@@ -96,12 +111,17 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 				lc.setParent(item);
 				
 				// TW
-				lc = new Listcell(kejadian.getTwPembuatanDateTime().toString()+" "+kejadian.getTwPembuatanTimezone().toString());
+				lc = new Listcell(kejadian.getTwKejadianDateTime().toString()+" "+kejadian.getTwKejadianTimezone().toString());
 				lc.setParent(item);
 				
 				// Kotamops
-				Kejadian kejadianByProxy = getKejadianDao().findKejadianKotamaopsByProxy(kejadian.getId());
-				lc = new Listcell(kejadianByProxy.getKotamaops().getKotamaopsName());
+				Kejadian kejadianKotamaopsByProxy = getKejadianDao().findKejadianKotamaopsByProxy(kejadian.getId());
+				lc = new Listcell(kejadianKotamaopsByProxy.getKotamaops().getKotamaopsName());
+				lc.setParent(item);
+				
+				// Propinsi
+				Kejadian kejadianPropinsiByProxy = getKejadianDao().findKejadianPropinsiByProxy(kejadian.getId());
+				lc = new Listcell(kejadianPropinsiByProxy.getPropinsi().getNamaPropinsi());
 				lc.setParent(item);
 				
 				// Jenis
@@ -324,5 +344,13 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 
 	public void setKejadianList(List<Kejadian> kejadianList) {
 		this.kejadianList = kejadianList;
+	}
+
+	public KotamaopsDao getKotamaopsDao() {
+		return kotamaopsDao;
+	}
+
+	public void setKotamaopsDao(KotamaopsDao kotamaopsDao) {
+		this.kotamaopsDao = kotamaopsDao;
 	}
 }

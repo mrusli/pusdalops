@@ -16,8 +16,10 @@ import mil.pusdalops.domain.wilayah.Propinsi;
 
 public interface KejadianRekapMotifDao {
 
-	public BigInteger countKejadian(LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception;
+	public BigInteger countAllKejadian(LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception;
 
+	public BigInteger countKejadianInKotamaopsList(List<Kotamaops> kotamaopsList, LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception;
+	
 	public BigInteger countKejadian(Kotamaops kotamaops, 
 			LocalDateTime twAwal, LocalDateTime twAkhir);
 

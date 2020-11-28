@@ -43,6 +43,12 @@ public class Propinsi extends IdBasedObject {
 	@Column(name = "img_display_width")
 	private String imageDisplayWidth;
 	
+	@Override
+	public String toString() {
+		return "Propinsi [namaPropinsi=" + namaPropinsi + ", imageId_01_100=" + imageId_01_100 + ", imageId_01="
+				+ imageId_01 + ", imageId_00=" + imageId_00 + ", imageDisplayWidth=" + imageDisplayWidth + "]";
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "propinsi_join_kabupaten",
@@ -98,20 +104,18 @@ public class Propinsi extends IdBasedObject {
 		this.imageDisplayWidth = imageDisplayWidth;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((imageDisplayWidth == null) ? 0 : imageDisplayWidth.hashCode());
+		result = prime * result + ((imageId_00 == null) ? 0 : imageId_00.hashCode());
+		result = prime * result + ((imageId_01 == null) ? 0 : imageId_01.hashCode());
+		result = prime * result + ((imageId_01_100 == null) ? 0 : imageId_01_100.hashCode());
 		result = prime * result + ((namaPropinsi == null) ? 0 : namaPropinsi.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -121,6 +125,26 @@ public class Propinsi extends IdBasedObject {
 		if (getClass() != obj.getClass())
 			return false;
 		Propinsi other = (Propinsi) obj;
+		if (imageDisplayWidth == null) {
+			if (other.imageDisplayWidth != null)
+				return false;
+		} else if (!imageDisplayWidth.equals(other.imageDisplayWidth))
+			return false;
+		if (imageId_00 == null) {
+			if (other.imageId_00 != null)
+				return false;
+		} else if (!imageId_00.equals(other.imageId_00))
+			return false;
+		if (imageId_01 == null) {
+			if (other.imageId_01 != null)
+				return false;
+		} else if (!imageId_01.equals(other.imageId_01))
+			return false;
+		if (imageId_01_100 == null) {
+			if (other.imageId_01_100 != null)
+				return false;
+		} else if (!imageId_01_100.equals(other.imageId_01_100))
+			return false;
 		if (namaPropinsi == null) {
 			if (other.namaPropinsi != null)
 				return false;

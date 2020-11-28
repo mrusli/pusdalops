@@ -35,7 +35,7 @@ public class KejadianRekapMotifHibernate implements KejadianRekapMotifDao {
 	}
 
 	@Override
-	public BigInteger countKejadian(LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception {
+	public BigInteger countAllKejadian(LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception {
 		
 		Session session = getSessionFactory().openSession();
 		
@@ -56,6 +56,30 @@ public class KejadianRekapMotifHibernate implements KejadianRekapMotifDao {
 		}
 	}
 
+	@Override
+	public BigInteger countKejadianInKotamaopsList(List<Kotamaops> kotamaopsList, LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception {
+		Session session = getSessionFactory().openSession();
+		
+		try {			
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT count(kejadian.id) FROM e010_k2_pusdalops.kejadian kejadian"
+					+ " where "
+					+ " kejadian.kotamaops_id_fk in (:kotamaops) and "
+					+ " kejadian.tw_kejadian_datetime<:twAkhirKejadian and "
+					+ " kejadian.tw_kejadian_datetime>:twAwalKejadian");
+			sqlQuery.setParameterList("kotamaops", kotamaopsList);
+			sqlQuery.setParameter("twAkhirKejadian", twAkhir.toString());
+			sqlQuery.setParameter("twAwalKejadian", twAwal.toString());
+			
+			return sqlQuery.list().isEmpty() ? BigInteger.ZERO : (BigInteger) sqlQuery.list().get(0);
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
+		
+	}
+	
 	@Override
 	public BigInteger countKejadian(Kotamaops kotamaops, LocalDateTime twAwal, LocalDateTime twAkhir) {
 

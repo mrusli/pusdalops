@@ -14,6 +14,8 @@ import org.apache.log4j.Logger;
 import org.zkoss.chart.Charts;
 import org.zkoss.chart.model.CategoryModel;
 import org.zkoss.chart.model.DefaultCategoryModel;
+import org.zkoss.chart.model.DefaultPieModel;
+import org.zkoss.chart.model.PieModel;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -21,8 +23,6 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
@@ -73,8 +73,8 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		kecamatanCombobox, kelurahanCombobox;
 	private Label jumlahKejKotamaops, jumlahKejPropinsi, jumlahKejKabupatenKot, 
 		jumlahKejKecamatan, jumlahKejKelurahan;
-	private Listbox jenisKejadianListbox, motifKejadianListbox;
-	private Charts jenisKejadianChart, motifKejadianChart;
+	// private Listbox jenisKejadianListbox, motifKejadianListbox;
+	private Charts jenisKejadianChart, motifKejadianChart, jenisKejadianPieChart, motifKejadianPieChart;
 	
 	private Settings settings;
 	private Kotamaops kotamaops;
@@ -113,9 +113,13 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		jenisKejadianChart.getLegend().setEnabled(false);
 		jenisKejadianChart.getYAxis().setTitle("");
 		
+		jenisKejadianPieChart.getExporting().setEnabled(false);
+		
 		motifKejadianChart.getExporting().setEnabled(false);
 		motifKejadianChart.getLegend().setEnabled(false);
 		motifKejadianChart.getYAxis().setTitle("");
+		
+		motifKejadianPieChart.getExporting().setEnabled(false);
 	}
 
 	private void setTwAwalAkhir() {		
@@ -533,26 +537,32 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		List<KejadianMotif> kejadianMotifList;
 		List<KejadianMotifCount> kejadianMotifCountList;
 		if (selKotamaopsComboitem.getValue()==null) {
-			// count the number of kejadian for all kotamaops
-			countKej = getKejadianRekapMotifDao().countKejadian(getAwalLocalDateTime(), getAkhirLocalDateTime());
+			// count the number of kejadian for all kotamaops under Pusdalops
+			log.info("Kotamaops: Routines for Pusat ONLY: Kotamaops: "+getKotamaops().getKotamaopsName());
+			Kotamaops kotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
+
+			countKej = getKejadianRekapMotifDao().countKejadianInKotamaopsList(kotamaopsList, getAwalLocalDateTime(), getAkhirLocalDateTime());
 			jumlahKejKotamaops.setValue(countKej.toString());
 			
 			// select distinct jenis kejadian
 			kejadianList = 
 					getKejadianRekapMotifDao().findDistinctKejadianByJenisKejadian(asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			kejadianJenisCountList = getKejadianJenisCountList(kejadianList);
-			jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
-			jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
+			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
+			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 			
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
 			// count the number of motif in the kejadian
 			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList);
-			motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
-			motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
+			// motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
+			// motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
 			
 		} else if (selPropinsiComboitem.getValue()==null) {
 			// count the number of kejadian for selected kotamaops
+			log.info("Propinsi: Routines for Kotamaops: Kotamaops: "+getKotamaops().getKotamaopsName());
 			countKej = getKejadianRekapMotifDao().countKejadian(
 					selKotamaopsComboitem.getValue(), 
 					getAwalLocalDateTime(), getAkhirLocalDateTime());
@@ -563,15 +573,15 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 					getKejadianRekapMotifDao().findDistinctKejadianByJenisKejadian(selKotamaopsComboitem.getValue(), 
 							asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			kejadianJenisCountList = getKejadianJenisCountList(kejadianList, selKotamaopsComboitem.getValue());
-			jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
-			jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
+			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
+			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
 			// count the number of motif in the kejadian
 			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList, selKotamaopsComboitem.getValue());
-			motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
-			motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
+			// motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
+			// motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
 			
 		} else if (selKabupatenKotComboitem.getValue()==null) {
 			// count the number of kejadian for selected kotamaops and propinsi
@@ -585,15 +595,15 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 					getKejadianRekapMotifDao().findDistinctKejadianByJenisKejadian(selKotamaopsComboitem.getValue(), 
 							selPropinsiComboitem.getValue(), asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			kejadianJenisCountList = getKejadianJenisCountList(kejadianList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue());
-			jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
-			jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
+			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
+			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 			
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
 			// count the number of motif in the kejadian
 			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue());
-			motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
-			motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
+			// motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
+			// motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
 			
 			
 		} else if (selKecamatanComboitem.getValue()==null) {
@@ -610,16 +620,16 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 							selPropinsiComboitem.getValue(), selKabupatenKotComboitem.getValue(), asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			kejadianJenisCountList = getKejadianJenisCountList(kejadianList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue(), 
 					selKabupatenKotComboitem.getValue());
-			jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
-			jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
+			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
+			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 			
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
 			// count the number of motif in the kejadian
 			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue(),
 					selKabupatenKotComboitem.getValue());
-			motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
-			motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
+			// motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
+			// motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
 		} else if (selKelurahanComboitem.getValue()==null) {
 			// count the number of kejadian for selected kotamaops propinsi kabupatenKot kecamatan
 			countKej = getKejadianRekapMotifDao().countKejadian(
@@ -635,16 +645,16 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 							asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			kejadianJenisCountList = getKejadianJenisCountList(kejadianList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue(), 
 					selKabupatenKotComboitem.getValue(), selKecamatanComboitem.getValue());
-			jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
-			jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
+			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
+			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 			
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
 			// count the number of motif in the kejadian
 			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue(),
 					selKabupatenKotComboitem.getValue(), selKecamatanComboitem.getValue());
-			motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
-			motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
+			// motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
+			// motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
 
 		} else {
 			// count the number of kejadian for selected kotamaops propinsi kabupatenKot kecamatan kelurahan
@@ -662,16 +672,16 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 							selKelurahanComboitem.getValue(), asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			kejadianJenisCountList = getKejadianJenisCountList(kejadianList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue(), 
 					selKabupatenKotComboitem.getValue(), selKecamatanComboitem.getValue(), selKelurahanComboitem.getValue());
-			jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
-			jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
+			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
+			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 			
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
 			// count the number of motif in the kejadian
 			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList, selKotamaopsComboitem.getValue(), selPropinsiComboitem.getValue(),
 					selKabupatenKotComboitem.getValue(), selKecamatanComboitem.getValue(), selKelurahanComboitem.getValue());
-			motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
-			motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
+			// motifKejadianListbox.setModel(new ListModelList<KejadianMotifCount>(kejadianMotifCountList));
+			// motifKejadianListbox.setItemRenderer(getKejadianMotifCountListitemRenderer());
 		}
 		
 		CategoryModel kejJenModel = new DefaultCategoryModel();
@@ -685,6 +695,17 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		
 		jenisKejadianChart.setModel(kejJenModel);
 		
+		PieModel pieModel = new DefaultPieModel();
+		
+		for (KejadianJenisCount kejadianJenisCount : kejadianJenisCountList) {
+			BigInteger count = kejadianJenisCount.getCount();
+			String namaJenis = kejadianJenisCount.getKejadianJenis().getNamaJenis();
+			
+			pieModel.setValue(namaJenis, count);
+		}
+		
+		jenisKejadianPieChart.setModel(pieModel);
+		
 		CategoryModel kejMotModel = new DefaultCategoryModel();
 		
 		for (KejadianMotifCount kejadianMotifCount : kejadianMotifCountList) {
@@ -695,6 +716,17 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		}
 		
 		motifKejadianChart.setModel(kejMotModel);
+		
+		PieModel motifPieModel = new DefaultPieModel();
+		
+		for (KejadianMotifCount kejadianMotifCount : kejadianMotifCountList) {
+			BigInteger count = kejadianMotifCount.getCount();
+			String namaMotif = kejadianMotifCount.getKejadianMotif().getNamaMotif();
+			
+			motifPieModel.setValue(namaMotif, count);
+		}
+		
+		motifKejadianPieChart.setModel(motifPieModel);
 	}
 
 	private List<KejadianMotifCount> getKejadianMotifCountList(List<KejadianMotif> kejadianMotifList, Kotamaops kotamaops,
@@ -904,6 +936,7 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		return kejadianJenisCountList;
 	}
 	
+	@SuppressWarnings("unused")
 	private ListitemRenderer<KejadianMotifCount> getKejadianMotifCountListitemRenderer() {
 		
 		return new ListitemRenderer<KejadianMotifCount>() {
@@ -924,6 +957,7 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		};
 	}
 
+	@SuppressWarnings("unused")
 	private ListitemRenderer<KejadianJenisCount> getKejadianJenisCountListitemRenderer() {
 
 		return new ListitemRenderer<KejadianJenisCount>() {

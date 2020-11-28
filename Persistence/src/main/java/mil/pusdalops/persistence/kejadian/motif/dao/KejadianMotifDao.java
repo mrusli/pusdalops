@@ -18,7 +18,7 @@ public interface KejadianMotifDao {
 	 * @throws Exception
 	 */
 	public List<KejadianMotif> findAllKejadianMotif() throws Exception;
-	
+		
 	/**
 	 * @param kejadianMotif
 	 * @return Long

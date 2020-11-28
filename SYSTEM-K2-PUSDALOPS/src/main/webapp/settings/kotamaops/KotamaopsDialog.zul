@@ -1,7 +1,7 @@
 <?page title="KotamaopsDialog" contentType="text/html;charset=UTF-8"?>
 <zk>
 <window id="kotamaopsDialogWin" border="normal" 
-	width="520px" height="460px" apply="${kotamaopsDialogWinControl}">
+	width="520px" height="520px" apply="${kotamaopsDialogWinControl}">
 	<vbox>
 		<grid width="450px">
 			<rows>
@@ -89,7 +89,23 @@
 						<textbox id="kodeTextbox" width="80px" sclass="dlg-textbox"></textbox>
 					</cell>
 				</row>
+				<row>
+					<cell>
+						<label value="Nama Image100:" style="font-size:14px;"></label>
+					</cell>
+					<cell>
+						<textbox id="image100Textbox" width="240px" sclass="dlg-textbox"></textbox>					
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<label value="Nama Image200:" style="font-size:14px;"></label>					
+					</cell>
+					<cell>
+						<textbox id="image200Textbox" width="240px" sclass="dlg-textbox"></textbox>					
+					</cell>
 				
+				</row>
 			</rows>
 		</grid>
 	</vbox>

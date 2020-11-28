@@ -24,7 +24,7 @@ public class KejadianMotifHibernate extends DaoHibernate implements KejadianMoti
 
 		return super.findAll(KejadianMotif.class);
 	}
-
+	
 	@Override
 	public Long save(KejadianMotif kejadianMotif) throws Exception {
 

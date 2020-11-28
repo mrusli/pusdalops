@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import org.zkoss.chart.Charts;
 import org.zkoss.chart.model.CategoryModel;
 import org.zkoss.chart.model.DefaultCategoryModel;
+import org.zkoss.chart.model.DefaultPieModel;
+import org.zkoss.chart.model.PieModel;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -63,7 +65,8 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 	private Grid kejadianPropinsiGrid;
 	private Textbox twAwalTahunTextbox, twAwalTanggalJamTextbox, twAwalTimeZoneTextbox,
 		twAkhirTahunTextbox, twAkhirTanggalJamTextbox, twAkhirTimeZoneTextbox;
-	private Charts jenisKejadianChart, motifKejadianChart, pelakuKejadianChart;
+	private Charts jenisKejadianChart, motifKejadianChart, pelakuKejadianChart,
+		jenisKejadianPieChart, motifKejadianPieChart, pelakuKejadianPieChart;
 	
 	private Settings settings;
 	private Kotamaops kotamaops;
@@ -101,14 +104,19 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		jenisKejadianChart.getLegend().setEnabled(false);
 		jenisKejadianChart.getYAxis().setTitle("");
 
+		jenisKejadianPieChart.getExporting().setEnabled(false);
+		
 		motifKejadianChart.getExporting().setEnabled(false);
 		motifKejadianChart.getLegend().setEnabled(false);
 		motifKejadianChart.getYAxis().setTitle("");
 
+		motifKejadianPieChart.getExporting().setEnabled(false);
+		
 		pelakuKejadianChart.getExporting().setEnabled(false);
 		pelakuKejadianChart.getYAxis().setTitle("");
 		pelakuKejadianChart.getLegend().setEnabled(false);
 
+		pelakuKejadianPieChart.getExporting().setEnabled(false);
 	}
 
 	private void setTwAwalAkhir(Long minDays) {
@@ -357,21 +365,25 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		List<KejadianPelakuCount> kejadianPelakuCountList;
 		if (kotamaopsCombobox.getSelectedItem().getValue()==null) {
 			// --semua--
-			// find distinct kejadian 
+			// find distinct kejadian
+			Kotamaops kotamaopsKotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+			
 			kejadianList = 
-					getKejadianRekapIntensitasDao().findDistinctKejadianByJenisKejadian(
-							asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
+					getKejadianRekapIntensitasDao().findInKotamaopsDistinctKejadianByJenisKejadian(
+							kotamaopsList, asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
 			// count each kejadian  
 			kejadianJenisCountList =
 					getKejadianJenisCountList(kejadianList);
 			
 			// select all motif kejadian
 			kejadianMotifList = getKejadianMotifDao().findAllKejadianMotif();
-			kejadianMotifCountList = getKejadianMotifCountList(kejadianMotifList);
+			kejadianMotifCountList = getKejadianMotifCountList(kotamaopsList, kejadianMotifList);
 			
 			// get all Pelaku kejadian
 			kejadianPelakuList = getKejadianPelakuDao().findAllKejadianPelaku();
-			kejadianPelakuCountList = getKejadianPelakuList(kejadianPelakuList);
+			kejadianPelakuCountList = getKejadianPelakuList(kotamaopsList, kejadianPelakuList);
 		} else {
 			// selected kotamaops
 			Kotamaops selKotamaops = kotamaopsCombobox.getSelectedItem().getValue();
@@ -403,6 +415,17 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		
 		jenisKejadianChart.setModel(kejJenModel);
 		
+		PieModel kejJenPieModel = new DefaultPieModel();
+		
+		for (KejadianJenisCount kejadianJenisCount : kejadianJenisCountList) {
+			BigInteger count = kejadianJenisCount.getCount();
+			String namaJenis = kejadianJenisCount.getKejadianJenis().getNamaJenis();
+
+			kejJenPieModel.setValue(namaJenis, count);
+		}
+		
+		jenisKejadianPieChart.setModel(kejJenPieModel);
+		
 		CategoryModel kejMotModel = new DefaultCategoryModel();
 		
 		for (KejadianMotifCount kejadianMotifCount : kejadianMotifCountList) {
@@ -414,6 +437,17 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		
 		motifKejadianChart.setModel(kejMotModel);
 
+		PieModel kejMotPieModel = new DefaultPieModel();
+		
+		for (KejadianMotifCount kejadianMotifCount : kejadianMotifCountList) {
+			BigInteger count = kejadianMotifCount.getCount();
+			String namaMotif = kejadianMotifCount.getKejadianMotif().getNamaMotif();
+
+			kejMotPieModel.setValue(namaMotif, count);
+		}
+		
+		motifKejadianPieChart.setModel(kejMotPieModel);
+		
 		CategoryModel kejPelModel = new DefaultCategoryModel();
 
 		for (KejadianPelakuCount kejadianPelakuCount : kejadianPelakuCountList) {
@@ -425,6 +459,16 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 
 		pelakuKejadianChart.setModel(kejPelModel);
 
+		PieModel kejPelPieModel = new DefaultPieModel();
+		
+		for (KejadianPelakuCount kejadianPelakuCount : kejadianPelakuCountList) {
+			BigInteger count = kejadianPelakuCount.getJumlah();
+			String pelaku = kejadianPelakuCount.getKejadianPelaku().getNamaPelaku();
+
+			kejPelPieModel.setValue(pelaku, count);
+		}
+		
+		pelakuKejadianPieChart.setModel(kejPelPieModel);
 	}
 	
 	private List<KejadianPelakuCount> getKejadianPelakuList(List<KejadianPelaku> kejadianPelakuList,
@@ -445,7 +489,7 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		return kejadianPelakuCountList;
 	}
 
-	private List<KejadianPelakuCount> getKejadianPelakuList(List<KejadianPelaku> kejadianPelakuList) {
+	private List<KejadianPelakuCount> getKejadianPelakuList(List<Kotamaops> kotamaopsList, List<KejadianPelaku> kejadianPelakuList) {
 		List<KejadianPelakuCount> kejadianPelakuCountList = new ArrayList<KejadianPelakuCount>();
 		BigInteger countPelaku;
 		for (KejadianPelaku kejadianPelaku : kejadianPelakuList) {
@@ -480,12 +524,12 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		return kejadianMotifCountList;
 	}
 
-	private List<KejadianMotifCount> getKejadianMotifCountList(List<KejadianMotif> kejadianMotifList) {
+	private List<KejadianMotifCount> getKejadianMotifCountList(List<Kotamaops> kotamaopsList, List<KejadianMotif> kejadianMotifList) throws Exception {
 		BigInteger kejMotCount;
 		List<KejadianMotifCount> kejadianMotifCountList = new ArrayList<KejadianMotifCount>();
 		for (KejadianMotif kejadianMotif : kejadianMotifList) {
 			kejMotCount = 
-					getKejadianRekapIntensitasDao().countMotifKejadian(
+					getKejadianRekapIntensitasDao().countMotifKejadianInKotamaops(kotamaopsList,
 							kejadianMotif, getAwalLocalDateTime(), getAkhirLocalDateTime());
 			
 			KejadianMotifCount kejMotifCount = new KejadianMotifCount();

@@ -16,7 +16,9 @@ public interface KejadianRekapIntensitasDao {
 
 	public BigInteger countKejadianByPropinsi(Propinsi propinsi, Date twAwal, Date twAkhir);
 
-	public List<Kejadian> findDistinctKejadianByJenisKejadian(Date twAwal, Date twAkhir);
+	public List<Kejadian> findAllDistinctKejadianByJenisKejadian(Date twAwal, Date twAkhir);
+	
+	public List<Kejadian> findInKotamaopsDistinctKejadianByJenisKejadian(List<Kotamaops> kotamaopsList, Date twAwal, Date twAkhir) throws Exception;
 
 	public BigInteger countJenisKejadian(KejadianJenis jenisKejadian, LocalDateTime twAwal, 
 			LocalDateTime twAkhir);
@@ -26,14 +28,21 @@ public interface KejadianRekapIntensitasDao {
 	public BigInteger countJenisKejadian(KejadianJenis jenisKejadian, Kotamaops kotamaops,
 			LocalDateTime twAwal, LocalDateTime twAkhir);
 
-	public BigInteger countMotifKejadian(KejadianMotif motifKejadian, LocalDateTime twAwal,
+	public BigInteger countAllMotifKejadian(KejadianMotif motifKejadian, LocalDateTime twAwal,
 			LocalDateTime twAkhir);
+	
+	public BigInteger countMotifKejadianInKotamaops(List<Kotamaops> kotamaopsList, KejadianMotif motifKejadian, LocalDateTime twAwal,
+			LocalDateTime twAkhir) throws Exception;
 
 	public BigInteger countMotifKejadian(KejadianMotif motifKejadian, Kotamaops kotamaops,
 			LocalDateTime twAwal, LocalDateTime twAkhir);
 
 	public BigInteger countPelakuKejadian(KejadianPelaku kejadianPelaku, LocalDateTime twAwal,
 			LocalDateTime twAkhir);
+	
+	public BigInteger countPelakuKejadianInKotamaops(List<Kotamaops> kotamaopsList, KejadianPelaku kejadianPelaku, LocalDateTime twAwal,
+			LocalDateTime twAkhir) throws Exception;
+	
 
 	public BigInteger countPelakuKejadian(KejadianPelaku kejadianPelaku, Kotamaops kotamaops,
 			LocalDateTime twAwal, LocalDateTime twAkhir);

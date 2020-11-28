@@ -12,7 +12,7 @@
 		</vlayout>
 	</north>
 	<center border="none" sclass="centerArea">
-		<div>
+		<div vflex="1">
 			<tabbox id="kejadianPeriodTabbox" sclass="mainTabbox" visible="false">
 				<tabs sclass="mainTabboxTabs">
 					<tab label="Semua" sclass="mainTab"/>
@@ -21,7 +21,7 @@
 					<tab label="30-Hari-Terakhir" sclass="mainTab"/>
 				</tabs>
 			</tabbox>
-			<hlayout style="padding: 10px;" valign="middle" visible="false">				
+			<hlayout style="padding: 10px;" valign="middle" visible="true">				
 				<label value="TW Awal:" style="color:yellow;"></label> 
 				<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
 				<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
@@ -31,9 +31,16 @@
 				<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
 				<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
 				<textbox id="twAkhirTimeZoneTextbox" width="52px" disabled="true" sclass="dlg01-textbox"></textbox>
-				<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>															
+				<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>
+				<label id="kotamaPropsLabel" value="Kotamaops:" style="color:yellow;"></label>
+				<combobox id="kotamaPropsCombobox" sclass="dlg01-combobox"></combobox>
+				<button id="filterKotamaopsButton" label="Filter" sclass="mod01Button" visible="false"></button>
+				<button id="filterPropinsiButton" label="Filter" sclass="mod01Button" visible="false"></button>															
+				<label value="Jenis Kejadian:" style="color:yellow"></label>
+				<combobox id="jenisKejadianCombobox" sclass="dlg01-combobox"></combobox>
+				<button id="filterJenisKejButton" label="Filter" sclass="mod01Button" visible="true"></button>
 			</hlayout>	
-			<listbox id="kejadianListbox" mold="paging" pageSize="8" height="100%">
+			<listbox id="kejadianListbox" mold="paging" autopaging="true" vflex="1">
 				<listhead>
 					<listheader width="850px"/>
 				</listhead>

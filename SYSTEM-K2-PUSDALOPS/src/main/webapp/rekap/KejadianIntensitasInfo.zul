@@ -56,16 +56,25 @@
 			<grid height="100%">
 				<rows>
 					<row>
+						<cell width="30%">
+							<charts id="jenisKejadianPieChart" type="pie" width="480" height="245" title=""></charts>
+						</cell>
 						<cell>
 							<charts id="jenisKejadianChart" height="245px" width="920" type="column" title="Jenis Kejadian"/>
 						</cell>
 					</row>
 					<row>
 						<cell>
+							<charts id="motifKejadianPieChart" type="pie" width="480" height="245" title=""></charts>
+						</cell>
+						<cell>
 							<charts id="motifKejadianChart" height="245px" width="920" type="column" title="Motif Kejadian"/>
 						</cell>
-					</row>
+					</row>					
 					<row>
+						<cell>
+							<charts id="pelakuKejadianPieChart" type="pie" width="480" height="245" title=""></charts>
+						</cell>					
 						<cell>
 							<charts id="pelakuKejadianChart" height="245px" width="920" type="column" title="Pelaku Kejadian"/>
 						</cell>

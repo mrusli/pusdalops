@@ -1,4 +1,4 @@
-package mil.pusdalops.webui.settings;
+package mil.pusdalops.webui.settings.kotamaprops;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
@@ -21,7 +22,9 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.Window;
 
 import mil.pusdalops.domain.kotamaops.Kotamaops;
@@ -76,7 +79,7 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getDefaultKotamaops().getId());
 			
 			// display the kotamaops under PUSDALOPS
-			displayKotamaops(kotamaopsByProxy.getKotamaops());
+			displayKotamaopsKotamaops(kotamaopsByProxy.getKotamaops());
 		} else {	
 			formTitleLabel.setValue("Settings | Kotamaops - Propinsi | Kotamaops : ");		
 
@@ -90,7 +93,7 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 	
 	}
 
-	private void displayKotamaops(List<Kotamaops> kotamaopsList) {
+	private void displayKotamaopsKotamaops(List<Kotamaops> kotamaopsList) {
 		kotamaopsPropinsiListbox.setVisible(false);
 		kotamaopsListbox.setVisible(true);
 		propHLayout.setVisible(false);
@@ -126,10 +129,68 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 				lc.setParent(item);
 				
 				// Kotamaops
-				lc = new Listcell(kotamaops.getKotamaopsName());
+				lc = initKotamaops(new Listcell(), kotamaops);
 				lc.setParent(item);
 				
 				item.setValue(kotamaops);
+			}
+
+			private Listcell initKotamaops(Listcell listcell, Kotamaops kotamaops) {
+				Vlayout vlayout = new Vlayout();
+				
+				// label for kotamaops name
+				Label kotamaopsNameLabel = new Label();
+				kotamaopsNameLabel.setValue(kotamaops.getKotamaopsName());
+				kotamaopsNameLabel.setParent(vlayout);
+				
+				// button to remove kotamaops from Pusdalops
+				Button removeKotamaopsButton = new Button();
+				removeKotamaopsButton.setLabel("Hapus");
+				removeKotamaopsButton.setSclass("listinfoEditButton");
+				removeKotamaopsButton.setParent(vlayout);
+				removeKotamaopsButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						Messagebox.show("Hapus Kotamaops "+kotamaops.getKotamaopsName()+" dari Pusdalops ?", 
+								"Konfirmasi", 
+								Messagebox.OK | Messagebox.CANCEL, 
+								Messagebox.QUESTION, new EventListener<Event>() {
+
+									@Override
+									public void onEvent(Event event) throws Exception {
+										if (event.getName().equals("onOK")) {
+											// is this kotamaops used in Kejadian ?
+											
+											try {
+												// get the kotamaops from pusdalops by proxy
+												Kotamaops kotamaopsByProxy;
+												kotamaopsByProxy = 
+														getKotamaopsDao().findKotamaopsKotamaopsByProxy(getDefaultKotamaops().getId());
+												// list of kotamaops under pusdalops
+												List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
+												// remove
+												kotamaopsList.remove(kotamaops);
+												// update
+												getKotamaopsDao().update(kotamaopsByProxy);
+												// display
+												kotamaopsByProxy = 
+														getKotamaopsDao().findKotamaopsKotamaopsByProxy(getDefaultKotamaops().getId());
+												displayKotamaopsKotamaops(kotamaopsByProxy.getKotamaops());
+												
+											} catch (Exception e) {
+												throw new Exception("Tidak dapat dihapus...");
+											}
+										}
+									}
+								});
+						
+					}
+				});
+				
+				vlayout.setParent(listcell);
+				
+				return listcell;
 			}
 		};
 	}
@@ -160,7 +221,7 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 				
 				getKotamaopsDao().update(kotamaopsByProxy);
 				
-				displayKotamaops(kotamaopsByProxy.getKotamaops());				
+				displayKotamaopsKotamaops(kotamaopsByProxy.getKotamaops());				
 			}
 		});
 		kotamaopsSelectWin.doModal();		
@@ -199,7 +260,7 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 				lc.setParent(item);
 				
 				// Propinsi
-				lc = new Listcell(propinsi.getNamaPropinsi());
+				lc = initPropinsi(new Listcell(), propinsi);
 				lc.setParent(item);
 				
 				item.setValue(propinsi);
@@ -225,7 +286,7 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 								Collections.singletonMap("propinsi", propinsi);
 						
 						Window propImgDisplayWin = (Window) Executions.createComponents(
-								"/dialogs/PropinsiImgDisplayDialog.zul", kotamaopsWilayahWin, arg);
+								"/settings/kotamaopsprops/PropinsiImgDisplayDialog.zul", kotamaopsWilayahWin, arg);
 						
 						propImgDisplayWin.doModal();						
 					}
@@ -233,6 +294,69 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 
 				return listcell;
 			}
+			
+			private Listcell initPropinsi(Listcell listcell, Propinsi propinsi) {
+				Vlayout vlayout = new Vlayout();
+				
+				// label for propinsi name
+				Label propNameLabel = new Label();
+				propNameLabel.setValue(propinsi.getNamaPropinsi());
+				propNameLabel.setParent(vlayout);
+				
+				// button to remove this propinsi
+				Button propDelButton = new Button();
+				propDelButton.setLabel("Hapus");
+				propDelButton.setSclass("listinfoEditButton");
+				propDelButton.setParent(vlayout);
+				propDelButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						Messagebox.show("Hapus Propinsi "+propinsi.getNamaPropinsi()+" dari Kotamaops "+
+								getDefaultKotamaops().getKotamaopsName()+" ?", 
+								"Konfirmasi", 
+								Messagebox.OK | Messagebox.CANCEL, 
+								Messagebox.QUESTION, new EventListener<Event>() {
+									
+									@Override
+									public void onEvent(Event event) throws Exception {
+										if (event.getName().equals("onOK")) {
+											// is the propinsi (under this kotamaops) used in Kejadian?
+											
+											
+											try {
+												// proxy propinsi
+												Kotamaops kotamaopsPropinsiByProxy = 
+														getKotamaopsDao().findKotamaopsPropinsiByProxy(getDefaultKotamaops().getId());
+												
+												// get the propinsi from proxy
+												List<Propinsi> propinsiList = kotamaopsPropinsiByProxy.getPropinsis();
+												
+												// remove
+												propinsiList.remove(propinsi);
+												
+												// update
+												getKotamaopsDao().update(kotamaopsPropinsiByProxy);
+												
+												// load and display -- from kotamaops
+												displayKotamaopsWilayah();
+												
+											} catch (Exception e) {
+												throw new Exception("Tidak Dapat Dihapus...");
+											}
+										}
+										
+									}
+								});
+						
+					}
+				});
+				
+				vlayout.setParent(listcell);
+				
+				return listcell;
+			}
+			
 		};
 	}
 	
@@ -245,13 +369,29 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 
 		Kotamaops kotamaopsByProxy = 
 				getKotamaopsDao().findKotamaopsPropinsiByProxy(getDefaultKotamaops().getId());
-		dialogData.setPropinsisToExclue(kotamaopsByProxy.getPropinsis());
+		dialogData.setPropinsisToExclude(kotamaopsByProxy.getPropinsis());
 		
 		Map<String, PropinsiListDialogData> args = Collections.singletonMap("dialogData", dialogData);
-		Window propinsiSelectWin = (Window) Executions.createComponents(
-				"/dialogs/PropinsiListDialog.zul", kotamaopsWilayahWin, args);
+		Window propinsiSelectWin = (Window) Executions.createComponents(				
+				"/settings/kotamaopsprops/PropinsiListDialog.zul", kotamaopsWilayahWin, args);
+		propinsiSelectWin.addEventListener(Events.ON_CHANGE, new EventListener<Event>() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				// get the data
+				Propinsi selPropinsi = (Propinsi) event.getData();
+				// add to the kotamaops
+				kotamaopsByProxy.getPropinsis().add(selPropinsi);
+				// update
+				getKotamaopsDao().update(kotamaopsByProxy);
+				// load and display -- from kotamaops
+				displayKotamaopsWilayah();
+			}
+		});
+		
 		propinsiSelectWin.doModal();
 	}
+	
 	
 	public SettingsDao getSettingsDao() {
 		return settingsDao;
@@ -271,6 +411,7 @@ public class KotamaopsWilayahControl extends GFCBaseController {
 
 	public Kotamaops getDefaultKotamaops() {
 		return defaultKotamaops;
+		
 	}
 
 	public void setDefaultKotamaops(Kotamaops defaultKotamaops) {

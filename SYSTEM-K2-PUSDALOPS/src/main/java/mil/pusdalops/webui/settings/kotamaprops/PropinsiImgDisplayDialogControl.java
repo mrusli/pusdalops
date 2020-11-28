@@ -1,4 +1,4 @@
-package mil.pusdalops.webui.dialogs;
+package mil.pusdalops.webui.settings.kotamaprops;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

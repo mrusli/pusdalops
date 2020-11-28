@@ -129,12 +129,10 @@ public class Kejadian extends IdBasedObject {
 	//  `jalan` varchar(255) DEFAULT NULL,
 	@Column(name = "jalan")
 	private String jalan;
-		
+		 
 	//  `kronologis` varchar(1020) DEFAULT NULL,
 	@Column(name = "kronologis")
-	// @ColumnTransformer(
-	//		read = "cast(aes_decrypt(kronologis, 'ABC') as char(3060))", 
-	//		write = "")
+	// @Convert(converter = AttributeEncryptor.class)
 	@Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	private String kronologis;
 	

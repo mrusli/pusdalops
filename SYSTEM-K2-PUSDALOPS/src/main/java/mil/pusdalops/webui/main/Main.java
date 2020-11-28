@@ -156,27 +156,27 @@ public class Main extends GFCBaseController {
 	 */
 	
 	public void onClick$kotamaopsMenuitem(Event event) throws Exception {
-		
+		// Kotamaops
 		mainInclude.setSrc("/settings/kotamaops/KotamaopsListInfo.zul");
 	}
 	
 	public void onClick$kotamaopsSettingsMenuitem(Event event) throws Exception {
-		
+		// Kotamaops-Peruntukan
 		mainInclude.setSrc("/settings/authorized/KotamaopsAuthorized.zul");
 	}
 	
 	public void onClick$kotamaopsWilayahMenuitem(Event event) throws Exception {
-		
-		mainInclude.setSrc("/settings/KotamaopsWilayah.zul");
+		// Kotamaops-Propinsi
+		mainInclude.setSrc("/settings/kotamaopsprops/KotamaopsWilayah.zul");
 	}
 	
 	public void onClick$wilayahMenuitem(Event event) throws Exception {
-		
+		// Wilayah
 		mainInclude.setSrc("/settings/Wilayah.zul");
 	}
 	
 	public void onClick$kejadianMenuitem(Event event) throws Exception {
-		
+		// Kejadian-Kerugian
 		mainInclude.setSrc("/settings/kejadian/KejadianSettings.zul");
 	}
 		

@@ -1,11 +1,10 @@
 <?page title="PropinsiList" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window width="500px" height="480px" title="Pilih Propinsi" border="normal"
+<window width="320px" height="480px" title="Pilih Propinsi" border="normal"
 	id="propinsiListDialogWin" apply="${propinsiListDialogControl}">
 	<listbox id="propinsiListbox" height="340px">
 		<listhead>
-			<listheader label="" width="165px"></listheader>
-			<listheader label="Nama Propinsi" width="285px"></listheader>
+			<listheader label="Nama Propinsi"></listheader>
 		</listhead>
 	</listbox>
 	<hlayout style="padding-top: 5px;">
