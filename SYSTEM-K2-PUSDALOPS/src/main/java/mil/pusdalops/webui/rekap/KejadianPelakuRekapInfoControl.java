@@ -72,7 +72,7 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 	private Textbox twAwalTahunTextbox, twAwalTanggalJamTextbox, twAwalTimeZoneTextbox, 
 		twAkhirTahunTextbox, twAkhirTanggalJamTextbox, twAkhirTimeZoneTextbox;
 	private Combobox kotamaopsCombobox, propinsiCombobox, kabupatenCombobox,
-		kecamatanCombobox, kelurahanCombobox;
+		kecamatanCombobox, kelurahanCombobox, matraCombobox;
 	private Label jumlahKejKotamaops, jumlahKejPropinsi, jumlahKejKabupatenKot, 
 		jumlahKejKecamatan, jumlahKejKelurahan;
 	// private Listbox pelakuKejadianListbox, motifKejadianListbox;
@@ -109,18 +109,23 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 		// set tw with current time
 		setTwAwalAkhir();
 		
+		// load matra combobox
+		loadKotamaopsMatraTypeCombobox();		
+		
 		// start with kotamaops
 		loadKotamaopsCombobox();
 		
 		pelakuKejadianChart.getExporting().setEnabled(false);
 		pelakuKejadianChart.getYAxis().setTitle("");
 		pelakuKejadianChart.getLegend().setEnabled(false);
-
+		pelakuKejadianChart.getPlotOptions().getSeries().setColorByPoint(true);
+		
 		pelakuKejadianPieChart.getExporting().setEnabled(false);
 		
 		motifKejadianChart.getExporting().setEnabled(false);
 		motifKejadianChart.getYAxis().setTitle("");
 		motifKejadianChart.getLegend().setEnabled(false);
+		motifKejadianChart.getPlotOptions().getSeries().setColorByPoint(true);
 		
 		motifKejadianPieChart.getExporting().setEnabled(false);
 	}
@@ -159,6 +164,40 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 		setTwAwalAkhirProper(true);			
 	}
 
+	private void loadKotamaopsMatraTypeCombobox() {
+		if (getKotamaops().getKotamaopsType().equals(KotamaopsType.PUSDALOPS)) {
+			// semua
+			Comboitem comboitem;
+			comboitem = new Comboitem();
+			comboitem.setLabel("--Semua Matra--");
+			comboitem.setValue(null);
+			comboitem.setParent(matraCombobox);
+			// other matra
+			for (KotamaopsType kotamaopsType : KotamaopsType.values()) {
+				if (kotamaopsType.equals(KotamaopsType.PUSDALOPS)) {
+					// do nothing
+				} else {
+					comboitem = new Comboitem();
+					comboitem.setLabel(kotamaopsType.toString());
+					comboitem.setValue(kotamaopsType);
+					comboitem.setParent(matraCombobox);
+				}
+			}
+			matraCombobox.setSelectedIndex(0);
+		} else {
+			// only selected kotamaops matra - disabled
+			Comboitem comboitem;
+			comboitem = new Comboitem();
+			comboitem.setLabel(getKotamaops().getKotamaopsType().toString());
+			comboitem.setValue(null);
+			comboitem.setParent(matraCombobox);
+
+			matraCombobox.setSelectedItem(comboitem);
+			matraCombobox.setDisabled(true);
+		}
+	}
+	
+	
 	public void onClick$twAwalRubahButton(Event event) throws Exception {
 		// create the data object
 		DatetimeData datetimeData = new DatetimeData();
@@ -308,6 +347,46 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 		
 	}
 
+	public void onSelect$matraCombobox(Event event) throws Exception {
+		Comboitem comboitem;
+		
+		resetOtherComboboxes(4);
+		// clear combobox
+		kotamaopsCombobox.getItems().clear();		
+		
+		if (matraCombobox.getSelectedItem().getValue()==null) {
+			// semua
+			loadKotamaopsCombobox();
+		} else {
+			// display selected matra
+			KotamaopsType kotamaopsMatraType = matraCombobox.getSelectedItem().getValue();
+			// get all the kotamaops under this kotmaops
+			Kotamaops kotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
+			// filter out
+			List<Kotamaops> selMatraKotamaopsList = new ArrayList<Kotamaops>();
+			for (Kotamaops kotamaops : kotamaopsList) {
+				if (kotamaops.getKotamaopsType().equals(kotamaopsMatraType)) {
+					selMatraKotamaopsList.add(kotamaops);
+				}
+			}
+			// semua
+			comboitem = new Comboitem();
+			comboitem.setLabel("--semua--");
+			comboitem.setValue(null);
+			comboitem.setParent(kotamaopsCombobox);
+			// kotamaops
+			for (Kotamaops kotamaops : selMatraKotamaopsList) {
+				comboitem = new Comboitem();
+				comboitem.setLabel(kotamaops.getKotamaopsName());
+				comboitem.setValue(kotamaops);
+				comboitem.setParent(kotamaopsCombobox);
+			}
+			kotamaopsCombobox.setSelectedIndex(0);
+		}
+	}
+	
 	public void onSelect$kotamaopsCombobox(Event event) throws Exception {
 		// only for users in PUSDALOPS
 		Kotamaops selKotamaops = kotamaopsCombobox.getSelectedItem().getValue();
@@ -544,9 +623,17 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 		List<KejadianMotifCount> kejadianMotifCountList;
 		if (selKotamaopsComboitem.getValue()==null) {
 			// count the number of kejadian for all kotamaops under Pusdalops
-			Kotamaops kotamaopsByProxy = 
-					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
-			List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
+			// Kotamaops kotamaopsByProxy = 
+			//		getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			// List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
+			List<Kotamaops> kotamaopsList = new ArrayList<Kotamaops>();
+			for (Comboitem comboitem : kotamaopsCombobox.getItems()) {
+				if (comboitem.getValue()==null) {
+					// do nothing
+				} else {
+					kotamaopsList.add(comboitem.getValue());
+				}
+			}
 			
 			// kejadianRekapPelakuMotifDao
 			countKej = getKejadianRekapPelakuMotifDao().countKejadianInKotamaopsList(kotamaopsList, getAwalLocalDateTime(), getAkhirLocalDateTime());

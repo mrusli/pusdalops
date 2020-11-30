@@ -61,7 +61,7 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 	
 	private Window kejadianIntensitasInfoWin;
 	private Label formTitleLabel;
-	private Combobox kotamaopsCombobox;
+	private Combobox kotamaopsCombobox, matraCombobox;
 	private Grid kejadianPropinsiGrid;
 	private Textbox twAwalTahunTextbox, twAwalTanggalJamTextbox, twAwalTimeZoneTextbox,
 		twAkhirTahunTextbox, twAkhirTanggalJamTextbox, twAkhirTimeZoneTextbox;
@@ -97,24 +97,30 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		// set tw awal dan akhir
 		setTwAwalAkhir(360L);
 		
+		// load matra combobox
+		loadKotamaopsMatraTypeCombobox();
+		
 		// load kotamaops
 		loadKotamaops();
 
 		jenisKejadianChart.getExporting().setEnabled(false);
 		jenisKejadianChart.getLegend().setEnabled(false);
 		jenisKejadianChart.getYAxis().setTitle("");
-
+		jenisKejadianChart.getPlotOptions().getSeries().setColorByPoint(true);
+		
 		jenisKejadianPieChart.getExporting().setEnabled(false);
 		
 		motifKejadianChart.getExporting().setEnabled(false);
 		motifKejadianChart.getLegend().setEnabled(false);
 		motifKejadianChart.getYAxis().setTitle("");
-
+		motifKejadianChart.getPlotOptions().getSeries().setColorByPoint(true);
+		
 		motifKejadianPieChart.getExporting().setEnabled(false);
 		
 		pelakuKejadianChart.getExporting().setEnabled(false);
 		pelakuKejadianChart.getYAxis().setTitle("");
 		pelakuKejadianChart.getLegend().setEnabled(false);
+		pelakuKejadianChart.getPlotOptions().getSeries().setColorByPoint(true);
 
 		pelakuKejadianPieChart.getExporting().setEnabled(false);
 	}
@@ -141,6 +147,38 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		
 		setTwAwalAkhirProper(true);				
 	}
+	
+	private void loadKotamaopsMatraTypeCombobox() {
+		Comboitem comboitem;
+		if (getKotamaops().getKotamaopsType().equals(KotamaopsType.PUSDALOPS)) {
+			// semua
+			comboitem = new Comboitem();
+			comboitem.setLabel("--Semua--");
+			comboitem.setValue(null);
+			comboitem.setParent(matraCombobox);
+			// other matra
+			for (KotamaopsType kotamaopsType : KotamaopsType.values()) {
+				if (kotamaopsType.equals(KotamaopsType.PUSDALOPS)) {
+					// do nothing
+				} else {
+					comboitem = new Comboitem();
+					comboitem.setLabel(kotamaopsType.toString());
+					comboitem.setValue(kotamaopsType);
+					comboitem.setParent(matraCombobox);
+				}
+			}
+			matraCombobox.setSelectedIndex(0);
+		} else {
+			// select the kotamaops matra dan disable the combobox
+			comboitem = new Comboitem();
+			comboitem.setLabel(getKotamaops().getKotamaopsType().toString());
+			comboitem.setValue(getKotamaops().getKotamaopsType());
+			comboitem.setParent(matraCombobox);
+			
+			matraCombobox.setSelectedItem(comboitem);
+			matraCombobox.setDisabled(true);
+		}
+	}	
 	
 	public void onClick$twAwalRubahButton(Event event) throws Exception {
 		// create the data object
@@ -273,6 +311,50 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		
 	}
 
+	public void onSelect$matraCombobox(Event event) throws Exception {
+		Comboitem comboitem;
+		
+		// clear combobox
+		kotamaopsCombobox.getItems().clear();			
+		
+		if (matraCombobox.getSelectedItem().getValue()==null) {
+			// semua
+			loadKotamaops();
+		} else {
+			// selected matra
+			KotamaopsType selKotamaopsMatraType = matraCombobox.getSelectedItem().getValue();
+			// semua
+			comboitem = new Comboitem();
+			comboitem.setLabel("--Semua--");
+			comboitem.setValue(null);
+			comboitem.setParent(kotamaopsCombobox);
+			// load other kotamaops under pusdalops
+			Kotamaops kotamaopsKotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+
+			List<Kotamaops> selMatraKotamaopsList = new ArrayList<Kotamaops>();
+			for (Kotamaops kotamaops : kotamaopsList) {
+				if (kotamaops.getKotamaopsType().equals(selKotamaopsMatraType)) {
+					selMatraKotamaopsList.add(kotamaops);
+				} 
+			}
+			
+			for (Kotamaops kotamaops : selMatraKotamaopsList) {
+				comboitem = new Comboitem();
+				comboitem.setLabel(kotamaops.getKotamaopsName());
+				comboitem.setValue(kotamaops);
+				comboitem.setParent(kotamaopsCombobox);
+			}			
+			
+			kotamaopsCombobox.setSelectedIndex(0);
+			
+			displayPropinsi(
+					getAllPropinsi());
+
+		}
+	}
+	
 	public void onSelect$kotamaopsCombobox(Event event) throws Exception {
 		// display all the propinsi under each kotamaops (when selected)
 		if (kotamaopsCombobox.getSelectedItem().getValue()==null) {
@@ -345,6 +427,13 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 
 				row.appendChild(label02);
 				
+				row.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						log.info("row click: "+propinsi.getNamaPropinsi());
+					}
+				});
 			}
 
 			private String countKejadianByPropinsi(Propinsi propinsi, LocalDateTime twAwal, LocalDateTime twAkhir) {
@@ -355,7 +444,7 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 			}
 		};
 	}
-
+	
 	public void onClick$executeButton(Event event) throws Exception {
 		List<Kejadian> kejadianList; 
 		List<KejadianJenisCount> kejadianJenisCountList;
@@ -366,9 +455,17 @@ public class KejadianIntensitasInfoControl extends GFCBaseController {
 		if (kotamaopsCombobox.getSelectedItem().getValue()==null) {
 			// --semua--
 			// find distinct kejadian
-			Kotamaops kotamaopsKotamaopsByProxy = 
-					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
-			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+			// Kotamaops kotamaopsKotamaopsByProxy = 
+			//		getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			// List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+			List<Kotamaops> kotamaopsList = new ArrayList<Kotamaops>();
+			for (Comboitem comboitem : kotamaopsCombobox.getItems()) {
+				if (comboitem.getValue()==null) {
+					// do nothing
+				} else {
+					kotamaopsList.add(comboitem.getValue());
+				}
+			}
 			
 			kejadianList = 
 					getKejadianRekapIntensitasDao().findInKotamaopsDistinctKejadianByJenisKejadian(

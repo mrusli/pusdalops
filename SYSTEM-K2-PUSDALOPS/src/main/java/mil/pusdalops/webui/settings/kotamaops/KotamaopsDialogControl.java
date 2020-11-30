@@ -22,7 +22,7 @@ public class KotamaopsDialogControl extends GFCBaseController {
 	private static final long serialVersionUID = 8781989113391554204L;
 
 	private Window kotamaopsDialogWin;
-	private Combobox zonaWaktuCombobox;
+	private Combobox zonaWaktuCombobox, matraCombobox;
 	private Textbox namaKotamaopsTextbox, alamat01Textbox, alamat02Textbox,
 		kotaTextbox, postalCodeTextbox, phoneTextbox, emailTextbox, faxTextbox,
 		kodeTextbox, image100Textbox, image200Textbox;
@@ -53,6 +53,9 @@ public class KotamaopsDialogControl extends GFCBaseController {
 		// load TimezoneInd
 		loadTimezoneInd();
 		
+		// load matra (or kotamaopstype)
+		loadKotamaopsMatra();
+		
 		// display
 		displayKotamaopsInfo();
 	}
@@ -68,6 +71,20 @@ public class KotamaopsDialogControl extends GFCBaseController {
 		
 	}
 
+	private void loadKotamaopsMatra() {
+		Comboitem comboitem;
+		for (KotamaopsType kotamaopsMatraType : KotamaopsType.values()) {
+			if (kotamaopsMatraType.compareTo(KotamaopsType.PUSDALOPS)==0) {
+				// don't add
+			} else {
+				comboitem = new Comboitem();
+				comboitem.setLabel(kotamaopsMatraType.toString());
+				comboitem.setValue(kotamaopsMatraType);
+				comboitem.setParent(matraCombobox);
+			}
+		}
+	}	
+	
 	private void displayKotamaopsInfo() {
 		if (getKotamaops().getId().compareTo(Long.MIN_VALUE)==0) {
 			// new - do nothing
@@ -75,7 +92,12 @@ public class KotamaopsDialogControl extends GFCBaseController {
 			image200Textbox.setValue("blank_01_200.jpg");
 		} else {
 			// existing - display data
-			namaKotamaopsTextbox.setValue(getKotamaops().getKotamaopsName()); 
+			namaKotamaopsTextbox.setValue(getKotamaops().getKotamaopsName());
+			for (Comboitem comboitem : matraCombobox.getItems()) {
+				if (comboitem.getValue().equals(getKotamaops().getKotamaopsType())) {
+					matraCombobox.setSelectedItem(comboitem);
+				}
+			}
 			alamat01Textbox.setValue(getKotamaops().getAddress01());
 			alamat02Textbox.setValue(getKotamaops().getAddress02());
 			kotaTextbox.setValue(getKotamaops().getCity());
@@ -95,9 +117,16 @@ public class KotamaopsDialogControl extends GFCBaseController {
 	}
 
 	public void onClick$saveButton(Event event) throws Exception {
+		if (namaKotamaopsTextbox.getValue().isEmpty()) {
+			throw new Exception("Nama Kotamaops belum diisi");
+		}
+		if (matraCombobox.getSelectedItem()==null) {
+			throw new Exception("Matra Kotamaops belum terpilih");
+		}
 		// get the changes
 		Kotamaops modKotamaops = getKotamaops();
 		modKotamaops.setKotamaopsName(namaKotamaopsTextbox.getValue());
+		modKotamaops.setKotamaopsType(matraCombobox.getSelectedItem().getValue());
 		modKotamaops.setAddress01(alamat01Textbox.getValue());
 		modKotamaops.setAddress02(alamat02Textbox.getValue());
 		modKotamaops.setCity(kotaTextbox.getValue());
@@ -110,8 +139,6 @@ public class KotamaopsDialogControl extends GFCBaseController {
 		// created in PUSAT ONLY
 		modKotamaops.setCreatedAt(asDate(getLocalDateTime()));
 		modKotamaops.setEditedAt(asDate(getLocalDateTime()));
-		// PUSAT creates OTHERS kotamaops
-		modKotamaops.setKotamaopsType(KotamaopsType.OTHERS);
 		// set a blank image -- user must define a new image later on
 		modKotamaops.setImagedId(image100Textbox.getValue());
 		modKotamaops.setImageId01(image200Textbox.getValue());

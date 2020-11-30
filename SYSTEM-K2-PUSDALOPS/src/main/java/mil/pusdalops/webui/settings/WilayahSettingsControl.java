@@ -71,7 +71,7 @@ public class WilayahSettingsControl extends GFCBaseController {
 					getPropinsiDao().findAllPropinsi());
 			
 		} else {
-			// TODO: propinsi for selected kotamaops
+			// never happen because this menu is inaccessible for user other than PUSAT
 		}
 		
 		// display

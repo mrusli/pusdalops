@@ -10,6 +10,8 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
@@ -44,6 +46,7 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 	private Window kejadianMenonjolListInfoWin;
 	private Label formTitleLabel, infoResultlabel;
 	private Listbox kejadianListbox;
+	private Combobox matraCombobox;
 	
 	private Settings settings;
 	private Kotamaops kotamaops;
@@ -53,6 +56,7 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 	private static final Logger log = Logger.getLogger(KejadianMenonjolListInfoControl.class);
 	
 	public void onCreate$kejadianMenonjolListInfoWin(Event event) throws Exception {
+		log.info("Creating KejadianMenonjolListInfo Control...");
 		setSettings(
 				getSettingsDao().findSettingsById(SETTINGS_DEFAULT_ID));
 		
@@ -62,9 +66,65 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 		formTitleLabel.setValue("Data Input | Kejadian Menonjol - Kotamaops: "+
 				getKotamaops().getKotamaopsName());
 
+		// load
+		loadMatraCombobox();
+		
 		// load kejadian list
 		loadKejadianList();
 		
+		// display
+		displayKejadianListInfo();
+	}
+	
+	private void loadMatraCombobox() {
+		Comboitem comboitem;
+		if (getKotamaops().getKotamaopsType().equals(KotamaopsType.PUSDALOPS)) {
+			// semua
+			comboitem = new Comboitem();
+			comboitem.setLabel("--Semua Matra--");
+			comboitem.setValue(null);
+			comboitem.setParent(matraCombobox);
+			// matra
+			for (KotamaopsType kotamaopsMatraType : KotamaopsType.values()) {
+				if (kotamaopsMatraType.equals(KotamaopsType.PUSDALOPS)) {
+					// do nothing
+				} else {
+					comboitem = new Comboitem();
+					comboitem.setLabel(kotamaopsMatraType.toString());
+					comboitem.setValue(kotamaopsMatraType);
+					comboitem.setParent(matraCombobox);
+				}
+			}
+			matraCombobox.setSelectedIndex(0);			
+		} else {
+			KotamaopsType kotamaopsMatraType = getKotamaops().getKotamaopsType();
+			// display kotamaops matra
+			comboitem = new Comboitem();
+			comboitem.setLabel(kotamaopsMatraType.toString());
+			comboitem.setValue(kotamaopsMatraType);
+			comboitem.setParent(matraCombobox);
+			// set selected
+			matraCombobox.setSelectedItem(comboitem);
+			// disable
+			matraCombobox.setDisabled(true);
+		}
+	}
+
+	public void onSelect$matraCombobox(Event event) throws Exception {
+		if (matraCombobox.getSelectedItem().getValue()==null) {
+			// semua
+			loadKejadianList();			
+		} else {
+			// display selected matra
+			KotamaopsType selKotamaopsMatraType = matraCombobox.getSelectedItem().getValue();
+
+			Kotamaops kotamaopsKotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+
+			setKejadianList(
+					getKejadianDao().findAllKejadianInKotamaopsByMatraType(true, kotamaopsList, selKotamaopsMatraType));
+		}
 		displayKejadianListInfo();
 	}
 	
@@ -75,7 +135,7 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
 			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
 			
-			kotamaopsList.forEach(kotamaops->log.info(kotamaops.toString()));
+			// kotamaopsList.forEach(kotamaops->log.info(kotamaops.toString()));
 			
 			setKejadianList(
 					getKejadianDao().findAllKejadianInKotamaops(true, kotamaopsList));

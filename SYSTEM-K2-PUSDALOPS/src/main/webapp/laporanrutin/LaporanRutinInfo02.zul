@@ -1,0 +1,74 @@
+<?page title="LaporanRutinInfo02" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout id="laporanRutinInfoWin02" apply="${laporanRutinInfoControl02}" width="100%" height="100%">
+	<north border="none" sclass="northArea">
+		<vlayout>			
+			<hlayout valign="middle" style="padding: 5px 0px">
+				<label id="formTitleLabel" sclass="headTitle"></label>
+			</hlayout>
+		</vlayout>
+	</north>
+	<center border="none" sclass="centerArea">
+		<div vflex="1">
+			<hlayout valign="middle">
+				<grid width="1020px" style="background-color:#d9251c; border-color: #d9251c;" height="40px">
+					<rows>
+						<row>
+							<cell width="10%">
+								<label value="TW Awal:" style="color:yellow;"></label>			
+							</cell>
+							<cell width="25%">
+								<textbox id="twAwalTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAwalTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAwalRubahButton" label="..." sclass="mod01Button"></button>								
+							</cell>
+							<cell width="10%">
+								<label value="TW Akhir:" style="color:yellow;"></label>			
+							</cell>
+							<cell>
+								<textbox id="twAkhirTahunTextbox" width="60px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTanggalJamTextbox" width="100px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<textbox id="twAkhirTimeZoneTextbox" width="42px" disabled="true" sclass="dlg01-textbox"></textbox>
+								<button id="twAkhirRubahButton" label="..." sclass="mod01Button"></button>						
+							</cell>
+						</row>
+					</rows>
+				</grid>
+			</hlayout>
+			<hlayout style="padding:10px;" height="45px">
+				<button id="executeButton" label="Tampilkan" sclass="mod01Button" visible="true"></button>
+				<button id="printButton" label="Cetak" sclass="mod01Button" visible="false"></button>
+				<button id="resetButton" label="Reset" sclass="mod01Button"></button>			
+			</hlayout>
+			<vbox id="printVbox" width="1020px" style="padding-left:5px; padding-top:5px" vflex="1">	
+				<grid height="120px">
+					<rows sclass="laporanScreenTitle">
+						<row align="center">
+							<label id="title01" style="font-weight:bold;"></label>
+						</row>
+						<row align="center">
+							<label id="title02" style="font-weight:bold;"></label>						
+						</row>
+						<row align="center">
+							<label id="title03" style="font-weight:bold;"></label>
+						</row>
+						<row align="center">
+							<label id="title04" style="font-weight:bold"></label>
+						</row>
+					</rows>
+				</grid>
+				<grid id="kejadianGrid" height="100%">
+					<columns sclass="laporanScreenGridColumn">
+						<column id="idUrtCol" width="60px" height="30px" align="center"></column>
+						<column id="idNoCol" width="60px" height="30px" align="center"></column>
+						<column id="twCol" width="140px" height="30px" align="center"></column>
+						<column id="uraiCol" width="450px" sclass="uraiColumnHeader"></column>
+						<column id="jenKejCol" width="210px" sclass="jenKejColumnHeader" height="30px"></column>
+					</columns>
+				</grid>
+			</vbox>
+		</div>
+	</center>
+</borderlayout>
+</zk>

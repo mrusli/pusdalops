@@ -11,6 +11,7 @@
 	<center border="none" sclass="centerArea">
 		<div vflex="1">
 			<hlayout style="padding: 10px;" valign="middle" height="50px">
+				<combobox id="matraCombobox" width="180px" sclass="dlg-combobox"></combobox>
 				<label id="infoResultlabel" value="Total: 0 kejadian" sclass="infoResultLabel"></label>
 				<button id="newButton" label="Tambah" sclass="modButton"></button>
 			</hlayout>	

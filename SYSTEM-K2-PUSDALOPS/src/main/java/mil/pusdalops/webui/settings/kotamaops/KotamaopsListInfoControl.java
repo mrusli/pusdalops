@@ -16,6 +16,8 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
@@ -27,6 +29,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.kotamaops.KotamaopsType;
 import mil.pusdalops.persistence.kotamaops.dao.KotamaopsDao;
 import mil.pusdalops.webui.common.GFCBaseController;
 
@@ -42,6 +45,7 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 	private Window kotamaopsListInfoWin;
 	private Label formTitleLabel, infoResultlabel;
 	private Listbox kotamaopsListbox;
+	private Combobox kotamaopsMatraCombobox;
 	
 	private List<Kotamaops> kotamaopsList;
 	
@@ -51,6 +55,8 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 	public void onCreate$kotamaopsListInfoWin(Event event) throws Exception {
 		formTitleLabel.setValue("Settings | Kotamaops");
 		
+		loadKotamaopsMatraCombobox();
+		
 		// load data
 		loadKotamaops();
 		
@@ -58,6 +64,28 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 		displayKotamaops();
 	}
 
+	private void loadKotamaopsMatraCombobox() {
+		Comboitem comboitem;
+		// semua matra
+		comboitem = new Comboitem();
+		comboitem.setLabel("--Semua Matra--");
+		comboitem.setValue(null);
+		comboitem.setParent(kotamaopsMatraCombobox);
+		// matra lain -- kecuali pusdalops
+		for (KotamaopsType kotamaopsMatra : KotamaopsType.values()) {
+			if (kotamaopsMatra.equals(KotamaopsType.PUSDALOPS)) {
+				// don't add
+			} else {
+				comboitem = new Comboitem();
+				comboitem.setLabel(kotamaopsMatra.toString());
+				comboitem.setValue(kotamaopsMatra);
+				comboitem.setParent(kotamaopsMatraCombobox);
+			}
+		}
+		// default -- semua matra
+		kotamaopsMatraCombobox.setSelectedIndex(0);
+	}
+	
 	private void loadKotamaops() throws Exception {
 		setKotamaopsList(
 				getKotamaopsDao().findAllKotamaops());
@@ -66,6 +94,19 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 		getKotamaopsList().remove(KOTAMAOPS_PUST_IDX);
 	}
 
+	public void onSelect$kotamaopsMatraCombobox(Event event) throws Exception {
+		if (kotamaopsMatraCombobox.getSelectedItem().getValue()==null) {
+			// findAll -- loadKotamaops and displayKotamaops
+			loadKotamaops();
+		} else {
+			KotamaopsType selKotMatra = kotamaopsMatraCombobox.getSelectedItem().getValue();
+			setKotamaopsList(
+					getKotamaopsDao().findKotamaopsByKotamaopsTypeMatra(selKotMatra));
+
+		}
+		displayKotamaops();		
+	}
+	
 	private void displayKotamaops() {
 		kotamaopsListbox.setModel(
 			new ListModelList<Kotamaops>(getKotamaopsList()));
@@ -102,6 +143,10 @@ public class KotamaopsListInfoControl extends GFCBaseController {
 				
 				// Nama Kotamaops
 				lc = new Listcell(kotamaops.getKotamaopsName());
+				lc.setParent(item);
+				
+				// Matra
+				lc = new Listcell(kotamaops.getKotamaopsType().toString());
 				lc.setParent(item);
 				
 				// Alamat

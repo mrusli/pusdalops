@@ -134,7 +134,7 @@ public class Main extends GFCBaseController {
 	
 	public void onClick$laporanCetakLaporanRutinMenuitem(Event event) throws Exception {
 		
-		mainInclude.setSrc("/laporanrutin/LaporanRutinInfo.zul");
+		mainInclude.setSrc("/laporanrutin/LaporanRutinInfo02.zul");
 	}
 	
 	/*

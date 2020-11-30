@@ -6,6 +6,7 @@
 <?link rel="stylesheet" type="text/css" href="/home/home.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/style_ListInfo.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/style_Dialog.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/style_preprint.css"?>
 <!-- javascript -->
 <?script type="text/javascript" src="/js/zk-custom.js"?>
 <?script type="text/javascript" src="/js/print.js"?>

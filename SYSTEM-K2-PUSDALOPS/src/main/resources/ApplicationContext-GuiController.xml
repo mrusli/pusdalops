@@ -322,4 +322,12 @@
 		<property name="laporanRutinDao" ref="laporanRutinDao"></property>
 	</bean>
 	
+	<bean id="laporanRutinInfoControl02" class="mil.pusdalops.webui.laporanrutin.LaporanRutinInfoControl02" scope="prototype" parent="basisController">
+		<property name="settingsDao" ref="settingsDao"></property>
+		<property name="kotamaopsDao" ref="kotamaopsDao"></property>
+		<property name="kejadianJenisDao" ref="kejadianJenisDao"></property>
+		<property name="laporanRutinDao" ref="laporanRutinDao"></property>
+		<property name="kejadianDao" ref="kejadianDao"></property>		
+	</bean>
+	
 </beans>

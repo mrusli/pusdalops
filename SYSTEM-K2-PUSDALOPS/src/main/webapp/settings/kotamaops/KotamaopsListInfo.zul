@@ -11,6 +11,7 @@
 	<center border="none" sclass="centerArea">
 		<div>
 			<hlayout style="padding: 10px;" valign="middle">
+				<combobox id="kotamaopsMatraCombobox" width="240px" sclass="dlg-combobox"></combobox>
 				<label id="infoResultlabel" value="Total: 0 Kotamaops" sclass="infoResultLabel"></label>
 				<button id="newButton" label="Tambah" sclass="modButton"></button>
 			</hlayout>	
@@ -18,6 +19,7 @@
 				<listhead>
 					<listheader label="" width="165px"/>
 					<listheader label="Kotamaops" width="240px"/>
+					<listheader label="Matra" width="180px"/>
 					<listheader label="Alamat" width="380px"/>
 					<listheader label="Komunikasi" width="280px"/>
 					<listheader label="Zona-Waktu" width="110px"/>
