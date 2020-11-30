@@ -23,4 +23,8 @@ public interface LaporanRutinDao {
 
 	public Kejadian findKejadianKabupatenKotByProxy(Long id) throws Exception;
 
+	public List<Kejadian> findAllKejadian() throws Exception;
+
+	public List<Kejadian> findAllKejadianInKotamaops(List<Kotamaops> kotamaopsList, Date twAwal, Date twAkhir) throws Exception;
+
 }

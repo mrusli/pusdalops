@@ -3,6 +3,7 @@ package mil.pusdalops.persistence.kotamaops.dao;
 import java.util.List;
 
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.kotamaops.KotamaopsType;
 
 public interface KotamaopsDao {
 
@@ -58,4 +59,6 @@ public interface KotamaopsDao {
 	 * @throws Exception
 	 */
 	public void delete(Kotamaops kotamaops) throws Exception;
+
+	public List<Kotamaops> findKotamaopsByKotamaopsTypeMatra(KotamaopsType kotamaopsTypeMatra) throws Exception;
 }

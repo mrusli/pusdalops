@@ -6,6 +6,7 @@ import java.util.List;
 import mil.pusdalops.domain.kejadian.Kejadian;
 import mil.pusdalops.domain.kejadian.KejadianJenis;
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.kotamaops.KotamaopsType;
 import mil.pusdalops.domain.wilayah.Propinsi;
 
 public interface KejadianDao {
@@ -134,6 +135,9 @@ public interface KejadianDao {
 
 	public List<Kejadian> findAllKejadianInKotamaops(boolean desc, List<Kotamaops> kotamaops) throws Exception;
 
+	public List<Kejadian> findAllKejadianInKotamaopsByMatraType(boolean desc, List<Kotamaops> kotamaopsList,
+			KotamaopsType kotamaopsMatraType) throws Exception;	
+	
 	public List<Kejadian> findAllKejadianInPropinsisByKotamaops(boolean desc, Kotamaops kotamaops, List<Propinsi> propinsis) throws Exception;
 
 	public List<Kejadian> searchKronologis(String searchString, Kotamaops selKotamaops) throws Exception;
@@ -156,5 +160,7 @@ public interface KejadianDao {
 
 	public List<Kejadian> searchKronologisByPropinsi(String searchString, Propinsi selPropinsi, Date twAwal,
 			Date twAkhir) throws Exception;
+
+
 	
 }

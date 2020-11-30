@@ -19,6 +19,7 @@ import org.hibernate.search.query.dsl.QueryBuilder;
 import mil.pusdalops.domain.kejadian.Kejadian;
 import mil.pusdalops.domain.kejadian.KejadianJenis;
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.kotamaops.KotamaopsType;
 import mil.pusdalops.domain.wilayah.Propinsi;
 import mil.pusdalops.persistence.common.dao.hibernate.DaoHibernate;
 import mil.pusdalops.persistence.kejadian.dao.KejadianDao;
@@ -277,7 +278,8 @@ public class KejadianHibernate extends DaoHibernate implements KejadianDao {
 	public List<Kejadian> findAllKejadianInKotamaops(boolean desc, List<Kotamaops> kotamaops) throws Exception {
 		Session session = getSessionFactory().openSession();
 		
-		String orderBy = "ORDER BY kejadian.kotamaops_id_fk, kejadian.tw_kejadian_datetime desc";
+		String orderBy = desc ? "ORDER BY kejadian.tw_kejadian_datetime desc" : 
+			"ORDER BY kejadian.tw_kejadian_datetime asc";
 		
 		try {
 			SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM e010_k2_pusdalops.kejadian kejadian"
@@ -297,16 +299,51 @@ public class KejadianHibernate extends DaoHibernate implements KejadianDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Kejadian> findAllKejadianInKotamaopsByMatraType(boolean desc, List<Kotamaops> kotamaopsList,
+			KotamaopsType kotamaopsMatraType) throws Exception {
+		
+		Session session = getSessionFactory().openSession();
+		
+		String orderBy = desc ? "kejadian.tw_kejadian_datetime desc" : 
+			"kejadian.tw_kejadian_datetime asc";
+		
+		try {
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT kejadian.*, kotamaops.* "
+					+ " FROM e010_k2_pusdalops.kejadian kejadian, e010_k2_pusdalops.kotamaops kotamaops "
+					+ " WHERE "
+					+ " kejadian.kotamaops_id_fk = kotamaops.id AND "
+					+ " kejadian.kotamaops_id_fk in (:kotamaops) AND "
+					+ " kotamaops.type=:matraType "
+					+ " ORDER BY "+orderBy);
+			sqlQuery.setParameterList("kotamaops", kotamaopsList);
+			sqlQuery.setParameter("matraType", kotamaopsMatraType.ordinal());
+			sqlQuery.addEntity(Kejadian.class);
+			
+			return sqlQuery.list(); 
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Kejadian> findAllKejadianInPropinsisByKotamaops(boolean desc, Kotamaops kotamaops,
 			List<Propinsi> propinsis) throws Exception {
 
 		Session session = getSessionFactory().openSession();
 
+		String orderBy = desc ? "ORDER BY kejadian.tw_kejadian_datetime desc" : 
+			"ORDER BY kejadian.tw_kejadian_datetime asc";		
+		
 		try {
 			SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM e010_k2_pusdalops.kejadian kejadian"
 					+ " WHERE "
 					+ " kejadian.kotamaops_id_fk = :kotamaops AND "
-					+ " kejadian.propinsi_id_fk in (:propinsis) ");
+					+ " kejadian.propinsi_id_fk in (:propinsis) "
+					+ orderBy);
 			sqlQuery.setParameter("kotamaops", kotamaops.getId());
 			sqlQuery.setParameterList("propinsis", propinsis);
 			sqlQuery.addEntity(Kejadian.class);

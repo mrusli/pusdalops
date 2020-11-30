@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.kotamaops.KotamaopsType;
 import mil.pusdalops.persistence.common.dao.hibernate.DaoHibernate;
 import mil.pusdalops.persistence.kotamaops.dao.KotamaopsDao;
 
@@ -78,5 +79,24 @@ public class KotamaopsHibernate extends DaoHibernate implements KotamaopsDao {
 	public void delete(Kotamaops kotamaops) throws Exception {
 
 		super.delete(kotamaops);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Kotamaops> findKotamaopsByKotamaopsTypeMatra(KotamaopsType kotamaopsTypeMatra) throws Exception {
+		Session session = getSessionFactory().openSession();
+		
+		Criteria criteria = session.createCriteria(Kotamaops.class);
+		criteria.add(Restrictions.eq("kotamaopsType", kotamaopsTypeMatra));
+		
+		try {
+
+			return criteria.list();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
 	}
 }

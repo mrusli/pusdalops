@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import mil.pusdalops.domain.kejadian.Kejadian;
@@ -163,6 +164,48 @@ public class LaporanRutinHibernate implements LaporanRutinDao {
 		} finally {
 			session.close();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Kejadian> findAllKejadian() throws Exception {
+		Session session = getSessionFactory().openSession();
+		
+		Criteria criteria = session.createCriteria(Kejadian.class);
+		
+		try {
+			
+			return criteria.list();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Kejadian> findAllKejadianInKotamaops(List<Kotamaops> kotamaopsList, Date twAwal, Date twAkhir) throws Exception {
+		Session session = getSessionFactory().openSession();
+		
+		Criteria criteria = session.createCriteria(Kejadian.class);
+		criteria.add(Restrictions.in("kotamaops", kotamaopsList));
+		criteria.add(Restrictions.ge("twKejadianDateTime", twAwal));
+		criteria.add(Restrictions.le("twKejadianDateTime", twAkhir));
+		criteria.addOrder(Order.asc("kotamaops"));
+		criteria.addOrder(Order.asc("twKejadianDateTime"));
+		
+		try {
+			
+			return criteria.list();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
+
 	}
 	
 }
