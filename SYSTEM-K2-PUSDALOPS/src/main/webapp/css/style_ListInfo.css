@@ -228,3 +228,7 @@ a:hover, a:focus {
 .autopaging-content-kronologis .z-listcell-content {
 	height: 110px;
 }
+
+.z-listbox-autopaging .z-listcell-content {
+    height: 30px;
+}
