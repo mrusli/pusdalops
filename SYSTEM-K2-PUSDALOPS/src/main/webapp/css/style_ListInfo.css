@@ -229,6 +229,7 @@ a:hover, a:focus {
 	height: 110px;
 }
 
-.z-listbox-autopaging .z-listcell-content {
-    height: 30px;
+
+.autopaging-content-kejadian-menonjol .z-listcell-content {
+	height: 30px;
 }

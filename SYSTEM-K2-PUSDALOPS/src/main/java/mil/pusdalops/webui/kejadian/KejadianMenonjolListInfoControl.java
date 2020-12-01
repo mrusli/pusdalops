@@ -166,6 +166,8 @@ public class KejadianMenonjolListInfoControl extends GFCBaseController {
 			public void render(Listitem item, Kejadian kejadian, int index) throws Exception {
 				Listcell lc;
 				
+				item.setSclass("autopaging-content-kejadian-menonjol");
+				
 				// ID
 				lc = new Listcell(kejadian.getSerialNumber().getSerialComp());
 				lc.setParent(item);
