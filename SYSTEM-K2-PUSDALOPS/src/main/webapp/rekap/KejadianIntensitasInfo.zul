@@ -10,10 +10,18 @@
 	</north>
 	<west width="400px" border="normal" sclass="westArea">
 		<div vflex="1">
-			<grid height="45px">
+			<grid height="90px">
 				<rows>
 					<row>
 						<cell width="25%">
+							Matra:
+						</cell>
+						<cell>
+							<combobox id="matraCombobox" width="270px"></combobox>
+						</cell>
+					</row>
+					<row>
+						<cell>
 							Kotamaops:
 						</cell>
 						<cell>
@@ -22,7 +30,7 @@
 					</row>
 				</rows>
 			</grid>
-			<grid id="kejadianPropinsiGrid" mold="paging" pageSize="16" height="100%">
+			<grid id="kejadianPropinsiGrid" mold="paging" autopaging="true" vflex="1">
 				<columns>
 					<column width="305px"/>
 					<column/>

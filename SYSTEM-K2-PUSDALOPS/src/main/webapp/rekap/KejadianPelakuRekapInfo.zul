@@ -13,11 +13,11 @@
 			<grid height="45px">
 				<rows>
 					<row>
-						<cell width="12%">
-
+						<cell width="15%">
+							Matra:
 						</cell>
 						<cell>
-
+							<combobox id="matraCombobox" width="210px"></combobox>
 						</cell>
 					</row>
 				</rows>
