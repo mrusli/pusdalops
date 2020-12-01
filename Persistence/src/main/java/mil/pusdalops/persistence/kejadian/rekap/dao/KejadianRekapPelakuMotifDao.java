@@ -73,4 +73,7 @@ public interface KejadianRekapPelakuMotifDao {
 			Propinsi propinsi, Kabupaten_Kotamadya kabupatenKot, Kecamatan kecamatan, 
 			Kelurahan kelurahan, LocalDateTime twAwal, LocalDateTime twAkhir);
 
+	public BigInteger countPelakuKejadianInKotamaops(List<Kotamaops> kotamaopsList, KejadianPelaku kejadianPelaku,
+			LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception;
+
 }

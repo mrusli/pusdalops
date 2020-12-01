@@ -42,6 +42,9 @@ public interface KejadianRekapMotifDao {
 	public List<Kejadian> findDistinctKejadianByJenisKejadian(Date twAwal,
 			Date twAkhir);
 
+	public List<Kejadian> findDistinctKejadianByJenisKejadianInKotamaopsList(
+			List<Kotamaops> kotamaopsList, Date twAwal, Date twAkhir) throws Exception;
+	
 	public List<Kejadian> findDistinctKejadianByJenisKejadian(Kotamaops kotamaops, 
 			Date twAwal, Date twAkhir);
 	
@@ -100,5 +103,8 @@ public interface KejadianRekapMotifDao {
 	public BigInteger countMotifKejadian(KejadianMotif motifKejadian, Kotamaops kotamaops,
 			Propinsi propinsi, Kabupaten_Kotamadya kabupatenKot, Kecamatan kecamatan, 
 			Kelurahan kelurahan, LocalDateTime twAwal, LocalDateTime twAkhir);
+
+	public BigInteger countJenisKejadianInKotamaops(List<Kotamaops> kotamaopsList, KejadianJenis jenisKejadian,
+			LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception;
 	
 }

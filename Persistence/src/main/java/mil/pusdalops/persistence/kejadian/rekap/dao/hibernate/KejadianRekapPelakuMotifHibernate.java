@@ -235,6 +235,34 @@ public class KejadianRekapPelakuMotifHibernate implements KejadianRekapPelakuMot
 	}
 
 	@Override
+	public BigInteger countPelakuKejadianInKotamaops(List<Kotamaops> kotamaopsList, KejadianPelaku kejadianPelaku,
+			LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception {
+		
+		Session session = getSessionFactory().openSession();
+		
+		try {			
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT count(kejadian.motif_kejadian_id_fk) FROM e010_k2_pusdalops.kejadian kejadian"
+					+ " where "
+					+ " kejadian.kotamaops_id_fk in (:kotamaops) and "
+					+ " kejadian.pelaku_kejadian_id_fk=:kejadianPelaku and "
+					+ " kejadian.tw_kejadian_datetime<:twAkhirKejadian and "
+					+ " kejadian.tw_kejadian_datetime>:twAwalKejadian"
+					);
+			sqlQuery.setParameterList("kotamaops", kotamaopsList);
+			sqlQuery.setParameter("kejadianPelaku", kejadianPelaku.getId());
+			sqlQuery.setParameter("twAkhirKejadian", twAkhir.toString());
+			sqlQuery.setParameter("twAwalKejadian", twAwal.toString());
+			
+			return sqlQuery.list().isEmpty() ? BigInteger.ZERO : (BigInteger) sqlQuery.list().get(0);
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}		
+	}
+	
+	@Override
 	public BigInteger countPelakuKejadian(KejadianPelaku kejadianPelaku, Kotamaops kotamaops,
 			LocalDateTime twAwal, LocalDateTime twAkhir) {
 		Session session = getSessionFactory().openSession();

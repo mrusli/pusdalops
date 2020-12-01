@@ -247,6 +247,32 @@ public class KejadianRekapMotifHibernate implements KejadianRekapMotifDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Kejadian> findDistinctKejadianByJenisKejadianInKotamaopsList(List<Kotamaops> kotamaopsList, Date twAwal,
+			Date twAkhir) throws Exception {
+
+		Session session = getSessionFactory().openSession();		
+
+		Criteria criteria = session.createCriteria(Kejadian.class);
+		criteria.add(Restrictions.ge("twKejadianDateTime", twAwal));
+		criteria.add(Restrictions.le("twKejadianDateTime", twAkhir));
+		criteria.add(Restrictions.in("kotamaops", kotamaopsList));
+		criteria.setProjection(Projections.distinct(Projections.projectionList().add(Projections.property("jenisKejadian"), "jenisKejadian")));
+		criteria.setResultTransformer(Transformers.aliasToBean(Kejadian.class));
+		
+		try {
+
+			return criteria.list();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Kejadian> findDistinctKejadianByJenisKejadian(Kotamaops kotamaops, Date twAwal, Date twAkhir) {
 		Session session = getSessionFactory().openSession();		
 
@@ -403,6 +429,33 @@ public class KejadianRekapMotifHibernate implements KejadianRekapMotifDao {
 		}
 	}
 
+	@Override
+	public BigInteger countJenisKejadianInKotamaops(List<Kotamaops> kotamaopsList, KejadianJenis jenisKejadian,
+			LocalDateTime twAwal, LocalDateTime twAkhir) throws Exception {
+		Session session = getSessionFactory().openSession();
+		
+		try {			
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT count(kejadian.jenis_kejadian_id_fk) FROM e010_k2_pusdalops.kejadian kejadian"
+					+ " where "
+					+ " kejadian.kotamaops_id_fk in (:kotamaops) and "
+					+ " kejadian.jenis_kejadian_id_fk=:kejadianJenis and "
+					+ " kejadian.tw_kejadian_datetime<:twAkhirKejadian and "
+					+ " kejadian.tw_kejadian_datetime>:twAwalKejadian"
+					);
+			sqlQuery.setParameterList("kotamaops", kotamaopsList);
+			sqlQuery.setParameter("kejadianJenis", jenisKejadian.getId());
+			sqlQuery.setParameter("twAkhirKejadian", twAkhir.toString());
+			sqlQuery.setParameter("twAwalKejadian", twAwal.toString());
+			
+			return sqlQuery.list().isEmpty() ? BigInteger.ZERO : (BigInteger) sqlQuery.list().get(0);
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			session.close();
+		}		
+	}
+	
 	@Override
 	public BigInteger countJenisKejadian(KejadianJenis jenisKejadian, Kotamaops kotamaops, LocalDateTime twAwal,
 			LocalDateTime twAkhir) {

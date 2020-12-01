@@ -630,13 +630,15 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 				}
 			}
 			
-			countKej = getKejadianRekapMotifDao().countKejadianInKotamaopsList(kotamaopsList, getAwalLocalDateTime(), getAkhirLocalDateTime());
+			countKej = getKejadianRekapMotifDao().countKejadianInKotamaopsList(
+					kotamaopsList, getAwalLocalDateTime(), getAkhirLocalDateTime());
 			jumlahKejKotamaops.setValue(countKej.toString());
 			
 			// select distinct jenis kejadian
 			kejadianList = 
-					getKejadianRekapMotifDao().findDistinctKejadianByJenisKejadian(asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
-			kejadianJenisCountList = getKejadianJenisCountList(kejadianList);
+					getKejadianRekapMotifDao().findDistinctKejadianByJenisKejadianInKotamaopsList(
+							kotamaopsList, asDate(getAwalLocalDateTime()), asDate(getAkhirLocalDateTime()));
+			kejadianJenisCountList = getKejadianJenisCountList(kotamaopsList, kejadianList);
 			// jenisKejadianListbox.setModel(new ListModelList<KejadianJenisCount>(kejadianJenisCountList));
 			// jenisKejadianListbox.setItemRenderer(getKejadianJenisCountListitemRenderer());
 			
@@ -1007,12 +1009,13 @@ public class KejadianMotifRekapInfoControl extends GFCBaseController {
 		return kejadianMotifCountList;
 	}
 
-	private List<KejadianJenisCount> getKejadianJenisCountList(List<Kejadian> kejadianList) {
+	private List<KejadianJenisCount> getKejadianJenisCountList(List<Kotamaops> kotamaopsList, List<Kejadian> kejadianList) throws Exception {
 		// count the number of each distinch jenis kejadian
 		BigInteger kejJenCount;
 		List<KejadianJenisCount> kejadianJenisCountList = new ArrayList<KejadianJenisCount>();
 		for (Kejadian kejadian : kejadianList) {
-			kejJenCount = getKejadianRekapMotifDao().countJenisKejadian(kejadian.getJenisKejadian(), getAwalLocalDateTime(), getAkhirLocalDateTime());
+			kejJenCount = getKejadianRekapMotifDao().countJenisKejadianInKotamaops(kotamaopsList, 
+					kejadian.getJenisKejadian(), getAwalLocalDateTime(), getAkhirLocalDateTime());
 			
 			KejadianJenisCount kejJenisCount = new KejadianJenisCount();
 			kejJenisCount.setKejadianJenis(kejadian.getJenisKejadian());

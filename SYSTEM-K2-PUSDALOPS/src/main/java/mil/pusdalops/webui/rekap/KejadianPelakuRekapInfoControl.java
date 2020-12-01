@@ -96,7 +96,7 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 		log.info("Creating Rekapitulais Kejadian dan Motif for Kotamaops: "+
 				getKotamaops().getKotamaopsName());
 		formTitleLabel.setValue(
-				"Rekapitulasi | Kejadian dan Motif - Kotamaops: "+
+				"Rekapitulasi | Pelaku dan Sasaran - Kotamaops: "+
 				getKotamaops().getKotamaopsName());
 
 		// set the timezone for this kotamaops
@@ -641,7 +641,7 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 			
 			// get all Pelaku kejadian
 			List<KejadianPelaku> kejadianPelakuList = getKejadianPelakuDao().findAllKejadianPelaku();
-			kejadianPelakuCountList = getKejadianPelakuList(kejadianPelakuList);
+			kejadianPelakuCountList = getKejadianPelakuList(kotamaopsList, kejadianPelakuList);
 			// pelakuKejadianListbox.setModel(
 			//		new ListModelList<KejadianPelakuCount>(kejadianPelakuCountList));
 			// pelakuKejadianListbox.setItemRenderer(getKejadianPelakuCountListitemRenderer());
@@ -825,11 +825,11 @@ public class KejadianPelakuRekapInfoControl extends GFCBaseController {
 
 	}
 
-	private List<KejadianPelakuCount> getKejadianPelakuList(List<KejadianPelaku> kejadianPelakuList) {
+	private List<KejadianPelakuCount> getKejadianPelakuList(List<Kotamaops> kotamaopsList, List<KejadianPelaku> kejadianPelakuList) throws Exception {
 		List<KejadianPelakuCount> kejadianPelakuCountList = new ArrayList<KejadianPelakuCount>();
 		BigInteger countPelaku;
 		for (KejadianPelaku kejadianPelaku : kejadianPelakuList) {
-			countPelaku = getKejadianRekapPelakuMotifDao().countPelakuKejadian(kejadianPelaku, getAwalLocalDateTime(), getAkhirLocalDateTime());
+			countPelaku = getKejadianRekapPelakuMotifDao().countPelakuKejadianInKotamaops(kotamaopsList, kejadianPelaku, getAwalLocalDateTime(), getAkhirLocalDateTime());
 			
 			KejadianPelakuCount kejadianPelakuCount = new KejadianPelakuCount();
 			kejadianPelakuCount.setKejadianPelaku(kejadianPelaku);
