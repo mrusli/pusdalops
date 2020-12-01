@@ -15,7 +15,7 @@
 				<label id="infoResultlabel" value="Total: 0 kejadian" sclass="infoResultLabel"></label>
 				<button id="newButton" label="Tambah" sclass="modButton"></button>
 			</hlayout>	
-			<listbox id="kejadianListbox" mold="paging" height="100%">
+			<listbox id="kejadianListbox" mold="paging" autopaging="true" vflex="1">
 				<listhead>
 					<listheader label="ID" width="185px"/>
 					<listheader label="TW" width="205px"/>
