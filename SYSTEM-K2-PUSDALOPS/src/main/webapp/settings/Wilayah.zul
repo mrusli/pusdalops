@@ -29,7 +29,8 @@
 				<cell>
 					<listbox id="kecamatanListbox" mold="paging" pageSize="10" height="440px">
 						<listhead>
-							<listheader label="Kecamatan" width="85%"></listheader>
+							<listheader label="Kecamatan" width="75%"></listheader>
+							<listheader width="10%"/>
 							<listheader/>
 						</listhead>					
 					</listbox>					
@@ -37,8 +38,8 @@
 				<cell>
 					<listbox id="kelurahanListbox" mold="paging" pageSize="10" height="440px">
 						<listhead>
-							<listheader label="Kelurahan" width="85%"></listheader>
-							<listheader/>
+							<listheader label="Kelurahan" width="75%"></listheader>
+							<listheader />
 						</listhead>					
 					</listbox>					
 				</cell>					
