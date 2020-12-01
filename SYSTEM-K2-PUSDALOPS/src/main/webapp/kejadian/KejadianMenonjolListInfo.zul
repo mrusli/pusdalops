@@ -17,7 +17,7 @@
 			</hlayout>	
 			<listbox id="kejadianListbox" mold="paging" autopaging="true" vflex="1">
 				<listhead>
-					<listheader label="ID" width="185px"/>
+					<listheader label="ID" width="175px"/>
 					<listheader label="TW" width="205px"/>
 					<listheader label="Kotamops" width="220px"/>
 					<listheader label="Propinsi" width="220px"/>
