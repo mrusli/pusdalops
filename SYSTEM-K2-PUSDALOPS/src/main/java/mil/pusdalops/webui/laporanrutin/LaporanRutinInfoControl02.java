@@ -28,6 +28,7 @@ import org.zkoss.zul.Window;
 
 import mil.pusdalops.domain.kejadian.Kejadian;
 import mil.pusdalops.domain.kotamaops.Kotamaops;
+import mil.pusdalops.domain.kotamaops.KotamaopsType;
 import mil.pusdalops.domain.settings.Settings;
 import mil.pusdalops.persistence.kejadian.dao.KejadianDao;
 import mil.pusdalops.persistence.kejadian.jenis.dao.KejadianJenisDao;
@@ -234,12 +235,18 @@ public class LaporanRutinInfoControl02 extends GFCBaseController {
 	}
 
 	public void onClick$executeButton(Event event) throws Exception {
-		Kotamaops kotamaopsKotamaopsByProxy = 
-				getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
-		List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
-		
-		List<Kejadian> kejadianList = getLaporanRutinDao().findAllKejadianInKotamaops(kotamaopsList, 
-				asDate(awalLocalDateTime), asDate(akhirLocalDateTime));
+		List<Kejadian> kejadianList = null;
+		if (getKotamaops().getKotamaopsType().equals(KotamaopsType.PUSDALOPS)) {
+			Kotamaops kotamaopsKotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsKotamaopsByProxy.getKotamaops();
+			
+			kejadianList = getLaporanRutinDao().findAllKejadianInKotamaops(kotamaopsList, 
+					asDate(awalLocalDateTime), asDate(akhirLocalDateTime));			
+		} else {
+			kejadianList = getLaporanRutinDao().findAllKejadianByKotamaops(getKotamaops(),
+					asDate(awalLocalDateTime), asDate(akhirLocalDateTime));
+		}
 		
 		List<KejadianPrintData> kejadianPrintList = new ArrayList<KejadianPrintData>();
 
