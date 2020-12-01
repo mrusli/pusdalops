@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -55,6 +56,8 @@ public class WilayahSettingsControl extends GFCBaseController {
 	
 	private List<Propinsi> propinsiList;
 	private UserSecurityDetails userSecurityDetails;	
+	
+	private static final Logger log = Logger.getLogger(WilayahSettingsControl.class);
 	
 	public void onCreate$wilayahSettingsWin(Event event) throws Exception {
 		formTitleLabel.setValue("Settings | Wilayah");
@@ -302,6 +305,10 @@ public class WilayahSettingsControl extends GFCBaseController {
 				lc = initKecamatan(new Listcell(), kecamatan);
 				lc.setParent(item);
 				
+				// delete
+				lc = initDeleteKecamatan(new Listcell(), kecamatan);
+				lc.setParent(item);
+				
 				// Select
 				lc = initSelectKecamatan(new Listcell(), kecamatan);
 				lc.setParent(item);
@@ -321,7 +328,7 @@ public class WilayahSettingsControl extends GFCBaseController {
 					@Override
 					public void onEvent(Event event) throws Exception {
 						// Messagebox.show("Are you sure to save?", "Confirm Dialog", Messagebox.OK | Messagebox.IGNORE  | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-						Messagebox.show("Simpan Perubahan nama Kabupaten / Kotamadya?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener<Event>() {
+						Messagebox.show("Simpan Perubahan nama Kecamatan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener<Event>() {
 							
 							@Override
 							public void onEvent(Event event) throws Exception {																
@@ -347,6 +354,24 @@ public class WilayahSettingsControl extends GFCBaseController {
 					}
 				});
 
+				return listcell;
+			}
+
+			private Listcell initDeleteKecamatan(Listcell listcell, Kecamatan kecamatan) {
+				Button delButton = new Button();
+				delButton.setLabel("-");
+				delButton.setSclass("listinfoEditButton");
+				delButton.setParent(listcell);
+				delButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						log.info("delete kecamatan...");
+						
+						// getKecamatanDao().delete(kecamatan);
+					}
+				});
+				
 				return listcell;
 			}
 
@@ -396,6 +421,10 @@ public class WilayahSettingsControl extends GFCBaseController {
 				// nama Kelurahan
 				lc = initNamaKelurahan(new Listcell(), kelurahan);
 				lc.setParent(item);
+
+				// delete button
+				lc = initDeleteKelurahan(new Listcell(), kelurahan);
+				lc.setParent(item);
 				
 				item.setValue(kelurahan);				
 			}
@@ -403,7 +432,7 @@ public class WilayahSettingsControl extends GFCBaseController {
 			private Listcell initNamaKelurahan(Listcell listcell, Kelurahan kelurahan) {
 				Textbox namaKelurahanTextbox = new Textbox();
 				namaKelurahanTextbox.setValue(kelurahan.getNamaKelurahan());
-				namaKelurahanTextbox.setWidth("260px");
+				namaKelurahanTextbox.setWidth("220px");
 				namaKelurahanTextbox.setInplace(true);
 				namaKelurahanTextbox.setSubmitByEnter(true);
 				namaKelurahanTextbox.setParent(listcell);
@@ -412,7 +441,7 @@ public class WilayahSettingsControl extends GFCBaseController {
 					@Override
 					public void onEvent(Event event) throws Exception {
 						// Messagebox.show("Are you sure to save?", "Confirm Dialog", Messagebox.OK | Messagebox.IGNORE  | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-						Messagebox.show("Simpan Perubahan nama Kabupaten / Kotamadya?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener<Event>() {
+						Messagebox.show("Simpan Perubahan nama Kelurahan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener<Event>() {
 							
 							@Override
 							public void onEvent(Event event) throws Exception {
@@ -439,6 +468,24 @@ public class WilayahSettingsControl extends GFCBaseController {
 
 				return listcell;
 			}
+			
+			private Listcell initDeleteKelurahan(Listcell listcell, Kelurahan kelurahan) {
+				Button delButton = new Button();
+				delButton.setLabel("-");
+				delButton.setClass("listinfoEditButton");
+				delButton.setParent(listcell);
+				delButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						log.info("delete kelurahan...");
+						
+					}
+				});
+				
+				return listcell;
+			}
+
 		};
 	}
 
