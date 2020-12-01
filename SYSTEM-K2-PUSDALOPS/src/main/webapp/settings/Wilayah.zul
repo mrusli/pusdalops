@@ -21,7 +21,7 @@
 				<cell>
 					<listbox id="kabupatenListbox" mold="paging" pageSize="10" height="440px">
 						<listhead>
-							<listheader label="Kabupaten" width="85%"></listheader>
+							<listheader label="Kabupaten" width="75%"></listheader>
 							<listheader/>
 						</listhead>
 					</listbox>					
