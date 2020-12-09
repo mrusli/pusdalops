@@ -91,17 +91,15 @@ public class LaporanRutinInfoControl02 extends GFCBaseController {
 		setReportTitle();
 		
 		setReportColumnTitle();
-		
 	}
 
 	private void setReportTitle() {
 		title01.setValue("DATA KEJADIAN MENONJOL");
-		title02.setValue("BESERTA REKAPITULASI KERUGIAN PERSONLE AND MATERIIL TNI");
+		title02.setValue("BESERTA REKAPITULASI KERUGIAN PERSONEL AND MATERIIL TNI");
 		title03.setValue("DI SELURUH KOTAMAOPS TNI");
 		title04.setValue("PERIODE BULAN "+ (
 				getLocalDateTimeString(akhirLocalDateTime, "MMMM")+" "+
 				getLocalDateTimeString(akhirLocalDateTime, "YYYY")).toUpperCase());
-		
 	}
 
 	private void setReportColumnTitle() {

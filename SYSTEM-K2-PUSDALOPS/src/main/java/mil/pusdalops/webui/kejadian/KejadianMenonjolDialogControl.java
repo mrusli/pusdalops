@@ -3,9 +3,11 @@ package mil.pusdalops.webui.kejadian;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -43,6 +45,7 @@ import mil.pusdalops.webui.common.GFCBaseController;
 import mil.pusdalops.webui.common.SerialNumberGenerator;
 import mil.pusdalops.webui.common.TwConversion;
 import mil.pusdalops.webui.dialogs.DatetimeData;
+import mil.pusdalops.webui.pejabat.PejabatListInfoControl;
 
 public class KejadianMenonjolDialogControl extends GFCBaseController {
 
@@ -85,6 +88,7 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 	private Kabupaten_Kotamadya selectedKabupatenKot;
 	private Kecamatan selectedKecamatan;
 	
+	private static final Logger log = Logger.getLogger(PejabatListInfoControl.class);
 	private final String NO_INFO = "-Tidak Ada Info-";
 	
 	@Override
@@ -97,21 +101,10 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 
 	public void onCreate$kejadianMenonjolDialogWin(Event event) throws Exception {
 		
-/*
- * 		if (getKejadianData().getKejadian().getId().compareTo(Long.MIN_VALUE)==0) {
-			// kotamaops -- will determine the timezone and documentCode
-			setKotamaops(
-					getKejadian().getKotamaops());
-			setSettingsKotamaops();
-		} else {
-			Kejadian kejadianByProxy = getKejadianDao().findKejadianKotamaopsByProxy(getKejadian().getId());
-			setKotamaops(
-					kejadianByProxy.getKotamaops());			
-		}
-*/		
-		
 		// kotamaops -- according to the login / settings
 		setSettingsKotamaops(getKejadianData().getSettingsKotamaops());
+		log.info("Creating KejadianMenonjolDialog Control for Kotamaops: "+
+				getSettingsKotamaops().getKotamaopsName());
 		
 		// set the timezone for this kotamaops
 		int timezoneOrdinal = getSettingsKotamaops().getTimeZone().ordinal();
@@ -137,8 +130,6 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 		
 		// load pelaku kejadian
 		loadPelakuKejadianCombobox();
-		
-		// load pelaku kejadian
 		
 		// display
 		displayKejadianData();
@@ -225,6 +216,17 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getSettingsKotamaops().getId());
 			List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
 			
+			// sort kotamaops
+			Collections.sort(kotamaopsList, new Comparator<Kotamaops>() {
+
+				@Override
+				public int compare(Kotamaops k1, Kotamaops k2) {
+
+					return k1.getKotamaopsName().compareTo(k2.getKotamaopsName());
+				}
+				
+			});
+			
 			Comboitem comboitem;
 			for (Kotamaops kotamaops : kotamaopsList) {
 				comboitem = new Comboitem();
@@ -260,7 +262,8 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 	}	
 	
 	private void loadJenisKejadianCombobox() throws Exception {
-		List<KejadianJenis> kejadianJenisList = getKejadianJenisDao().findAllKejadianJenisOrderBy(true);
+		List<KejadianJenis> kejadianJenisList = 
+				getKejadianJenisDao().findAllKejadianJenisOrderBy(true);
 		
 		Comboitem comboitem;
 		for (KejadianJenis kejadianJenis : kejadianJenisList) {
@@ -278,7 +281,8 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 	}	
 	
 	private void loadMotifKejadianCombobox() throws Exception {
-		List<KejadianMotif> kejadianMotifList = getKejadianMotifDao().findAllKejadianMotifOrderBy(true);
+		List<KejadianMotif> kejadianMotifList = 
+				getKejadianMotifDao().findAllKejadianMotifOrderBy(true);
 		
 		Comboitem comboitem;
 		for (KejadianMotif kejadianMotif : kejadianMotifList) {
@@ -296,7 +300,8 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 	}
 
 	private void loadPelakuKejadianCombobox() throws Exception {
-		List<KejadianPelaku> kejadianPelakuList = getKejadianPelakuDao().findAllKejadianPelaku();
+		List<KejadianPelaku> kejadianPelakuList = 
+				getKejadianPelakuDao().findAllKejadianPelaku();
 		
 		Comboitem comboitem;
 		for (KejadianPelaku kejadianPelaku : kejadianPelakuList) {
@@ -370,8 +375,15 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 				getKotamaopsDao().findKotamaopsPropinsiByProxy(selKotamaops.getId());
 		List<Propinsi> propinsiList = kotamaopsByProxy.getPropinsis();
 		
-		// init - clear previously stored propinsi
-		// propCombobox.getItems().clear();
+		// sort
+		Collections.sort(propinsiList, new Comparator<Propinsi>() {
+
+			@Override
+			public int compare(Propinsi p1, Propinsi p2) {
+
+				return p1.getNamaPropinsi().compareTo(p2.getNamaPropinsi());
+			}
+		});
 		
 		Comboitem comboitem;
 		for (Propinsi propinsi : propinsiList) {
@@ -395,6 +407,16 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 				getPropinsiDao().findKabupatenKotamadyaByProxy(selPropinsi.getId());
 		List<Kabupaten_Kotamadya> kabupaten_Kotamadyas = 
 				selPropinsiByProxy.getKabupatenkotamadyas();
+		
+		// sort
+		Collections.sort(kabupaten_Kotamadyas, new Comparator<Kabupaten_Kotamadya>() {
+
+			@Override
+			public int compare(Kabupaten_Kotamadya kabKot1, Kabupaten_Kotamadya kabKot2) {
+				
+				return kabKot1.getNamaKabupaten().compareTo(kabKot2.getNamaKabupaten());
+			}
+		});
 		
 		Comboitem comboitem;
 		for (Kabupaten_Kotamadya kabupaten_Kotamadya : kabupaten_Kotamadyas) {
@@ -453,19 +475,7 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 					resetOtherComboboxes(3);
 					
 					loadKabupatenCombobox(selectedPropinsi);
-/*					kabupatenCombobox.getItems().clear();
-					
-					propByProxy = 
-							getPropinsiDao().findKabupatenKotamadyaByProxy(selPropinsi.getId());
-					kabupatenKotList = propByProxy.getKabupatenkotamadyas();
-					Comboitem comboitem;
-					for (Kabupaten_Kotamadya kabupatenKotamadya : kabupatenKotList) {
-						comboitem = new Comboitem();
-						comboitem.setLabel(kabupatenKotamadya.getNamaKabupaten());
-						comboitem.setValue(kabupatenKotamadya);
-						comboitem.setParent(kabupatenCombobox);
-					}
-*/
+
 					for (Comboitem comboitemKab : kabupatenCombobox.getItems()) {
 						if (comboitemKab.getLabel().compareTo(namaKabupaten)==0) {
 							kabupatenCombobox.setSelectedItem(comboitemKab);
@@ -490,7 +500,7 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 			textEntryWindow.doModal();
 		} else {
 			resetOtherComboboxes(2);
-			// Kabupaten_Kotamadya selKabupaten = kabupatenCombobox.getSelectedItem().getValue();
+			
 			selectedKabupatenKot = kabupatenCombobox.getSelectedItem().getValue();
 			
 			loadKecamatanCombobox(selectedKabupatenKot);			
@@ -502,6 +512,18 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 				getKabupaten_KotamadyaDao().findKecamatanByProxy(selKabupaten.getId());
 		List<Kecamatan> kecamatanList = 
 				kabupatenKotByProxy.getKecamatans();
+		
+		// sort
+		Collections.sort(kecamatanList, new Comparator<Kecamatan>() {
+
+			@Override
+			public int compare(Kecamatan kec1, Kecamatan kec2) {
+				
+				return kec1.getNamaKecamatan().compareTo(kec2.getNamaKecamatan());
+			}
+		});
+		
+		
 		if (selKabupaten.getNamaKabupaten().compareTo(NO_INFO)==0) {
 			if (kecamatanList.isEmpty()) {
 				// create comboitem to add to the kabupaten_kotmadya list
@@ -555,6 +577,17 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 				getKecamatanDao().findKelurahanByProxy(selKecmatan.getId());
 		List<Kelurahan> kelurahanList =
 				kecamatanByProxy.getKelurahans();
+		
+		// sort
+		Collections.sort(kelurahanList, new Comparator<Kelurahan>() {
+
+			@Override
+			public int compare(Kelurahan kel1, Kelurahan kel2) {
+				
+				return kel1.getNamaKelurahan().compareTo(kel2.getNamaKelurahan());
+			}
+		});
+		
 		if (kelurahanList.isEmpty()) {
 			// create comboitem to add to the kecamatan list
 			Comboitem comboitem = new Comboitem();
@@ -623,16 +656,6 @@ public class KejadianMenonjolDialogControl extends GFCBaseController {
 					
 					loadKecamatanCombobox(selectedKabupatenKot);
 					
-/*					kabupatenKotByProxy = getKabupaten_KotamadyaDao().findKecamatanByProxy(selKabupatenKot.getId());
-					kecamatanList = kabupatenKotByProxy.getKecamatans();
-					Comboitem comboitem;
-					for (Kecamatan kecamatanObj : kecamatanList) {
-						comboitem = new Comboitem();
-						comboitem.setLabel(kecamatanObj.getNamaKecamatan());
-						comboitem.setValue(kecamatanObj);
-						comboitem.setParent(kecamatanCombobox);
-					}
-*/
 					for (Comboitem comboitemKec : kecamatanCombobox.getItems()) {
 						if (comboitemKec.getLabel().compareTo(namaKecamatan)==0) {
 							kecamatanCombobox.setSelectedItem(comboitemKec);

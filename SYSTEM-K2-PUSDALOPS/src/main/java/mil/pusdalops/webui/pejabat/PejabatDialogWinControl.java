@@ -2,6 +2,8 @@ package mil.pusdalops.webui.pejabat;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -77,8 +79,22 @@ public class PejabatDialogWinControl extends GFCBaseController {
 		Comboitem comboitem;
 
 		if (getKotamaops().getKotamaopsType().compareTo(KotamaopsType.PUSDALOPS)==0) {
-			// load all kotamaops
-			List<Kotamaops> kotamaopsList = getKotamaopsDao().findAllKotamaops();	
+			log.info("Load kotamaops associated with PUSDALOPS...");
+			// populate the combobox with all the kotamaops, associated with this PUSDALOPS
+			Kotamaops kotamaopsByProxy = 
+					getKotamaopsDao().findKotamaopsKotamaopsByProxy(getKotamaops().getId());
+			List<Kotamaops> kotamaopsList = kotamaopsByProxy.getKotamaops();
+
+			// sort
+			Collections.sort(kotamaopsList, new Comparator<Kotamaops>() {
+
+				@Override
+				public int compare(Kotamaops k1, Kotamaops k2) {
+					
+					return k1.getKotamaopsName().compareTo(k2.getKotamaopsName());
+				}
+			});
+
 			for (Kotamaops kotamaops : kotamaopsList) {
 				comboitem = new Comboitem();
 				comboitem.setLabel(kotamaops.getKotamaopsName());
@@ -87,6 +103,7 @@ public class PejabatDialogWinControl extends GFCBaseController {
 			}
 			kotamaopsCombobox.setSelectedIndex(0);
 		} else {
+			log.info("Use this Kotamaops: "+getKotamaops().getKotamaopsName()+"...Nothing to select");
 			// use this kotamaops -- nothing to select
 			comboitem = new Comboitem();
 			comboitem.setLabel(getKotamaops().getKotamaopsName());
