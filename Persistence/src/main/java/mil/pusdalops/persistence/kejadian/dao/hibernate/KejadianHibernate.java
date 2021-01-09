@@ -198,12 +198,20 @@ public class KejadianHibernate extends DaoHibernate implements KejadianDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Kejadian> findKotamaopsNonSynchronizedKejadian(Kotamaops kotamaops) throws Exception {
+	public List<Kejadian> findKotamaopsNonSynchronizedKejadian(Kotamaops kotamaops, boolean nonSynchData) throws Exception {
 		Session session = getSessionFactory().openSession();
 		
-		Criteria criteria = session.createCriteria(Kejadian.class);
-		criteria.add(Restrictions.eq("kotamaops", kotamaops));
-		criteria.add(Restrictions.isNull("synchAt"));
+		Criteria criteria = session.createCriteria(Kejadian.class, "kejadian");
+		criteria.createAlias("kejadian.serialNumber", "serialNumber");
+		
+		String docCode = kotamaops.getDocumentCode();
+		
+		criteria.add(Restrictions.eq("serialNumber.documentCode", docCode));
+		if (nonSynchData) {
+			criteria.add(Restrictions.isNull("synchAt"));			
+		} else {
+			criteria.add(Restrictions.isNotNull("synchAt"));						
+		}
 		criteria.addOrder(Order.desc("twPembuatanDateTime"));
 		
 		try {
@@ -278,13 +286,16 @@ public class KejadianHibernate extends DaoHibernate implements KejadianDao {
 	public List<Kejadian> findAllKejadianInKotamaops(boolean desc, List<Kotamaops> kotamaops) throws Exception {
 		Session session = getSessionFactory().openSession();
 		
-		String orderBy = desc ? "ORDER BY kejadian.tw_kejadian_datetime desc" : 
-			"ORDER BY kejadian.tw_kejadian_datetime asc";
+		String orderBy = desc ? " ORDER BY kejadian.tw_kejadian_datetime desc " : 
+			" ORDER BY kejadian.tw_kejadian_datetime asc ";
 		
 		try {
 			SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM e010_k2_pusdalops.kejadian kejadian"
+					+ " LEFT OUTER JOIN document_serial_number document ON kejadian.serial_number_id_fk = document.id "
 					+ " WHERE "
-					+ " kejadian.kotamaops_id_fk in (:kotamaops) "+orderBy);
+					+ " document.document_code is null AND "
+					+ " kejadian.kotamaops_id_fk in (:kotamaops) " + orderBy);
+			// sqlQuery.setParameter("documentCode", null);
 			sqlQuery.setParameterList("kotamaops", kotamaops);
 			sqlQuery.addEntity(Kejadian.class);
 			
@@ -304,14 +315,15 @@ public class KejadianHibernate extends DaoHibernate implements KejadianDao {
 		
 		Session session = getSessionFactory().openSession();
 		
-		String orderBy = desc ? "kejadian.tw_kejadian_datetime desc" : 
-			"kejadian.tw_kejadian_datetime asc";
+		String orderBy = desc ? " kejadian.tw_kejadian_datetime desc " : 
+			" kejadian.tw_kejadian_datetime asc ";
 		
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery("SELECT kejadian.*, kotamaops.* "
-					+ " FROM e010_k2_pusdalops.kejadian kejadian, e010_k2_pusdalops.kotamaops kotamaops "
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT kejadian.* FROM e010_k2_pusdalops.kejadian kejadian"
+					+ " LEFT OUTER JOIN kotamaops kotamaops ON kejadian.kotamaops_id_fk = kotamaops.id "
+					+ " LEFT OUTER JOIN document_serial_number document ON kejadian.serial_number_id_fk = document.id "
 					+ " WHERE "
-					+ " kejadian.kotamaops_id_fk = kotamaops.id AND "
+					+ " document.document_code is null AND "
 					+ " kejadian.kotamaops_id_fk in (:kotamaops) AND "
 					+ " kotamaops.type=:matraType "
 					+ " ORDER BY "+orderBy);
@@ -332,22 +344,25 @@ public class KejadianHibernate extends DaoHibernate implements KejadianDao {
 	@Override
 	public List<Kejadian> findAllKejadianInPropinsisByKotamaops(boolean desc, Kotamaops kotamaops,
 			List<Propinsi> propinsis) throws Exception {
-
+		
 		Session session = getSessionFactory().openSession();
 
-		String orderBy = desc ? "ORDER BY kejadian.tw_kejadian_datetime desc" : 
-			"ORDER BY kejadian.tw_kejadian_datetime asc";		
+		String orderBy = desc ? " ORDER BY kejadian.tw_kejadian_datetime desc " : 
+			" ORDER BY kejadian.tw_kejadian_datetime asc ";		
 		
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM e010_k2_pusdalops.kejadian kejadian"
+			SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM e010_k2_pusdalops.kejadian kejadian "
+					+ " LEFT OUTER JOIN document_serial_number document ON kejadian.serial_number_id_fk = document.id "
 					+ " WHERE "
 					+ " kejadian.kotamaops_id_fk = :kotamaops AND "
+					+ " document.document_code = :documentCode AND "
 					+ " kejadian.propinsi_id_fk in (:propinsis) "
 					+ orderBy);
 			sqlQuery.setParameter("kotamaops", kotamaops.getId());
+			sqlQuery.setParameter("documentCode", kotamaops.getDocumentCode());
 			sqlQuery.setParameterList("propinsis", propinsis);
 			sqlQuery.addEntity(Kejadian.class);
-			
+
 			return sqlQuery.list();
 			
 		} catch (Exception e) {

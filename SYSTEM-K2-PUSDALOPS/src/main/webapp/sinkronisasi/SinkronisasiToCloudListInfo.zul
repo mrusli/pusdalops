@@ -11,6 +11,8 @@
 	<center border="none" sclass="centerArea">
 		<div>
 			<hlayout sclass="hLayoutMiddleAlign">
+				Status:
+				<combobox id="statusCombobox" width="160px" sclass="dlg-combobox"></combobox>
 				<label id="infoResultlabel" value="Total: 0 kejadian" sclass="infoResultLabel"></label>				
 			</hlayout>	
 			<listbox id="kejadianListbox" mold="paging" pageSize="12" height="510px">
@@ -20,12 +22,9 @@
 					<listheader label="Kotamops" width="220px"/>
 					<listheader label="Jenis" width="160px"/>
 					<listheader label="Motif" width="160px"/>
-					<!-- detail kejadian -->
-					<listheader width="120px"/>
-					<!-- detail kerugian -->
-					<listheader width="120px"/>
 					<!-- sinkronisasi -->
 					<listheader width="120px"/>
+					<listheader label="Sinkronisasi Pd Tgl."/>
 				</listhead>
 			</listbox>	
 		</div>

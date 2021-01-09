@@ -107,11 +107,12 @@ public interface KejadianDao {
 	public Kejadian findKejadianKelurahanByProxy(long id) throws Exception;
 
 	/**
+	 * @param nonSynchData 
 	 * @param asLastSynchDate
 	 * @return List<Kejadian>
 	 * @throws Exception
 	 */
-	public List<Kejadian> findKotamaopsNonSynchronizedKejadian(Kotamaops kotamaops) throws Exception;
+	public List<Kejadian> findKotamaopsNonSynchronizedKejadian(Kotamaops kotamaops, boolean nonSynchData) throws Exception;
 	
 	/**
 	 * Index / Re-Index kronologis

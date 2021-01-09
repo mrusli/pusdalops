@@ -10,6 +10,8 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -39,6 +41,7 @@ public class SinkronisasiToCloudListInfoControl extends GFCBaseController {
 	private Window sinkronisasiToCloudlListInfoWin;
 	private Label formTitleLabel, infoResultlabel;
 	private Listbox kejadianListbox;
+	private Combobox statusCombobox;
 	
 	private Settings settings;
 	private Kotamaops kotamaops;
@@ -66,14 +69,47 @@ public class SinkronisasiToCloudListInfoControl extends GFCBaseController {
 		formTitleLabel.setValue("Sinkronisasi | Ke Pusdalops - Kotamaops : " +
 				getKotamaops().getKotamaopsName());
 				
+		// load status combobox
+		loadStatusCombobox();
+
+		// load non-synch kejadian
+		loadNonSynchronizedKejadian();
+		
 		displayKejadianToSyncToCloud();
 	}
 
-	private void displayKejadianToSyncToCloud() throws Exception {
+	private void loadStatusCombobox() {
+		String[] synchStatus = { "Pending" , "Selesai" };
+		
+		Comboitem comboitem;
+		for (String status : synchStatus) {
+			comboitem = new Comboitem();
+			comboitem.setLabel(status);
+			comboitem.setValue(status);
+			comboitem.setParent(statusCombobox);
+		}
+		
+		statusCombobox.setSelectedIndex(0);
+	}
+
+	public void onSelect$statusCombobox(Event event) throws Exception {
+		boolean nonSynchData = statusCombobox.getSelectedItem().getValue().equals("Pending");
+		
+		setKejadianListToSynchToCloud(
+				getKejadianDao().findKotamaopsNonSynchronizedKejadian(getKotamaops(), nonSynchData));		
+		
+		displayKejadianToSyncToCloud();
+	}
+	
+	private void loadNonSynchronizedKejadian() throws Exception {
+		boolean nonSynchData = true;
+		
 		// condition -- synchAt is null
 		setKejadianListToSynchToCloud(
-				getKejadianDao().findKotamaopsNonSynchronizedKejadian(getKotamaops()));
-		
+				getKejadianDao().findKotamaopsNonSynchronizedKejadian(getKotamaops(), nonSynchData));		
+	}	
+	
+	private void displayKejadianToSyncToCloud() {
 		kejadianListbox.setModel(
 				new ListModelList<Kejadian>(getKejadianListToSynchToCloud()));
 		kejadianListbox.setItemRenderer(getKejadianListitemRenderer());
@@ -103,54 +139,27 @@ public class SinkronisasiToCloudListInfoControl extends GFCBaseController {
 				lc.setParent(item);
 
 				// Jenis
-				lc = new Listcell();
+				lc = new Listcell(kejadian.getJenisKejadian().getNamaJenis());
+				lc.setStyle("white-space:nowrap;");
 				lc.setParent(item);
 
 				// Motif
-				lc = new Listcell();
-				lc.setParent(item);
-				
-				// view kejadian
-				lc = initViewKejadian(new Listcell(), kejadian);
-				lc.setParent(item);
-				
-				// Kerugian -- view kerugian by drop-down box
-				lc = initViewKerugian(new Listcell(), kejadian);
+				lc = new Listcell(kejadian.getMotifKejadian().getNamaMotif());
 				lc.setParent(item);
 				
 				// synchronize to cloud
 				lc = initSychronizeToCloud(new Listcell(), kejadian);
 				lc.setParent(item);
-			}
-
-			private Listcell initViewKejadian(Listcell listcell, Kejadian kejadian) {
-				Button viewKejadianButton = new Button();
-				viewKejadianButton.setLabel("Detail Kejadian");
-				viewKejadianButton.setClass("listinfoEditButton");
-				viewKejadianButton.setParent(listcell);
-				viewKejadianButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
-
-					@Override
-					public void onEvent(Event event) throws Exception {
-						
-					}
-				});
-				return listcell;
-			}
-
-			private Listcell initViewKerugian(Listcell listcell, Kejadian kejadian) {
-				Button viewKerugianButton = new Button();
-				viewKerugianButton.setLabel("Detail Kerugian");
-				viewKerugianButton.setClass("listinfoEditButton");
-				viewKerugianButton.setParent(listcell);
-				viewKerugianButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
-
-					@Override
-					public void onEvent(Event event) throws Exception {
-						
-					}
-				});
-				return listcell;
+				
+				// Sinkronisasi Pd Tgl.
+				if (kejadian.getSynchAt()==null) {
+					// pending to synch
+					lc = new Listcell("");
+				} else {
+					// synch completed
+					lc = new Listcell(getLocalDateTimeString(asLocalDateTime(kejadian.getSynchAt()), "dd-mm-yyyy"));
+				}
+				lc.setParent(item);
 			}
 
 			private Listcell initSychronizeToCloud(Listcell listcell, Kejadian kejadian) {
@@ -158,6 +167,7 @@ public class SinkronisasiToCloudListInfoControl extends GFCBaseController {
 				synchToCloudButton.setLabel("Sinkronisasi");
 				synchToCloudButton.setClass("listinfoEditButton");
 				synchToCloudButton.setParent(listcell);
+				synchToCloudButton.setDisabled(kejadian.getSynchAt()!=null);
 				synchToCloudButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 
 					@Override

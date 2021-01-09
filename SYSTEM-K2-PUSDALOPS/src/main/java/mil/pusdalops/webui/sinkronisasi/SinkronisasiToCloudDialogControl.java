@@ -941,6 +941,9 @@ public class SinkronisasiToCloudDialogControl extends GFCBaseController {
 		//  `motif_kejadian_id_fk` bigint(20) DEFAULT NULL,
 		cloudKejadian.setMotifKejadian(kejadianMotifReferenceMap.get(Boolean.TRUE));
 		
+		cloudKejadian.setPelakuKejadian(kejadian.getPelakuKejadian());
+		cloudKejadian.setKeteranganPelaku(kejadian.getKeteranganPelaku());
+		
 		//  `sasaran` varchar(255) DEFAULT NULL,
 		cloudKejadian.setSasaran(kejadian.getSasaran());
 		
